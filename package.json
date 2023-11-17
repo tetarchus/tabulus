@@ -23,6 +23,7 @@
     "docs:build": "npm run build -w tabulus-docs",
     "docs:dev": "npm run dev -w tabulus-docs",
     "docs:start": "npm run start -w tabulus-docs",
+    "storybook:start": "npm run storybook -w tabulus",
     "lint": "eslint ."
   },
   "devDependencies": {
