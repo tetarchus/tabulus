@@ -274,6 +274,21 @@ const eslintConfig = [
       'unicorn/switch-case-braces': ['error', 'avoid'],
     },
   },
+  {
+    files: ['**/*.stories.tsx'],
+    rules: {
+      'unicorn/filename-case': [
+        'error',
+        // FIXME: pascalCase current wants all parts to be capitalized (including 'stories' and 'tests')
+        // The 'ignore' can be removed once the below PR is merged
+        // https://github.com/sindresorhus/eslint-plugin-unicorn/pull/2186
+        {
+          cases: { camelCase: false, kebabCase: false, pascalCase: true, snakeCase: false },
+          ignore: ['stories\\.tsx$', 'test\\.tsx$'],
+        },
+      ],
+    },
+  },
 ];
 
 export default eslintConfig;
