@@ -1,12 +1,46 @@
 {
-  "name": "tabulus",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "tabulus-repo",
+  "version": "0.1.0",
+  "description": "React Table Library",
+  "license": "MIT",
+  "keywords": [
+    "react-table",
+    "react",
+    "table",
+    "data-table"
+  ],
+  "author": "Tetarchus <contact@tetbot.app>",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/tetarchus/tabulus.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "type": "module",
+  "workspaces": [
+    "packages/tabulus",
+    "apps/docs"
+  ],
+  "scripts": {
+    "docs:build": "npm run build -w tabulus-docs",
+    "docs:dev": "npm run dev -w tabulus-docs",
+    "docs:start": "npm run start -w tabulus-docs",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@eslint/js": "8.53.0",
+    "@typescript-eslint/eslint-plugin": "6.11.0",
+    "@typescript-eslint/parser": "6.11.0",
+    "@typescript-eslint/utils": "6.11.0",
+    "eslint": "^8.53.0",
+    "eslint-import-resolver-typescript": "3.6.1",
+    "eslint-plugin-import": "2.29.0",
+    "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-sonarjs": "0.23.0",
+    "eslint-plugin-unicorn": "49.0.0",
+    "globals": "13.23.0",
+    "prettier": "3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }

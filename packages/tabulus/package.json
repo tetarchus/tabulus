@@ -1,0 +1,35 @@
+{
+  "name": "tabulus",
+  "version": "0.1.0",
+  "description": "React Table Library",
+  "license": "MIT",
+  "keywords": [
+    "react-table",
+    "react",
+    "table",
+    "data-table"
+  ],
+  "author": "Tetarchus <contact@tetbot.app>",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/tetarchus/tabulus.git"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "react": ">=18.0",
+    "react-dom": ">=18.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.37",
+    "@types/react-dom": "18.2.15",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "5.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
