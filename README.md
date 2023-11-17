@@ -8,5 +8,3 @@ Tabulus is a React library for displaying table data with tonnes of customizatio
 
 - Loadable data
 
-
-$$
