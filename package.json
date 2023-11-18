@@ -29,7 +29,7 @@
     "storybook:start": "npm run storybook:start -w tabulus"
   },
   "devDependencies": {
-    "@eslint/js": "8.53.0",
+    "@eslint/js": "8.54.0",
     "@typescript-eslint/eslint-plugin": "6.11.0",
     "@typescript-eslint/parser": "6.11.0",
     "@typescript-eslint/utils": "6.11.0",
