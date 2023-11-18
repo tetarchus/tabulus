@@ -25,6 +25,7 @@
     "docs:dev": "npm run dev -w @tabulus/docs",
     "docs:start": "npm run start -w @tabulus/docs",
     "lint": "eslint .",
+    "publish": "npm run publish -w tabulus",
     "storybook:start": "npm run storybook:start -w tabulus"
   },
   "devDependencies": {
