@@ -16,12 +16,13 @@
   },
   "type": "module",
   "scripts": {
+    "build": "tsc && tsup",
     "storybook": "storybook dev --no-open -p 6006",
     "build-storybook": "storybook build"
   },
   "peerDependencies": {
-    "react": ">=18.0",
-    "react-dom": ">=18.0"
+    "react": ">= 18.0",
+    "react-dom": ">= 18.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "7.5.3",
@@ -32,11 +33,13 @@
     "@storybook/react": "7.5.3",
     "@storybook/react-vite": "7.5.3",
     "@storybook/testing-library": "0.2.2",
+    "@types/lodash-es": "4.17.11",
     "@types/react": "18.2.37",
     "@types/react-dom": "18.2.15",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "storybook": "7.5.3",
+    "ts-essentials": "9.4.1",
     "typescript": "5.2.2"
   },
   "engines": {
@@ -44,6 +47,9 @@
   },
   "dependencies": {
     "@emotion/react": "11.11.1",
-    "@emotion/styled": "11.11.0"
+    "@emotion/styled": "11.11.0",
+    "classnames": "2.3.2",
+    "lodash-es": "4.17.21",
+    "tsup": "7.3.0"
   }
 }
