@@ -1,41 +1,29 @@
-import type { MetaFunction } from "@remix-run/node";
+import { Tabulus } from '@tabulus/components';
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
+import type { MetaFunction } from '@remix-run/node';
+
+const meta: MetaFunction = () => {
+  return [{ title: 'New Remix App' }, { name: 'description', content: 'Welcome to Remix!' }];
 };
 
-export default function Index() {
-  return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
-  );
-}
+const cols = [
+  { id: 'id', title: 'ID' },
+  { id: 'name', title: 'Name' },
+  { id: 'age', title: 'Age' },
+];
+
+const data = [
+  { id: 1, name: 'Steve', age: 23 },
+  { id: 2, name: 'Gemma', age: 33 },
+  { id: 3, name: 'Tet', age: 36 },
+];
+
+const IndexRoute = () => (
+  <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
+    <h1>Welcome to Tabulus</h1>
+    <Tabulus columns={cols} data={data} id='test' />
+  </div>
+);
+
+export default IndexRoute;
+export { meta };
