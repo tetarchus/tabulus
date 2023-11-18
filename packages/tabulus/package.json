@@ -15,10 +15,13 @@
     "url": "https://github.com/tetarchus/tabulus.git"
   },
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc && tsup",
     "storybook:build": "storybook build",
     "storybook:start": "storybook dev --no-open -p 6006",
+    "publish": "npm publish",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc"
   },
