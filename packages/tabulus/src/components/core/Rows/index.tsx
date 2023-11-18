@@ -23,3 +23,4 @@ const Rows: FC<RowsProps> = () => {
 };
 
 export { Rows };
+export type { RowsProps } from './types';
