@@ -19,7 +19,8 @@
     "build": "tsc && tsup",
     "storybook:build": "storybook build",
     "storybook:start": "storybook dev --no-open -p 6006",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc"
   },
   "peerDependencies": {
     "react": ">=18.0",

@@ -16,13 +16,14 @@ const IDENTICAL_FUNC_MAX_LINES = 3;
 
 const allLintableFiles = ['**/*.{js,jsx,mjs,cjs,ts,tsx}'];
 const allIgnoredFiles = [
-  'node_modules/**',
-  'eslint.config.js',
-  'build/**',
-  'public/build/**',
-  'coverage/**',
   '.vscode/**',
-  '.cache/**',
+  '**/.cache/**',
+  '**/build/**',
+  '**/coverage/**',
+  '**/dist/**',
+  '**/node_modules/**',
+  '**/public/build/**',
+  'eslint.config.js',
 ];
 
 const fileExtensionsMdx = ['.md', '.mdx'];
@@ -45,6 +46,14 @@ const plugins = {
   'unicorn': unicornPlugin,
 };
 
+const tsconfigs = [
+  'tsconfig.json',
+  'apps/docs/tsconfig.json',
+  'packages/tabulus/tsconfig.json',
+  'packages/tabulus/tsconfig.node.json',
+  'packages/tabulus/.storybook/tsconfig.json',
+];
+
 // Plugin settings
 const settings = {
   'import/extensions': fileExtensionsAll,
@@ -61,7 +70,7 @@ const settings = {
     typescript: {
       alwaysTryTypes: true,
       extensions: fileExtensionsTypescript,
-      project: ['tsconfig.json', '.storybook/tsconfig.json'],
+      project: tsconfigs,
     },
   },
   'react': {
@@ -81,7 +90,7 @@ const eslintConfig = [
         },
         ecmaVersion: 'latest',
         extraFileExtension: 'json',
-        project: true,
+        project: tsconfigs,
         sourceType: 'module',
       },
     },
@@ -272,6 +281,29 @@ const eslintConfig = [
       'unicorn/text-encoding-identifier-case': 'off',
       // Only want braces if variables are defined.
       'unicorn/switch-case-braces': ['error', 'avoid'],
+    },
+  },
+  {
+    files: ['**/*.stories.tsx'],
+    rules: {
+      'unicorn/filename-case': [
+        'error',
+        // FIXME: pascalCase current wants all parts to be capitalized (including 'stories' and 'tests')
+        // The 'ignore' can be removed once the below PR is merged
+        // https://github.com/sindresorhus/eslint-plugin-unicorn/pull/2186
+        {
+          cases: { camelCase: false, kebabCase: false, pascalCase: true, snakeCase: false },
+          ignore: ['stories\\.tsx$', 'test\\.tsx$'],
+        },
+      ],
+    },
+  },
+  {
+    files: ['**/*.config.*'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
     },
   },
 ];

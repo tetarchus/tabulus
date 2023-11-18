@@ -3,7 +3,7 @@
   "include": [
     "./src"
   ],
-  "exclude": [],
+  "exclude": ["./tsup.config.ts"],
   "compilerOptions": {
     "jsxImportSource": "@emotion/react"
   },
