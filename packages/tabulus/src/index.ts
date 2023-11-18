@@ -5,6 +5,6 @@ export {
   TableManagerProvider,
   TabulusContextProvider,
 } from './contexts';
-export { useTabulus, useTabulusContext } from './hooks';
+export { useTabulus, useTabulusContext, useTabulusRegistry } from './hooks';
 
 export type { TabulusProps } from './types';

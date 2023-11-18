@@ -10,12 +10,13 @@ const cols = [
   { id: 'id', title: 'ID' },
   { id: 'name', title: 'Name' },
   { id: 'age', title: 'Age' },
+  { id: 'title', title: 'Title' },
 ];
 
 const data = [
-  { id: 1, name: 'Steve', age: 23 },
-  { id: 2, name: 'Gemma', age: 33 },
-  { id: 3, name: 'Tet', age: 36 },
+  { id: 1, name: 'Steve', age: 23, title: '' },
+  { id: 2, name: 'Gemma', age: 33, title: '' },
+  { id: 3, name: 'Tet', age: 36, title: '' },
 ];
 
 const IndexRoute = () => (

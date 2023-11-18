@@ -21,14 +21,23 @@ const initialValue: TableManagerValue = {
   rows: [],
 };
 
+/**
+ * Context for storing and providing table functions and values to the tables below.
+ * This is an internal context for use with our standard components.
+ *
+ * @private
+ */
 const TableManager = createContext<TableManagerValue>(initialValue);
 TableManager.displayName = 'TableManager';
+
+const defaultEvents = {};
+const defaultTableOptions = {};
 
 const TableManagerProvider: FC<TableManagerProviderProps> = ({
   columns: baseColumns,
   data: baseData,
-  events: userEvents = {},
-  options: tableOptions = {},
+  events: userEvents = defaultEvents,
+  options: tableOptions = defaultTableOptions,
   children,
   tableId,
 }: TableManagerProviderProps) => {

@@ -25,7 +25,7 @@ const Row: FC<RowProps> = ({ index, row }: RowProps) => {
       role={ROLES.ROW}
     >
       {cells.map(([column, value]) => (
-        <Cell key={`${column}-${index}`} value={value} />
+        <Cell column={column} key={`${column}-${index}`} type='cell' value={String(value)} />
       ))}
     </RowWrapper>
   );

@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
 
-const TableHolder = styled.div``;
+const TableHolder = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 // TODO: Not used
 const TableContents = styled.div``;

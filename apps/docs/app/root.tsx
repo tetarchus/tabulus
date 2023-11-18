@@ -25,8 +25,8 @@ const App = () => (
     <body>
       <Outlet />
       <ScrollRestore />
-      <Scripts />
       <LiveReload />
+      <Scripts />
     </body>
   </html>
 );
