@@ -20,10 +20,12 @@
     "apps/docs"
   ],
   "scripts": {
-    "docs:build": "npm run build -w tabulus-docs",
-    "docs:dev": "npm run dev -w tabulus-docs",
-    "docs:start": "npm run start -w tabulus-docs",
-    "lint": "eslint ."
+    "build": "npm run build -w tabulus",
+    "docs:build": "npm run build -w @tabulus/docs",
+    "docs:dev": "npm run dev -w @tabulus/docs",
+    "docs:start": "npm run start -w @tabulus/docs",
+    "lint": "eslint .",
+    "storybook:start": "npm run storybook:start -w tabulus"
   },
   "devDependencies": {
     "@eslint/js": "8.53.0",
