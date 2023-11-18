@@ -15,6 +15,7 @@ const DUPLICATE_STRING_MAX = 2;
 const IDENTICAL_FUNC_MAX_LINES = 3;
 
 const allLintableFiles = ['**/*.{js,jsx,mjs,cjs,ts,tsx}'];
+const serverFiles = ['**/*.config.*'];
 const allIgnoredFiles = [
   'node_modules/**',
   'eslint.config.js',
@@ -81,7 +82,13 @@ const eslintConfig = [
         },
         ecmaVersion: 'latest',
         extraFileExtension: 'json',
-        project: true,
+        project: [
+          './tsconfig.json',
+          './apps/docs/tsconfig.json',
+          './apps/cra/tsconfig.json',
+          './packages/tabulus/tsconfig.json',
+          './packages/tabulus/tsconfig.node.json',
+        ],
         sourceType: 'module',
       },
     },
@@ -287,6 +294,14 @@ const eslintConfig = [
           ignore: ['stories\\.tsx$', 'test\\.tsx$'],
         },
       ],
+    },
+  },
+  {
+    files: serverFiles,
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
     },
   },
 ];

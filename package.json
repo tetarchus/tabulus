@@ -1,6 +1,7 @@
 {
   "name": "tabulus-repo",
   "version": "0.1.0",
+  "private": true,
   "description": "React Table Library",
   "license": "MIT",
   "keywords": [
@@ -17,12 +18,16 @@
   "type": "module",
   "workspaces": [
     "packages/tabulus",
+    "apps/cra",
     "apps/docs"
   ],
   "scripts": {
-    "docs:build": "npm run build -w tabulus-docs",
-    "docs:dev": "npm run dev -w tabulus-docs",
-    "docs:start": "npm run start -w tabulus-docs",
+    "build": "npm run build -w tabulus",
+    "cra:build": "npm run build -w @tabulus/cra",
+    "cra:start": "npm run start -w @tabulus/cra",
+    "docs:build": "npm run build -w @tabulus/docs",
+    "docs:dev": "npm run dev -w @tabulus/docs",
+    "docs:start": "npm run start -w @tabulus/docs",
     "storybook:start": "npm run storybook -w tabulus",
     "lint": "eslint ."
   },
