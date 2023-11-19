@@ -6,7 +6,7 @@ import type { AxeMatchers } from 'vitest-axe/matchers';
  * Inject custom theme into @emotion to allow auto-complete for theme properties.
  */
 declare module '@emotion/react' {
-  export { Theme } from '@tabulus/types/theme';
+  export { Theme } from '@tabulus/types';
 }
 
 /**

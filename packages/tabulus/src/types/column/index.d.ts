@@ -21,10 +21,8 @@ interface ColumnDefinition<RowData extends RowDataBase = RowDataBase>
   columns?: Array<ColumnDefinition<RowData>>;
 }
 
-/** Options to lookup a column in utility functions. */
-type ColumnLookup = string;
-
 /** Options object for default column settings. */
 type ColumnConfig = DeepPartial<FullColumnConfig>;
 
-export type { ColumnConfig, ColumnDefinition, ColumnLookup, FullColumnConfig };
+export type { ColumnConfig, ColumnDefinition, FullColumnConfig };
+export type { ColumnFilter, ColumnLookup } from './utils';

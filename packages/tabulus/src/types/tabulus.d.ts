@@ -12,10 +12,10 @@ interface TabulusProps<RowData extends RowDataBase = RowDataBase> {
   /** Unique ID for the table. */
   readonly id: string;
   /** User options for the table to override defaults. */
-  readonly options?: Partial<TabulusOptions>;
+  readonly options?: Partial<TabulusOptions> | undefined;
   // TODO: Write these props
   /** Callbacks to run when events are triggered. */
-  readonly events?: Record<string, unknown>;
+  readonly events?: Record<string, unknown> | undefined;
 }
 
 export type { TabulusProps };
