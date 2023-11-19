@@ -9,6 +9,6 @@
     "noEmit": false,
     "outDir": "./dist"
   },
-  "include": ["tsup.config.ts"],
+  "include": ["tsup.config.ts", "vite.config.ts"],
   "exclude": []
 }

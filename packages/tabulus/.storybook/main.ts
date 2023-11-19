@@ -1,8 +1,9 @@
 import { createRequire } from 'node:module';
 import { join, dirname } from 'node:path';
-import { URL, fileURLToPath } from 'node:url';
 
 import { mergeConfig } from 'vite';
+
+import { viteConfig } from '../vite.config';
 
 import type { StorybookConfig } from '@storybook/react-vite';
 
@@ -26,13 +27,6 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
-  viteFinal: baseConfig =>
-    mergeConfig(baseConfig, {
-      resolve: {
-        alias: [
-          { find: '@tabulus/', replacement: fileURLToPath(new URL('../src/', import.meta.url)) },
-        ],
-      },
-    }),
+  viteFinal: baseConfig => mergeConfig(baseConfig, viteConfig),
 };
 export default config;

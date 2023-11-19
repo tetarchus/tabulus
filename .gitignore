@@ -5,6 +5,7 @@ build
 /public/build
 .env
 dist
+coverage
 
 .DS_Store
 .vscode
