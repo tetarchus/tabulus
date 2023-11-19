@@ -1,11 +1,16 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-import { createTableOptions } from '@tabulus/utils';
+import { setTableTheme } from '@tabulus/theme';
+import { ThemeProvider, createTableOptions } from '@tabulus/utils';
 
 import { TabulusRegistry } from '../TabulusRegistry';
 
 import type { TableManagerProviderProps, TableManagerValue } from './types';
 import type { FC } from 'react';
+
+const getOptionPlaceholder = (() => {
+  /** Placeholder */
+}) as TableManagerValue['getOption'];
 
 /**
  * Initial value for the TableManager. The `initialized` prop will be set to `false` when the
@@ -15,9 +20,10 @@ const initialValue: TableManagerValue = {
   columns: [],
   data: [],
   events: {},
+  getColumnCount: () => 0,
+  getOption: getOptionPlaceholder,
   id: '',
   initialized: false,
-  options: {},
   rows: [],
 };
 
@@ -43,7 +49,7 @@ const TableManagerProvider: FC<TableManagerProviderProps> = ({
 }: TableManagerProviderProps) => {
   const { defaultOptions } = useContext(TabulusRegistry);
 
-  //== State ==========================
+  //== Base State =====================
   const [id, setId] = useState(tableId);
   const [data, setData] = useState(baseData);
   const [rows, setRows] = useState(baseData); // TODO: This will change
@@ -51,12 +57,39 @@ const TableManagerProvider: FC<TableManagerProviderProps> = ({
   const [columns, setColumns] = useState(baseColumns);
   const [options, setOptions] = useState(createTableOptions(tableOptions, defaultOptions));
 
+  //== Functions ======================
+  const getOption: TableManagerValue['getOption'] = useCallback(
+    option => options[option] ?? defaultOptions[option],
+    [defaultOptions, options],
+  );
+
+  const getColumnCount: TableManagerValue['getColumnCount'] = useCallback(
+    (filter = 'all') => {
+      switch (filter) {
+        case 'all':
+        case 'selected': // TODO: Write this as a separate return (should get the currently selected columns)
+          return columns.length;
+        case 'visible':
+          return columns.filter(
+            column => (column.visible ?? getOption('columnDefaults').visible) === true,
+          ).length;
+        // No default -- exhaustive
+      }
+    },
+    [columns, getOption],
+  );
+
+  //== Complex State ==================
+  // State that relies on the above functions to set its initial value.
+  const [theme, setTheme] = useState(setTableTheme(getOption('theme')));
+
   //== Side Effects ===================
   useEffect(() => setId(tableId), [tableId]);
   useEffect(() => setData(baseData), [baseData]);
   useEffect(() => setRows(baseData), [baseData]); // TODO: This will change
   useEffect(() => setEvents(userEvents), [userEvents]);
   useEffect(() => setColumns(baseColumns), [baseColumns]);
+  useEffect(() => setTheme(setTableTheme(getOption('theme'))), [getOption]);
   useEffect(
     () => setOptions(createTableOptions(tableOptions, defaultOptions)),
     [defaultOptions, tableOptions],
@@ -64,13 +97,15 @@ const TableManagerProvider: FC<TableManagerProviderProps> = ({
 
   //== Memoized Context Value =========
   const managerValue = useMemo(
-    () => ({ columns, data, events, id, initialized: true, options, rows }),
-    [columns, data, events, id, options, rows],
+    () => ({ columns, data, events, getColumnCount, getOption, id, initialized: true, rows }),
+    [columns, data, events, getColumnCount, getOption, id, rows],
   );
 
-  console.log('CREATING TABLE MANAGER');
-
-  return <TableManager.Provider value={managerValue}>{children}</TableManager.Provider>;
+  return (
+    <TableManager.Provider value={managerValue}>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </TableManager.Provider>
+  );
 };
 
 export { TableManager, TableManagerProvider };
