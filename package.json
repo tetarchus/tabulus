@@ -28,7 +28,8 @@
     "publish": "npm run publish -w tabulus",
     "storybook:start": "npm run storybook:start -w tabulus",
     "test": "npm run test -w tabulus",
-    "validate": "npm run tsc -w tabulus && npm run lint && npm run test"
+    "tsc": "npm run tsc -w tabulus",
+    "validate": "npm run tsc && npm run lint && npm run test"
   },
   "devDependencies": {
     "@eslint/js": "8.54.0",
