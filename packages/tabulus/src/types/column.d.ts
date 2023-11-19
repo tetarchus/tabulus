@@ -1,7 +1,7 @@
 import type { RowDataBase } from './row';
 
 /** Definition for a column in the table. */
-interface ColumnDefinition<RowData extends RowDataBase> {
+interface ColumnDefinition<RowData extends RowDataBase = RowDataBase> {
   /** The unique identifier for the column. Used as the key in the data. */
   id: keyof RowData;
   /** The text title to display in the header. */
