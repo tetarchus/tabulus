@@ -315,7 +315,14 @@ const eslintConfig = [
     },
   },
   {
-    files: [jsxTestFiles, '**/*.test.ts'],
+    files: [
+      jsxTestFiles,
+      '**/*.test.ts',
+      '**/test/**',
+      '**/tests/**',
+      '**/__tests__/**',
+      '**/__test__/**',
+    ],
     rules: {
       'vitest/consistent-test-filename': ['error'],
       'vitest/consistent-test-it': ['error', { fn: 'test', withinDescribe: 'it' }],
