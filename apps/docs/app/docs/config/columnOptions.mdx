@@ -1,0 +1,26 @@
+# Column Options
+
+Each column can be configured using a range of options. If you find yourself using the same options
+for all columns in a table, you can set the [`defaultColumnOptions`](@todo) option for the table to
+set these, and then you only need to override the settings that you want to differ.
+
+If you want to set defaults for _all_ tables in a project, you can pass in
+[`defaultColumnOptions`](@todo) to the [`TabulusRegistry`](@todo) context wrapper and these will
+apply to all tables below the context in the tree.
+
+## Available Options
+
+### General
+
+| Option  | Value Types | Default Value | Description                                                   |
+| ------- | ----------- | ------------- | ------------------------------------------------------------- |
+| visible | `boolean`   | `true`        | Whether the column should be displayed in the rendered table. |
+
+### Layout
+
+| Option                | Value Types                                | Default Value | Description                                             |
+| --------------------- | ------------------------------------------ | ------------- | ------------------------------------------------------- |
+| horizontalAlign       | <code>'left' \| 'center' \| 'right'</code> | `'left'`      | How to align content horizontally within a cell.        |
+| verticalAlign         | <code>'top' \| 'middle' \| 'bottom'</code> | `'middle'`    | How to align content vertically within a cell.          |
+| headerHorizontalAlign | <code>'left' \| 'center' \| 'right'</code> | `'left'`      | How to align content horizontally within a header cell. |
+| headerVerticalAlign   | <code>'top' \| 'middle' \| 'bottom'</code> | `'middle'`    | How to align content vertically within a header cell.   |
