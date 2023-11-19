@@ -377,7 +377,7 @@ const eslintConfig = [
       'vitest/require-top-level-describe': [
         'error',
         {
-          maxNumberOfTopLevelDescribes: 2,
+          maxNumberOfTopLevelDescribes: 1,
         },
       ],
       'vitest/valid-describe-callback': 'error',
@@ -449,6 +449,12 @@ const eslintConfig = [
       'testing-library/prefer-screen-queries': 'error',
       'testing-library/prefer-user-event': ['error', { allowedMethods: [] }],
       'testing-library/render-result-naming-convention': 'error',
+    },
+  },
+  {
+    files: ['**/testConfig.ts'],
+    rules: {
+      'vitest/require-top-level-describe': 'off',
     },
   },
 ];
