@@ -7,6 +7,8 @@ const defaultOptions: TabulusOptions = {
   horizontalAlign: 'center',
   //== Columns ========================
   columnDefaults: defaultColumnConfig,
+  //== Style ==========================
+  theme: 'standard',
 };
 
 export { defaultOptions };
