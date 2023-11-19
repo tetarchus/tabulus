@@ -14,7 +14,7 @@ let consoleWarn: SpyInstance<[...messages: unknown[]], void> | null = null;
 const expectedError = WARNINGS.INVALID_OPTION('table', 'invalidOption');
 
 const userOptions: DeepPartial<TabulusOptions> = {
-  align: 'right',
+  horizontalAlign: 'right',
 };
 
 const invalidOptions = {
@@ -23,10 +23,12 @@ const invalidOptions = {
 } as DeepPartial<TabulusOptions>;
 
 const expectedMerge: TabulusOptions = {
-  align: 'right',
+  ...defaultOptions,
+  horizontalAlign: 'right',
 };
 
 const expectedInvalidMerge = {
+  ...defaultOptions,
   ...invalidOptions,
 };
 

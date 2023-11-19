@@ -1,4 +1,4 @@
-import { mergeWith } from 'lodash-es';
+import { mergeWith } from 'lodash';
 
 import { defaultOptions } from '@tabulus/config';
 
@@ -26,7 +26,7 @@ const createTableOptions = (
   tableOptions: DeepPartial<TabulusOptions>,
   defaults: TabulusOptions,
 ): TabulusOptions => {
-  const merged = mergeWith({}, defaults, tableOptions);
+  const merged = mergeWith({}, defaults, tableOptions, () => {});
   validateOptions(merged);
   return merged;
 };
