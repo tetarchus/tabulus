@@ -1,4 +1,6 @@
-import { objectEntries } from './object';
+import { defaultColumnConfig } from '@tabulus/config';
+
+import { objectKeys } from './object';
 import { WARNINGS } from './warnings';
 
 import type { ColumnDefinition } from '@tabulus/types';
@@ -18,14 +20,23 @@ const validateIds = (columnDefinitions: ColumnDefinition[]): void => {
   invalidColumns.length > 0 && console.warn(WARNINGS.DUPLICATE_COL_ID(invalidColumns));
 };
 
+/**
+ * Checks for extra keys in a column definition and displays a warning if any are found.
+ * @param columnDefinition The definition to validate.
+ */
 const validateColumnDefinition = (columnDefinition: ColumnDefinition): void => {
-  for (const [key, value] of objectEntries(columnDefinition)) {
-    // Check the key exists in the default Column definition
-    // Check the value is valid
-    // If the value is an object, scan that too.
+  for (const key of objectKeys(columnDefinition)) {
+    if (!Object.hasOwn(defaultColumnConfig, key) && !['id', 'title'].includes(key)) {
+      // Check the key exists in the default Column definition
+      console.warn(WARNINGS.INVALID_OPTION('column', key));
+    }
   }
 };
 
+/**
+ * Checks column definitions for validity, including extra keys, and duplicate IDs.
+ * @param columnDefinitions Array of column definitions to check.
+ */
 const validateColumnDefinitions = (columnDefinitions: ColumnDefinition[]): void => {
   validateIds(columnDefinitions);
   for (const column of columnDefinitions) {
