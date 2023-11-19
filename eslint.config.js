@@ -176,6 +176,7 @@ const eslintConfig = [
           'warnOnUnassignedImports': true,
         },
       ],
+      'react/no-unknown-property': ['error', { ignore: ['css'] }],
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'error',
       'sonarjs/no-all-duplicated-branches': 'error',
