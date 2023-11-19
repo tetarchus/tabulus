@@ -1,2 +1,8 @@
 .storybook
 *.stories.*
+vite.config.ts
+*.test. &
+src/test
+__test__
+test.d.ts
+coverage
