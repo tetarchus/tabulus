@@ -9,3 +9,4 @@ export {
 } from './object';
 export { createTableOptions } from './options';
 export { WARNINGS } from './warnings';
+export { styled, ThemeProvider } from './style';
