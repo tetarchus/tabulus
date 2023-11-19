@@ -19,6 +19,7 @@ const CLASSES = {
     EVEN: `${PREFIX}-row-even`,
     ODD: `${PREFIX}-row-odd`,
   },
+  TABLE: `${PREFIX}-table`,
 } as const;
 
 export { CLASSES };
