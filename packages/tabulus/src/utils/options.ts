@@ -1,21 +1,34 @@
+import { mergeWith } from 'lodash-es';
+
+import { defaultOptions } from '@tabulus/config';
+
+import { objectKeys } from './object';
+import { WARNINGS } from './warnings';
+
 import type { TabulusOptions } from '@tabulus/types';
 import type { DeepPartial } from 'ts-essentials';
 
-// import { objectKeys } from './object';
-
-// const validateOptions = (options: DeepPartial<TabulusOptions>): void => {};
-
-// const warnOnDeprecatedOptions = (options: DeepPartial<TabulusOptions>): void => {};
-
-const createTableOptions = (
-  _tableOptions: DeepPartial<TabulusOptions>,
-  defaults: TabulusOptions,
-): TabulusOptions => {
-  // validateOptions(tableOptions);
-  // warnOnDeprecatedOptions(tableOptions);
-
-  // FIXME
-  return defaults;
+const validateOptions = (options: DeepPartial<TabulusOptions>): void => {
+  for (const key of objectKeys(options)) {
+    if (!Object.hasOwn(defaultOptions, key)) {
+      console.warn(WARNINGS.INVALID_OPTION('table', key));
+    }
+  }
 };
 
-export { createTableOptions };
+/**
+ *
+ * @param tableOptions The table-specific options to use.
+ * @param defaults
+ * @returns
+ */
+const createTableOptions = (
+  tableOptions: DeepPartial<TabulusOptions>,
+  defaults: TabulusOptions,
+): TabulusOptions => {
+  const merged = mergeWith({}, defaults, tableOptions);
+  validateOptions(merged);
+  return merged;
+};
+
+export { createTableOptions, validateOptions };

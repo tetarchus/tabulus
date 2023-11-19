@@ -8,3 +8,4 @@ export {
   swapKeyValue,
 } from './object';
 export { createTableOptions } from './options';
+export { WARNINGS } from './warnings';
