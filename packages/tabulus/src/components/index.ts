@@ -1,8 +1,11 @@
-export { Cell } from './Cell';
-export { Row } from './Row';
-export { Table } from './Table';
-export { Tabulus } from './Tabulus';
+export { Cell, Column, Footer, Header, Row, Rows, Table, Tabulus } from './core';
 
-export type { CellProps } from './Cell';
-export type { RowProps } from './Row';
-export type { TableProps } from './Table';
+export type {
+  CellProps,
+  ColumnProps,
+  FooterProps,
+  HeaderProps,
+  RowProps,
+  RowsProps,
+  TableProps,
+} from './core';
