@@ -1,4 +1,5 @@
 export { arrayIncludes } from './array';
+export { getHorizontalAlignProperty, getVerticalAlignProperty } from './cell';
 export { validateColumnDefinition, validateColumnDefinitions } from './columns';
 export {
   cleanObject,
