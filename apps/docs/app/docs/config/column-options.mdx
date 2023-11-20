@@ -1,3 +1,10 @@
+---
+title: Column Options
+description: Options for defining columns
+---
+
+import { Tabulus } from 'tabulus';
+
 # Column Options
 
 Each column can be configured using a range of options. If you find yourself using the same options
@@ -11,6 +18,23 @@ apply to all tables below the context in the tree.
 ## Available Options
 
 ### General
+
+<Tabulus
+  columns={[
+    { id: 'id', title: 'Option' },
+    { id: 'types', title: 'Value Types' },
+    { id: 'default', title: 'Default Value' },
+    { id: 'desc', title: 'Description' },
+  ]}
+  data={[
+    {
+      id: 'visible',
+      types: '`boolean`',
+      default: '`true`',
+      desc: 'Whether the column should be displayed in the rendered table.',
+    },
+  ]}
+/>
 
 | Option  | Value Types | Default Value | Description                                                   |
 | ------- | ----------- | ------------- | ------------------------------------------------------------- |
