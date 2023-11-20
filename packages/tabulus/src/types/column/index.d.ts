@@ -25,4 +25,4 @@ interface ColumnDefinition<RowData extends RowDataBase = RowDataBase>
 type ColumnConfig = DeepPartial<FullColumnConfig>;
 
 export type { ColumnConfig, ColumnDefinition, FullColumnConfig };
-export type { ColumnFilter, ColumnLookup } from './utils';
+export type { ColumnLookup } from './utils';

@@ -9,7 +9,7 @@ interface ColumnLayoutOptions {
   horizontalAlign: HorizontalAlign;
   /**
    * How to align cell content vertically within the cell.
-   * @default 'center'
+   * @default 'middle'
    */
   verticalAlign: VerticalAlign;
   /**
@@ -19,7 +19,7 @@ interface ColumnLayoutOptions {
   headerHorizontalAlign: HorizontalAlign;
   /**
    * How to align headercell content vertically within the cell.
-   * @default 'center'
+   * @default 'middle'
    */
   headerVerticalAlign: VerticalAlign;
 }

@@ -1,10 +1,6 @@
-export type {
-  ColumnConfig,
-  ColumnDefinition,
-  ColumnFilter,
-  ColumnLookup,
-  FullColumnConfig,
-} from './column';
+export type { HorizontalAlign, VerticalAlign } from './base';
+export type { CellFilter } from './cell';
+export type { ColumnConfig, ColumnDefinition, ColumnLookup, FullColumnConfig } from './column';
 export type { CellType } from './component';
 export type { CustomFormatterFunction } from './function';
 export type { RowDataBase } from './row';
