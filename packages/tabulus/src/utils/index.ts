@@ -1,3 +1,4 @@
+export { arrayIncludes } from './array';
 export { validateColumnDefinition, validateColumnDefinitions } from './columns';
 export {
   cleanObject,
