@@ -6,3 +6,4 @@ src/test
 __test__
 modules.d.ts
 coverage
+stories

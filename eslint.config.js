@@ -264,6 +264,7 @@ const eslintConfig = [
             argTypesRegex: true,
             DevTool: true,
             docs: true,
+            Docs: true,
             e: true,
             env: true,
             i: true,

@@ -30,7 +30,7 @@
     "noUnusedParameters": true,
     "paths": {
       "@docs/*": ["./apps/docs/app/*"],
-      "@tabulus/*": ["./packages/tabulus/src/*"],
+      "@tabulus/*": ["./packages/tabulus/src/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
