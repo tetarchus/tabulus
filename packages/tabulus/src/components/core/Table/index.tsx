@@ -12,13 +12,17 @@ import { TablePositioner, TableWrapper } from './styled';
 import type { TableProps } from './types';
 import type { FC } from 'react';
 
+/** The main internal table component. */
 const Table: FC<TableProps> = () => {
-  const { getColumnCount, getOption, id } = useContext(TableManager);
+  //== Context Values =================
+  const { getColumnCount, getOption, getRowCount, id } = useContext(TableManager);
 
+  //== Component Return ===============
   return (
     <TablePositioner className={CLASSES.BASE}>
       <TableWrapper
         aria-colcount={getColumnCount()} // TODO: Do we want this to be visible rather than all?
+        aria-rowcount={getRowCount()} // TODO: Do we want this to be visible rather than all?
         className={CLASSES.TABLE}
         horizontalAlign={getOption('horizontalAlign')}
         id={id}

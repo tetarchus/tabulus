@@ -11,9 +11,12 @@ import { HeadersRow, TableHeader } from './styled';
 import type { HeaderProps } from './types';
 import type { FC } from 'react';
 
+/** The header row for the table, containing all header cells. */
 const Header: FC<HeaderProps> = () => {
+  //== Context Values =================
   const { columns } = useContext(TableManager);
 
+  //== Component Return ===============
   return (
     <TableHeader className={cn(CLASSES.HEADER.BASE)} role={ROLES.HEADER}>
       <HeadersRow className={CLASSES.HEADER.ROW} role={ROLES.ROW}>

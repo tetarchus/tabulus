@@ -5,15 +5,30 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta = {
   component: Cell,
   tags: ['autodocs'],
-  title: 'Table Components/Cell',
+  title: 'Core Components/Cell',
 } satisfies Meta<typeof Cell>;
 
 type Story = StoryObj<typeof meta>;
 
-/** Address component containing all available data. */
-const Default: Story = { args: { column: 'Cell', type: 'cell' } };
+/** A standard table cell. */
+const Default: Story = {
+  args: {
+    column: 'Cell',
+    rowIndex: 1,
+    type: 'cell',
+    value: 'Cell',
+  },
+};
 
-const HeaderCell: Story = { args: { column: 'Header Cell', type: 'header' } };
+/** A header table cell. */
+const HeaderCell: Story = {
+  args: {
+    column: 'Header Cell',
+    rowIndex: 'header',
+    type: 'header',
+    value: 'Header',
+  },
+};
 
 export default meta;
 export { Default, HeaderCell };

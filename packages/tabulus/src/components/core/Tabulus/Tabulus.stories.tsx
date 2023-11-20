@@ -24,7 +24,20 @@ const data = [
 ];
 
 /** Address component containing all available data. */
-const Default: Story = { args: { columns, data, id: 'test' } };
+const Default: Story = {
+  args: {
+    columns,
+    data,
+    id: 'test',
+    options: {
+      columnDefaults: {
+        headerHorizontalAlign: 'right',
+        verticalAlign: 'middle',
+        horizontalAlign: 'center',
+      },
+    },
+  },
+};
 
 export default meta;
 export { Default };

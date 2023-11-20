@@ -10,9 +10,12 @@ import { TableHolder } from './styled';
 import type { RowsProps } from './types';
 import type { FC } from 'react';
 
+/** All of the rows of data in the table. */
 const Rows: FC<RowsProps> = () => {
+  //== Context Values =================
   const { rows } = useContext(TableManager);
 
+  //== Component Return ===============
   return (
     <TableHolder className={CLASSES.BODY.BASE} role={ROLES.BODY}>
       {rows.map((row, index) => (

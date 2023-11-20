@@ -11,6 +11,7 @@ import { RowWrapper } from './styled';
 import type { RowProps } from './types';
 import type { FC } from 'react';
 
+/** A single row on the table, representing a line of data. */
 const Row: FC<RowProps> = ({ index, row }: RowProps) => {
   //== State ==========================
   const [cells, setCells] = useState(objectEntries(row));
@@ -18,14 +19,21 @@ const Row: FC<RowProps> = ({ index, row }: RowProps) => {
   //== Side Effects ===================
   useEffect(() => setCells(objectEntries(row)), [row]);
 
-  //== Return Value ===================
+  //== Component Return ===============
   return (
     <RowWrapper
+      aria-rowindex={index}
       className={cn(CLASSES.ROW.BASE, index % 2 === 0 ? CLASSES.ROW.EVEN : CLASSES.ROW.ODD)}
       role={ROLES.ROW}
     >
       {cells.map(([column, value]) => (
-        <Cell column={column} key={`${column}-${index}`} type='cell' value={String(value)} />
+        <Cell
+          column={column}
+          key={`${column}-${index}`}
+          rowIndex={index}
+          type='cell'
+          value={String(value)}
+        />
       ))}
     </RowWrapper>
   );
