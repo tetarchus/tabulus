@@ -5,7 +5,12 @@ description: Options for defining columns
 
 import { Tabulus } from 'tabulus';
 
-# Column Options
+export const columns = [
+  { id: 'id', title: 'Option' },
+  { id: 'types', title: 'Value Types' },
+  { id: 'default', title: 'Default Value' },
+  { id: 'desc', title: 'Description' },
+];
 
 Each column can be configured using a range of options. If you find yourself using the same options
 for all columns in a table, you can set the [`defaultColumnOptions`](@todo) option for the table to
@@ -19,13 +24,10 @@ apply to all tables below the context in the tree.
 
 ### General
 
+{/* TODO: Move data to a separate folder? */}
+
 <Tabulus
-  columns={[
-    { id: 'id', title: 'Option' },
-    { id: 'types', title: 'Value Types' },
-    { id: 'default', title: 'Default Value' },
-    { id: 'desc', title: 'Description' },
-  ]}
+  columns={columns}
   data={[
     {
       id: 'visible',

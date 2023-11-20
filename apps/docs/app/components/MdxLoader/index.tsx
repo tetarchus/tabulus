@@ -18,3 +18,4 @@ const MdxLoader: FC<MdxLoaderProps> = ({ code, frontmatter }: MdxLoaderProps) =>
 };
 
 export { MdxLoader };
+export type { MdxLoaderProps } from './types';
