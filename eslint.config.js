@@ -309,7 +309,7 @@ const eslintConfig = [
     },
   },
   {
-    files: ['**/*.config.*'],
+    files: ['**/*.config.*', '**/*.server.ts'],
     languageOptions: {
       globals: {
         ...globals.node,
