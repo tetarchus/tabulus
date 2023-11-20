@@ -1,4 +1,4 @@
-import { isNil, omitBy } from 'lodash';
+import { isNil, omitBy } from 'lodash-es';
 
 import type { CleanObject, EntriesToObject, EntriesType, ObjectType } from '@tabulus/types';
 
