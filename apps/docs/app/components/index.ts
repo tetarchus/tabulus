@@ -1,4 +1,5 @@
 export { Contents } from './Contents';
+export { Heading, Link } from './DocBlocks';
 export { Header } from './Header';
 export { MdxLoader } from './MdxLoader';
 
