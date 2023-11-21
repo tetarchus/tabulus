@@ -6,7 +6,6 @@ build
 .env
 dist
 coverage
-*.psd
 
 .DS_Store
 .vscode
