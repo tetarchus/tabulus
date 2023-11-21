@@ -3,8 +3,8 @@
 <link href='https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@500&display=swap' rel='stylesheet' />
 
 <div style='display:flex;flex-direction:column;align-items:center;justify-content:center;'>
-  <img  src='./apps/docs/app/images/Logo@0.25x.png' style='' width='150px'/>
-  <h1 style='line-height:1;font-size:4rem;font-family:"Smooch Sans", sans-serif;margin:0px;padding-bottom:12px'>Tabulus</h1>
+  <img align='center' src='./apps/docs/app/images/Logo@0.25x.png' style='' width='150px'/>
+  <h1 align='center' style='line-height:1;font-size:4rem;font-family:"Smooch Sans", sans-serif;margin:0px;padding-bottom:12px'>Tabulus</h1>
   <!-- <h3 style='line-height:1;font-size:2rem;font-family:"Smooch Sans", sans-serif;margin:0px'>Fabulus React Tables</h3> -->
 </div>
 
