@@ -1,14 +1,25 @@
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import { mergeMeta, mergeTitles } from '@tetarchus/utils/remix';
 
 import { MdxLoader } from '@docs/components';
 
-import { bundleMdx } from '../utils/mdx.server';
+import { bundleMdx } from '../utils/server';
 
-import type { LoaderFunctionArgs } from '@remix-run/node';
+import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/node';
 import type { FC } from 'react';
 
-const loader = async ({ params }: LoaderFunctionArgs) => {
+const meta = mergeMeta(mergeTitles);
+
+const loader = async ({
+  params,
+}: LoaderFunctionArgs): Promise<
+  TypedResponse<{
+    code: string;
+    frontmatter: Record<string, unknown>;
+    title: string;
+  }>
+> => {
   const docsRoute = params['*'];
   const file = `./app/docs/${docsRoute}.mdx`;
 
@@ -24,4 +35,4 @@ const DocsRoute: FC = () => {
 };
 
 export default DocsRoute;
-export { loader };
+export { loader, meta };
