@@ -76,7 +76,7 @@ const settings = {
     },
     typescript: {
       alwaysTryTypes: true,
-      extensions: fileExtensionsTypescript,
+      extensions: [...fileExtensionsTypescript, ...fileExtensionsJavascript],
       project: tsconfigs,
     },
   },
