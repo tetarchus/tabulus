@@ -1,4 +1,4 @@
-import { json } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { mergeMeta, mergeTitles } from '@tetarchus/utils/remix';
 
@@ -8,6 +8,8 @@ import { bundleMdx } from '../utils/server';
 
 import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/node';
 import type { FC } from 'react';
+
+const FILE_EXT = '.mdx';
 
 const meta = mergeMeta(mergeTitles);
 
@@ -21,7 +23,13 @@ const loader = async ({
   }>
 > => {
   const docsRoute = params['*'];
-  const file = `./app/docs/${docsRoute}.mdx`;
+  const documentationUrl = docsRoute?.replace(FILE_EXT, '');
+
+  if (docsRoute?.endsWith(FILE_EXT)) {
+    throw redirect(documentationUrl ?? '/docs');
+  }
+
+  const file = `./app/docs/${documentationUrl || 'toc'}${FILE_EXT}`;
 
   const { code, frontmatter } = await bundleMdx(file);
   const title = frontmatter['title'];
