@@ -4,7 +4,11 @@ import { defaultOptions } from '@tabulus/config';
 import { createTableOptions } from '@tabulus/utils';
 
 import type { TabulusRegistryProviderProps, TabulusRegistryValue } from './types';
-import type { FC } from 'react';
+import type { TableManagerValue } from '../TableManager';
+import type { TabulusCustomOptions } from '@tabulus/types';
+import type { FC, MutableRefObject } from 'react';
+
+const DEFAULT_CUSTOM_OPTIONS: TabulusCustomOptions = {};
 
 /**
  * Initial value for the TabulusRegistry. As this is not a required context, this contains an
@@ -13,6 +17,9 @@ import type { FC } from 'react';
  */
 const initialValue: TabulusRegistryValue = {
   defaultOptions,
+  findTable: () => {
+    /* Placeholder */
+  },
   initialized: false,
   registerTable: () => {
     /* Placeholder */
@@ -21,19 +28,19 @@ const initialValue: TabulusRegistryValue = {
 };
 
 /** Context for storing all in-use tables in an application. */
-const TabulusRegistry = createContext<TabulusRegistryValue>(initialValue);
-TabulusRegistry.displayName = 'TabulusRegistry';
+const TabulusRegistryContext = createContext<TabulusRegistryValue>(initialValue);
+TabulusRegistryContext.displayName = 'TabulusRegistry';
 
 /**
  * Registry for all current tables on the site. Allows for accessing a table by ID, as well
  * as assisting with cross-table moving.
  */
-const TabulusRegistryProvider: FC<TabulusRegistryProviderProps> = ({
+const TabulusRegistry: FC<TabulusRegistryProviderProps> = ({
   children,
-  defaultOptions: customOptions,
+  defaultOptions: customOptions = DEFAULT_CUSTOM_OPTIONS,
 }: TabulusRegistryProviderProps) => {
   //== State ==========================
-  const [tables, setTables] = useState(new Map<string, unknown>());
+  const [tables, setTables] = useState(new Map<string, MutableRefObject<TableManagerValue>>());
   const [options, setOptions] = useState(createTableOptions(customOptions, defaultOptions));
 
   //== Side Effects ===================
@@ -53,14 +60,21 @@ const TabulusRegistryProvider: FC<TabulusRegistryProviderProps> = ({
     [tables],
   );
 
+  const findTable: TabulusRegistryValue['findTable'] = useCallback(id => tables.get(id), [tables]);
+
   //== Memoized Context Value =========
   const managerValue = useMemo(
-    () => ({ registerTable, defaultOptions: options, initialized: true, tables }),
-    [options, registerTable, tables],
+    () => ({ registerTable, defaultOptions: options, findTable, initialized: true, tables }),
+    [findTable, options, registerTable, tables],
   );
 
-  return <TabulusRegistry.Provider value={managerValue}>{children}</TabulusRegistry.Provider>;
+  //== Provider =======================
+  return (
+    <TabulusRegistryContext.Provider value={managerValue}>
+      {children}
+    </TabulusRegistryContext.Provider>
+  );
 };
 
-export { TabulusRegistry, TabulusRegistryProvider };
+export { TabulusRegistry, TabulusRegistryContext };
 export type { TabulusRegistryProviderProps, TabulusRegistryValue } from './types';

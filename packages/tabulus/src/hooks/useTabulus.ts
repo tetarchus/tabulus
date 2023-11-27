@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { TabulusRegistry } from '@tabulus/contexts';
+import { TabulusRegistryContext } from '@tabulus/contexts';
 import { createTableOptions } from '@tabulus/utils';
 
 import type { RowDataBase, TabulusProps } from '@tabulus/types';
@@ -13,7 +13,7 @@ const useTabulus = <RowData extends RowDataBase>({
   id,
   options: userOptions = defaultUserOptions,
 }: TabulusProps<RowData>) => {
-  const { defaultOptions } = useContext(TabulusRegistry);
+  const { defaultOptions } = useContext(TabulusRegistryContext);
 
   const [columns, setColumns] = useState(baseColumns);
   const [data, setData] = useState(baseData);

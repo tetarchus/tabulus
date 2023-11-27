@@ -1,10 +1,18 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import { defaultColumnConfig } from '@tabulus/config';
 import { setTableTheme } from '@tabulus/theme';
 import { ThemeProvider, createTableOptions } from '@tabulus/utils';
 
-import { TabulusRegistry } from '../TabulusRegistry';
+import { TabulusRegistryContext } from '../TabulusRegistry';
 
 import type { TableManagerProviderProps, TableManagerValue } from './types';
 import type { FullColumnConfig } from '@tabulus/types';
@@ -56,7 +64,7 @@ const TableManagerProvider: FC<TableManagerProviderProps> = ({
   children,
   tableId,
 }: TableManagerProviderProps) => {
-  const { defaultOptions } = useContext(TabulusRegistry);
+  const { defaultOptions, initialized, registerTable } = useContext(TabulusRegistryContext);
 
   //== Base State =====================
   const [id, setId] = useState(tableId);
@@ -206,6 +214,20 @@ const TableManagerProvider: FC<TableManagerProviderProps> = ({
     ],
   );
 
+  //== Registration ===================
+  const tableRef = useRef(managerValue);
+
+  useEffect(() => {
+    tableRef.current = managerValue;
+  }, [managerValue]);
+
+  useEffect(() => {
+    if (initialized) {
+      registerTable(id, tableRef);
+    }
+  }, [id, initialized, registerTable]);
+
+  //== Provider =======================
   return (
     <TableManager.Provider value={managerValue}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
