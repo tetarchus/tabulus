@@ -7,4 +7,7 @@
  */
 type CellFilter = 'all' | 'selected' | 'viewport' | 'visible';
 
-export type { CellFilter };
+/** The definition of a Cell within the table. */
+interface CellComponent {}
+
+export type { CellComponent, CellFilter };

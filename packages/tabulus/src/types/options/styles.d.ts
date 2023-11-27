@@ -1,4 +1,4 @@
-import type { CustomTheme } from '../Theme';
+import type { CustomTheme, Theme } from '../theme';
 import type { themes } from '@tabulus/theme';
 
 /** Table options relating to the look and styling of the table. */
@@ -8,7 +8,7 @@ interface TableStyleOptions {
    * theme definition.
    * @default 'standard'
    */
-  theme: keyof typeof themes | CustomTheme;
+  theme: keyof typeof themes | CustomTheme | Theme;
 }
 
 export type { TableStyleOptions };
