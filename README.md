@@ -1,65 +1,39 @@
-<link rel='preconnect' href='https://fonts.googleapis.com' />
-<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
-<link href='https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@500&display=swap' rel='stylesheet' />
+<p align="center">
+  <a href="https://storybook.js.org/">
+    <img align='center' src='./packages/shared/images/Logo@0.25x.png' width='150px'/>
+  </a>
+  <h1 align='center'>Tabulus</h1>
+</p>
 
-<div style='display:flex;flex-direction:column;align-items:center;justify-content:center;'>
-  <img align='center' src='./apps/docs/app/images/Logo@0.25x.png' width='150px'/>
-  <h1 align='center' style='line-height:1;font-size:4rem;font-family:"Smooch Sans", sans-serif;margin:0px;padding-bottom:12px'>Tabulus</h1>
-  <!-- <h3 style='line-height:1;font-size:2rem;font-family:"Smooch Sans", sans-serif;margin:0px'>Fabulus React Tables</h3> -->
-</div>
 
-> An easy to use, interactive table library for React.
+<p align="center">Fabulous React Tables</p>
 
-Tabulus is a React library for displaying and interacting with tabular data. It offers tonnes of customization, but you can be up and running in a few simple steps.
+<br />
 
-## Contents
+<p align="center">
+Tabulus is a powerful React table library, allowing for displaying and manipulating data.
+</p>
 
-1. [Setup](#setup)
-2. [Usage](#usage)
-   1. [1. React Component](#1-react-component)
-   2. [2. useTabulus Hook](#2-usetabulus-hook)
-3. [Contributing](#contributing)
+<!-- Badges go here -->
 
-## Setup
+### Getting Started
 
-Install `tabulus`:
+You can install the main library with:
 
 ```sh
 npm i tabulus
 ```
 
-Both `react` and `react-dom` are peer dependencies (>= v18), so you'll need those as well if you don't already have them:
+For a detailed 'Getting Started' guide, examples, and more, please see the [Tabulus Website](@todo) for our comprehensive documentation.
 
-```sh
-npm i react react-dom
-# And for typescript, also grab their types
-npm i -D @types/react @types/react-dom
-```
+### Contributing
 
-## Usage
+Contributions are always welcome!
+Please see our [Contribution Guide](./CONTRIBUTING.md) for details on how to get started.
 
-There are a few ways to use `tabulus` in your code.
+### Community
 
-More information about each method, and the various options is available in our [Documentation](@todo).
+You can get in touch with us on:
 
-### 1. React Component
-
-This is the simplest method for using `tabulus`. Just import the component, define your columns, data, and any options you want, and that's it!
-
-```jsx
-import {tabulus} from 'tabulus';
-
-export default function App() {
-  const columns = useMemo(() => [/* Column Definitions */], []);
-  const data = useMemo(() => [/* Data Definition */], []);
-
-
-  return <Tabulus columns={columns} data={data} id='My Table' />
-}
-```
-
-### 2. useTabulus Hook
-
-## Contributing
-
-> For more information please see the [Contribution Guide](./CONTRIBUTING.md).
+- Twitter/X - [@tabulus_](https://twitter.com/tabulus_)
+- Discord - [Join our Server](https://discord.gg/hc5dMPgrWf)

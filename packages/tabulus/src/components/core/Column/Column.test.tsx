@@ -3,9 +3,9 @@ import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import * as ColumnStories from './Column.stories';
+import * as Stories from './Column.stories';
 
-const { Default } = composeStories(ColumnStories);
+const { Default } = composeStories(Stories);
 
 describe('Column Component Tests', () => {
   describe('Accessibility Tests', () => {

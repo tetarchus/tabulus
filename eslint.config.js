@@ -54,11 +54,11 @@ const plugins = {
 };
 
 const tsconfigs = [
-  'tsconfig.json',
+  '.storybook/tsconfig.json',
   'apps/docs/tsconfig.json',
   'packages/tabulus/tsconfig.json',
   'packages/tabulus/tsconfig.node.json',
-  'packages/tabulus/.storybook/tsconfig.json',
+  'tsconfig.json',
 ];
 
 // Plugin settings
@@ -66,7 +66,7 @@ const settings = {
   'import/extensions': fileExtensionsAll,
   'import/external-module-folders': ['node_modules', 'node_modules/@types'],
   'import/ignore': ['(.*/)?node_modules', '\\.(css|md|svg|json)$'],
-  'import/internal-regex': '^~\\/',
+  'import/internal-regex': '^@(docs|shared|tabulus)\\/',
   'import/parsers': {
     '@typescript-eslint/parser': fileExtensionsTypescript,
   },

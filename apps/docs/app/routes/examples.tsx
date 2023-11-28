@@ -1,7 +1,7 @@
 import { json } from '@remix-run/node';
 import { mergeMeta, mergeTitles } from '@tetarchus/utils/remix';
 
-import { Heading } from '@docs/components';
+import { Heading } from '@docs/components/DocBlocks';
 
 import type { FC } from 'react';
 

@@ -1,17 +1,16 @@
 import { Link, useLocation } from '@remix-run/react';
 import { FaDiscord, FaGithub } from 'react-icons/fa6/index.js';
 
-import logo from '@docs/images/Logo@0.25x.png';
+import logo from '@shared/images/Logo@0.25x.png';
 
 import { HeaderLink } from '../HeaderLink';
 
-import type { HeaderProps } from './types';
 import type { FC } from 'react';
 
 const SOCIAL_LINK_CLASSES = 'text-white hover:text-white/80';
 
 /** Standard page header. */
-const Header: FC<HeaderProps> = () => {
+const Header: FC = () => {
   const currentLocation = useLocation();
 
   return (
@@ -47,4 +46,3 @@ const Header: FC<HeaderProps> = () => {
 };
 
 export { Header };
-export type { HeaderProps } from './types';

@@ -1,12 +1,9 @@
+import { arrayIncludes } from '@tetarchus/utils/core';
 import { useContext, useEffect, useState } from 'react';
 
 import { ROLES } from '@tabulus/constants';
 import { TableManager } from '@tabulus/contexts';
-import {
-  arrayIncludes,
-  getHorizontalAlignProperty,
-  getVerticalAlignProperty,
-} from '@tabulus/utils';
+import { getHorizontalAlignProperty, getVerticalAlignProperty } from '@tabulus/utils';
 
 import { CellContainer } from './styled';
 
@@ -14,14 +11,10 @@ import type { CellProps } from './types';
 import type { FC } from 'react';
 
 /** A cell in a table. */
-const Cell: FC<CellProps> = ({
-  children,
-  className,
-  column,
-  type = 'cell',
-  rowIndex,
-  value,
-}: CellProps) => {
+const Cell: FC<CellProps> = ({ children, className, cell }: CellProps) => {
+  //== Cell Component =================
+  const { column, type = 'cell', rowIndex, value } = cell;
+
   //== Context Values =================
   const { getColumnIndex, getColumnOption } = useContext(TableManager);
 

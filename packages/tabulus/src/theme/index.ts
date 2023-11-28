@@ -17,10 +17,12 @@ const themes = { standard };
 const setTableTheme = (theme: TabulusOptions['theme']): Theme => {
   if (typeof theme === 'string') {
     return themes[theme] ?? themes.standard;
-  } else if (typeof theme === 'object') {
+  } else if (typeof theme === 'object' && 'baseTheme' in theme) {
     const { baseTheme = 'standard' } = theme;
     const baseThemeObject = themes[baseTheme];
     return mergeWith(baseThemeObject, theme, () => {});
+  } else if (typeof theme === 'object') {
+    return theme;
   } else {
     return themes.standard;
   }

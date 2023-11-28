@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import { styled } from '@tabulus/utils';
 
 /** A wrapper around all of the rows. */
 const TableHolder = styled.div`

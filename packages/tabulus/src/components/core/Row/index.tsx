@@ -1,8 +1,8 @@
+import { objectEntries } from '@tetarchus/utils/core';
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 
 import { CLASSES, ROLES } from '@tabulus/constants';
-import { objectEntries } from '@tabulus/utils';
 
 import { Cell } from '../Cell';
 
@@ -28,11 +28,8 @@ const Row: FC<RowProps> = ({ index, row }: RowProps) => {
     >
       {cells.map(([column, value]) => (
         <Cell
-          column={column}
+          cell={{ column, rowIndex: index, type: 'cell', value: String(value) }}
           key={`${column}-${index}`}
-          rowIndex={index}
-          type='cell'
-          value={String(value)}
         />
       ))}
     </RowWrapper>

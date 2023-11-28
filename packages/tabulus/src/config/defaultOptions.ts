@@ -7,6 +7,9 @@ const defaultOptions: TabulusOptions = {
   horizontalAlign: 'center',
   //== Columns ========================
   columnDefaults: defaultColumnConfig,
+  //== History ========================
+  history: true,
+  historySize: 10,
   //== Style ==========================
   theme: 'standard',
 };

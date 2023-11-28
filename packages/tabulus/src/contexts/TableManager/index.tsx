@@ -4,44 +4,67 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useReducer,
   useRef,
-  useState,
 } from 'react';
 
-import { defaultColumnConfig } from '@tabulus/config';
-import { setTableTheme } from '@tabulus/theme';
-import { ThemeProvider, createTableOptions } from '@tabulus/utils';
+import {
+  ThemeProvider,
+  tableManagerReducer,
+  getColumnOptionValue,
+  setTableManagerStateInitialValue,
+  tableManagerInitial,
+  getColumnIndexNumber,
+  getRowIndexNumber,
+  getTableRowsCount,
+  getTableColumnsCount,
+} from '@tabulus/utils';
 
 import { TabulusRegistryContext } from '../TabulusRegistry';
 
 import type { TableManagerProviderProps, TableManagerValue } from './types';
-import type { FullColumnConfig } from '@tabulus/types';
-import type { FC } from 'react';
+import type {
+  ColumnsRenderFunction,
+  FooterRenderFunction,
+  GetCellByIdFunction,
+  GetCellCountFunction,
+  GetColumnOptionFunction,
+  GetTableOptionFunction,
+  RowDataBase,
+  RowsRenderFunction,
+  TabulusProps,
+} from '@tabulus/types';
 
+// TODO: Move these?
 const getOptionPlaceholder = (() => {
   /** Placeholder */
-}) as TableManagerValue['getOption'];
+}) as TableManagerValue<RowDataBase>['getOption'];
 const getColumnOptionPlaceholder = (() => {
   /** Placeholder */
-}) as TableManagerValue['getColumnOption'];
+}) as TableManagerValue<RowDataBase>['getColumnOption'];
+const defaultEvents: NonNullable<TabulusProps<RowDataBase>['events']> = {};
+const defaultTableOptions: NonNullable<TabulusProps<RowDataBase>['options']> = {};
 
 /**
  * Initial value for the TableManager. The `initialized` prop will be set to `false` when the
  * context has not been initialized.
  */
-const initialValue: TableManagerValue = {
-  columns: [],
-  data: [],
-  events: {},
-  getColumnCount: () => 0,
+const initialValue: TableManagerValue<RowDataBase> = {
+  // columns: [],
+  // data: [],
+  // events: {},
+  getColumnsCount: () => 0,
   getColumnOption: getColumnOptionPlaceholder,
   getColumnIndex: () => -1,
   getOption: getOptionPlaceholder,
-  getRowCount: () => 0,
+  getRowsCount: () => 0,
   getRowIndex: () => -1,
+  renderColumns: () => null,
+  renderRows: () => null,
+  renderFooter: () => null,
   id: '',
   initialized: false,
-  rows: [],
+  // rows: [],
 };
 
 /**
@@ -50,172 +73,116 @@ const initialValue: TableManagerValue = {
  *
  * @private
  */
-const TableManager = createContext<TableManagerValue>(initialValue);
+const TableManager = createContext<TableManagerValue<RowDataBase>>(initialValue);
 TableManager.displayName = 'TableManager';
 
-const defaultEvents = {};
-const defaultTableOptions = {};
-
-const TableManagerProvider: FC<TableManagerProviderProps> = ({
+/**
+ * Main internal Table context.
+ * @param param0 The props passed in to the TableManager by the `Tabulus` component.
+ * @returns The contents of the table wrapped in the context provider to allow passing down of data.
+ *
+ * @private
+ */
+const TableManagerProvider = <RowData extends RowDataBase>({
   columns: baseColumns,
   data: baseData,
   events: userEvents = defaultEvents,
   options: tableOptions = defaultTableOptions,
   children,
   tableId,
-}: TableManagerProviderProps) => {
+}: TableManagerProviderProps<RowData>) => {
+  //== Registry Link ==================
   const { defaultOptions, initialized, registerTable } = useContext(TabulusRegistryContext);
 
-  //== Base State =====================
-  const [id, setId] = useState(tableId);
-  const [data, setData] = useState(baseData);
-  const [rows, setRows] = useState(baseData); // TODO: This will change
-  const [events, setEvents] = useState(userEvents);
-  const [columns, setColumns] = useState(baseColumns);
-  const [options, setOptions] = useState(createTableOptions(tableOptions, defaultOptions));
-
-  //== Functions ======================
-  /**
-   * Gets the value of an option for the table. If the table does not have an option set, it will
-   * fallback to the default values (either custom defaults if set on the `TabulusRegistry`
-   * context, or globals set internally.
-   */
-  const getOption: TableManagerValue['getOption'] = useCallback(
-    option => options[option] ?? defaultOptions[option],
-    [defaultOptions, options],
+  //== State ==========================
+  const [{ columns, id, options, rows, theme }, dispatchState] = useReducer(
+    tableManagerReducer<RowData>,
+    tableManagerInitial({
+      columns: baseColumns,
+      data: baseData,
+      events: userEvents,
+      id: tableId,
+      options: tableOptions,
+    }),
+    setTableManagerStateInitialValue(defaultOptions),
   );
-
-  /**
-   * Gets the value of an option for a specific column. If the column does not have an option set,
-   * it will fallback to default values (either table defaults if set, custom defaults if set
-   * on the `TabulusRegistry` context, or globals set internally.
-   */
-  const getColumnOption: TableManagerValue['getColumnOption'] = useCallback(
-    // TODO: Sort out types so we don't need the types here as well as in the manager value types
-    <K extends keyof FullColumnConfig>(columnId: string, option: K) => {
-      const columnDefinition = columns.find(column => column.id === columnId);
-      const columnOption = columnDefinition?.[option];
-      if (columnOption != null) {
-        // TODO: Sort out types so casting is not necessary (`satisfies` is not working and mentioning `never`)
-        return columnOption as FullColumnConfig[K];
-      }
-      return (
-        options.columnDefaults[option] ??
-        defaultOptions.columnDefaults[option] ??
-        defaultColumnConfig[option]
-      );
-    },
-    [columns, defaultOptions.columnDefaults, options.columnDefaults],
-  );
-
-  /**
-   * Gets the index of a column from its ID.
-   */
-  const getColumnIndex: TableManagerValue['getColumnIndex'] = useCallback(
-    columnId => columns.findIndex(column => column.id === columnId),
-    [columns],
-  );
-
-  /**
-   * Gets the number of columns for the table. By default this returns the count of all columns,
-   * visible or not.
-   * @param filter Optional column filter to allow getting this number for a subset of columns.
-   */
-  const getColumnCount: TableManagerValue['getColumnCount'] = useCallback(
-    (filter = 'all') => {
-      switch (filter) {
-        case 'all':
-        case 'selected': // TODO: Write this as a separate return (should get the currently selected columns)
-          return columns.length;
-        case 'viewport': // TODO: Write this as a separate return (should get the columns current visible in the viewport)
-        case 'visible':
-          return columns.filter(
-            column => (column.visible ?? getOption('columnDefaults').visible) === true,
-          ).length;
-        // No default -- exhaustive
-      }
-    },
-    [columns, getOption],
-  );
-
-  /**
-   * Gets the number of rows for the table. By default this returns the count of all rows,
-   * visible or not.
-   * @param filter Optional row filter to allow getting this number for a subset of rows.
-   */
-  const getRowCount: TableManagerValue['getRowCount'] = useCallback(
-    (filter = 'all') => {
-      switch (filter) {
-        case 'all':
-        case 'selected': // TODO: Write this as a separate return (should get the currently selected columns)
-        case 'viewport': // TODO: Write this as a separate return (should get the columns current visible in the viewport)
-        case 'visible': // TODO: Write this as a separate return (should get the columns current visible in the table)
-          return rows.length;
-
-        // No default -- exhaustive
-      }
-    },
-    [rows],
-  );
-
-  /**
-   * Gets the index of a row based on the value of its `id` column.
-   */
-  // TODO: Make this use a custom ID field if set as an option
-  const getRowIndex: TableManagerValue['getRowIndex'] = useCallback(
-    rowId => rows.findIndex(row => row['id'] === rowId),
-    [rows],
-  );
-
-  //== Complex State ==================
-  // State that relies on the above functions to set its initial value.
-  const [theme, setTheme] = useState(setTableTheme(getOption('theme')));
+  // TODO: Make use of: data, events
 
   //== Side Effects ===================
-  useEffect(() => setId(tableId), [tableId]);
-  useEffect(() => setData(baseData), [baseData]);
-  useEffect(() => setRows(baseData), [baseData]); // TODO: This will change
-  useEffect(() => setEvents(userEvents), [userEvents]);
-  useEffect(() => setColumns(baseColumns), [baseColumns]);
-  useEffect(() => setTheme(setTableTheme(getOption('theme'))), [getOption]);
+  useEffect(() => dispatchState({ type: 'set_id', id: tableId }), [tableId]);
+  useEffect(() => dispatchState({ type: 'set_data', data: baseData }), [baseData]);
+  useEffect(() => dispatchState({ type: 'set_events', events: userEvents }), [userEvents]);
+  useEffect(() => dispatchState({ type: 'set_columns', columns: baseColumns }), [baseColumns]);
   useEffect(
-    () => setOptions(createTableOptions(tableOptions, defaultOptions)),
+    () => dispatchState({ type: 'set_options', defaultOptions, options: tableOptions }),
     [defaultOptions, tableOptions],
   );
 
+  //== Functions ======================
+  const getOption: GetTableOptionFunction = useCallback(option => options[option], [options]);
+  const getColumnOption: GetColumnOptionFunction<RowData> = useCallback(
+    (columnId, option) =>
+      getColumnOptionValue(columns, getOption('columnDefaults'), columnId, option),
+    [columns, getOption],
+  );
+  const getColumnsCount: GetCellCountFunction = useCallback(
+    filter => getTableColumnsCount(columns, filter),
+    [columns],
+  );
+  const getRowsCount: GetCellCountFunction = useCallback(
+    filter => getTableRowsCount(rows, filter),
+    [rows],
+  );
+  const getColumnIndex: GetCellByIdFunction = useCallback(
+    columnId => getColumnIndexNumber(columns, columnId),
+    [columns],
+  );
+  const getRowIndex: GetCellByIdFunction = useCallback(
+    rowId => getRowIndexNumber(rows, rowId),
+    [rows],
+  );
+  const renderColumns: ColumnsRenderFunction = useCallback(
+    renderFunction => renderFunction(columns),
+    [columns],
+  );
+  const renderRows: RowsRenderFunction = useCallback(
+    renderFunction => renderFunction(rows),
+    [rows],
+  );
+  const renderFooter: FooterRenderFunction = useCallback(renderFunction => renderFunction(), []);
+
   //== Memoized Context Value =========
   const managerValue = useMemo(
-    () => ({
-      columns,
-      data,
-      events,
-      getColumnCount,
-      getColumnOption,
-      getColumnIndex,
-      getOption,
-      getRowCount,
-      getRowIndex,
-      id,
-      initialized: true,
-      rows,
-    }),
+    () =>
+      ({
+        getColumnsCount,
+        getColumnOption,
+        getColumnIndex,
+        getOption,
+        getRowsCount,
+        getRowIndex,
+        id,
+        initialized: true,
+        renderColumns,
+        renderFooter,
+        renderRows,
+      }) satisfies TableManagerValue<RowData>,
     [
-      columns,
-      data,
-      events,
-      getColumnCount,
+      getColumnsCount,
       getColumnOption,
       getColumnIndex,
       getOption,
-      getRowCount,
+      getRowsCount,
       getRowIndex,
       id,
-      rows,
+      renderColumns,
+      renderFooter,
+      renderRows,
     ],
   );
 
   //== Registration ===================
-  const tableRef = useRef(managerValue);
+  const tableRef = useRef<TableManagerValue<RowData>>(managerValue);
 
   useEffect(() => {
     tableRef.current = managerValue;
@@ -223,17 +190,17 @@ const TableManagerProvider: FC<TableManagerProviderProps> = ({
 
   useEffect(() => {
     if (initialized) {
-      registerTable(id, tableRef);
+      registerTable<RowData>(id, tableRef);
     }
   }, [id, initialized, registerTable]);
 
   //== Provider =======================
   return (
-    <TableManager.Provider value={managerValue}>
+    <TableManager.Provider value={managerValue as TableManagerValue<RowDataBase>}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </TableManager.Provider>
   );
 };
 
 export { TableManager, TableManagerProvider };
-export type { TableManagerProviderProps, TableManagerValue } from './types';
+export type { TableManagerProviderProps, TableManagerState, TableManagerValue } from './types';

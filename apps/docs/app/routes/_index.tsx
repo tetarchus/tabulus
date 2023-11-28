@@ -1,6 +1,6 @@
 import { json } from '@remix-run/node';
 
-import logo from '@docs/images/Logo@0.25x.png';
+import logo from '@shared/images/Logo@0.25x.png';
 
 import type { LoaderFunction } from '@remix-run/node';
 

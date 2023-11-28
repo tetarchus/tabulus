@@ -15,14 +15,14 @@ import type { FC } from 'react';
 /** The main internal table component. */
 const Table: FC<TableProps> = () => {
   //== Context Values =================
-  const { getColumnCount, getOption, getRowCount, id } = useContext(TableManager);
+  const { getColumnsCount, getOption, getRowsCount, id } = useContext(TableManager);
 
   //== Component Return ===============
   return (
     <TablePositioner className={CLASSES.BASE}>
       <TableWrapper
-        aria-colcount={getColumnCount()} // TODO: Do we want this to be visible rather than all?
-        aria-rowcount={getRowCount()} // TODO: Do we want this to be visible rather than all?
+        aria-colcount={getColumnsCount()} // TODO: Do we want this to be visible rather than all?
+        aria-rowcount={getRowsCount()} // TODO: Do we want this to be visible rather than all?
         className={CLASSES.TABLE}
         horizontalAlign={getOption('horizontalAlign')}
         id={id}

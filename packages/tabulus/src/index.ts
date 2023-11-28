@@ -1,10 +1,6 @@
 export { Tabulus } from './components';
-export {
-  TableManager,
-  TabulusContext,
-  TableManagerProvider,
-  TabulusContextProvider,
-} from './contexts';
+export { TabulusRegistry } from './contexts';
 export { useTabulus, useTabulusContext, useTabulusRegistry } from './hooks';
 
-export type { TabulusProps } from './types';
+// TODO: Export more types for external use
+export type { CustomTheme, TabulusCustomOptions, TabulusProps, Theme } from './types';

@@ -1,10 +1,25 @@
 export type { HorizontalAlign, VerticalAlign } from './base';
-export type { CellFilter } from './cell';
-export type { ColumnConfig, ColumnDefinition, ColumnLookup, FullColumnConfig } from './column';
-export type { CellType } from './component';
-export type { CustomFormatterFunction } from './function';
-export type { RowDataBase } from './row';
+export type { CellComponent, CellFilter, CellType } from './cell';
+export type {
+  ColumnComponent,
+  ColumnConfig,
+  ColumnDefinition,
+  FullColumnConfig,
+  ColumnLookup,
+} from './column';
+export type { CustomComponents, TableComponents } from './components';
+export type {
+  ColumnsRenderFunction,
+  FindTableFunction,
+  FooterRenderFunction,
+  GetCellByIdFunction,
+  GetCellCountFunction,
+  GetColumnOptionFunction,
+  GetTableOptionFunction,
+  RegisterTableFunction,
+  RowsRenderFunction,
+} from './functions';
 export type { TabulusCustomOptions, TabulusOptions } from './options';
+export type { RowComponent, RowDataBase } from './row';
 export type { TabulusProps } from './tabulus';
 export type { CustomTheme, Theme } from './theme';
-export type { CleanObject, EntriesToObject, EntriesType, ObjectType } from './util';

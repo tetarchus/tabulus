@@ -11,6 +11,10 @@ const FONT_SIZE_MAP = {
   h6: 'text-2xl',
 } as const;
 
+// TODO: Add an option (default 'on') to add:
+// - Link Icon to the left
+// - Add hash to URL if clicked (and copy the link)
+
 /**
  * HOC wrapper around a standard Heading to use as a replacement in MDX content.
  * @param tag The heading level to use for the heading (1-6).

@@ -5,10 +5,10 @@ import { createTableOptions } from '@tabulus/utils';
 
 import type { TabulusRegistryProviderProps, TabulusRegistryValue } from './types';
 import type { TableManagerValue } from '../TableManager';
-import type { TabulusCustomOptions } from '@tabulus/types';
+import type { FindTableFunction, RegisterTableFunction, RowDataBase } from '@tabulus/types';
 import type { FC, MutableRefObject } from 'react';
 
-const DEFAULT_CUSTOM_OPTIONS: TabulusCustomOptions = {};
+const DEFAULT_CUSTOM_OPTIONS = {};
 
 /**
  * Initial value for the TabulusRegistry. As this is not a required context, this contains an
@@ -17,50 +17,51 @@ const DEFAULT_CUSTOM_OPTIONS: TabulusCustomOptions = {};
  */
 const initialValue: TabulusRegistryValue = {
   defaultOptions,
-  findTable: () => {
-    /* Placeholder */
-  },
+  findTable: () => null,
   initialized: false,
   registerTable: () => {
     /* Placeholder */
   },
-  tables: new Map(),
+  tables: {},
 };
 
 /** Context for storing all in-use tables in an application. */
 const TabulusRegistryContext = createContext<TabulusRegistryValue>(initialValue);
 TabulusRegistryContext.displayName = 'TabulusRegistry';
 
+// TODO: Move to types.
+type TableMap = Record<string, MutableRefObject<TableManagerValue<RowDataBase>>>;
+
 /**
- * Registry for all current tables on the site. Allows for accessing a table by ID, as well
- * as assisting with cross-table moving.
+ * Registry provider for all current tables on the site. Allows for accessing a table by ID,
+ * as well as assisting with cross-table moving.
  */
 const TabulusRegistry: FC<TabulusRegistryProviderProps> = ({
   children,
   defaultOptions: customOptions = DEFAULT_CUSTOM_OPTIONS,
 }: TabulusRegistryProviderProps) => {
   //== State ==========================
-  const [tables, setTables] = useState(new Map<string, MutableRefObject<TableManagerValue>>());
+  const [tables, setTables] = useState<TableMap>({});
   const [options, setOptions] = useState(createTableOptions(customOptions, defaultOptions));
 
   //== Side Effects ===================
   useEffect(() => setOptions(createTableOptions(customOptions, defaultOptions)), [customOptions]);
 
   //== Functions ======================
-  const registerTable: TabulusRegistryValue['registerTable'] = useCallback(
+  const registerTable: RegisterTableFunction = useCallback(
     (id, table) => {
-      const newMap = new Map(tables);
-      if (newMap.has(id)) {
-        throw new Error(`Table '${id}' already exists.`);
-      } else {
-        newMap.set(id, table);
+      const newMap = { ...tables };
+      if (newMap[id] == null) {
+        newMap[id] = table as TableMap[string];
         setTables(newMap);
+      } else {
+        throw new Error(`Table '${id}' already exists.`);
       }
     },
     [tables],
   );
 
-  const findTable: TabulusRegistryValue['findTable'] = useCallback(id => tables.get(id), [tables]);
+  const findTable: FindTableFunction = useCallback(id => tables[id] ?? null, [tables]);
 
   //== Memoized Context Value =========
   const managerValue = useMemo(

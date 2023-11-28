@@ -1,8 +1,8 @@
+import { objectKeys } from '@tetarchus/utils/core';
 import { mergeWith } from 'lodash-es';
 
 import { defaultOptions } from '@tabulus/config';
 
-import { objectKeys } from './object';
 import { WARNINGS } from './warnings';
 
 import type { TabulusOptions } from '@tabulus/types';

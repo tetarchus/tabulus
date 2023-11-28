@@ -18,7 +18,18 @@ const TableWrapper = styled.div<TableWrapperProps>(({ horizontalAlign }) => ({
 
 /** Full width container for the table to allow positioning. */
 const TablePositioner = styled.div`
+  position: relative;
+  border: none;
+  overflow: hidden;
+
   width: 100%;
+
+  //== Theme Properties ===============
+  /* font-size
+  */
+
+  //== Layout Properties ==============
+  /* ? Layout === 'fitDataTable' => display: inline-block */
 `;
 
 export { TablePositioner, TableWrapper };

@@ -3,12 +3,12 @@ import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import * as TableStories from './Table.stories';
+import * as Stories from './Table.stories';
 
-const { Default } = composeStories(TableStories);
+const { Default } = composeStories(Stories);
 
 describe('Table Component Tests', () => {
-  describe('Accessibility Tests', () => {
+  describe('Accessibility (Axe) Tests', () => {
     it('should pass accessibility checks - Default', async () => {
       expect.assertions(1);
       const { container } = render(<Default />);

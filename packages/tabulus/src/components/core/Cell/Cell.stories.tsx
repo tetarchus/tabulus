@@ -13,20 +13,14 @@ type Story = StoryObj<typeof meta>;
 /** A standard table cell. */
 const Default: Story = {
   args: {
-    column: 'Cell',
-    rowIndex: 1,
-    type: 'cell',
-    value: 'Cell',
+    cell: { column: 'Cell', rowIndex: 1, type: 'cell', value: 'Cell' },
   },
 };
 
 /** A header table cell. */
 const HeaderCell: Story = {
   args: {
-    column: 'Header Cell',
-    rowIndex: 'header',
-    type: 'header',
-    value: 'Header',
+    cell: { column: 'Header Cell', rowIndex: 'header', type: 'header', value: 'Header' },
   },
 };
 

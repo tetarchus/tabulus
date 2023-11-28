@@ -1,58 +1,63 @@
-# Contributing to Tabulus
+# Contribution Guide
 
-@todo
+Contributions are always welcome, whether you want to add a new feature, work on an issue, or fix a bug you've found yourself.
 
-## Making your own changes
+`tabulus` is organised as an [npm monorepo](https://docs.npmjs.com/cli/v7/using-npm/workspaces) with workspaces, so you should run all commands from the root directory.
+
+There are currently 2 packages in the repo that can be developed:
+
+- [tabulus](./packages/tabulus/README.md) - The main library
+- [@tabulus/docs](./apps/docs/README.md) - The documentation and website.
+
+For contributing to either package, the initial workflow is the same:
+
+## Getting Started
+
+To get up and running with your own copy of the repo to make changes, you need to fork
 
 ### 1. Fork and Clone the project
 
-Create your own fork of the repo, clone, and create a new feature/bugfix branch (prefixed with either `feature/` or `bugfix/`).
+Create your own [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) of the repo and clone this into your development environment.
 
-### 2. Install Dependencies
+### 2. Create a new working branch
 
-`tabulus` is a monorepo with 2 projects:
+Depending on the purpose of your contribution, you either want to branch off of `master` (bug fixes) or `next` (new features/code refactoring). While not required, we suggest a branch naming structure of:
 
-- `@tabulus/docs` - The documentation site.
-- `tabulus` - The main library project and storybook site.
+```sh
+{branch-type}/{issue-ref}-{description}
+```
 
-Running
+Where `branch-type` is one of:
+
+- `bugfix` - For fixing bugs
+- `feat` - For adding new features
+- `refactor` - For code refactoring that doesn't add any additional functionality, but simplifies/improves existing code.
+
+### 3. Install dependencies
+
+Depending on the source branch, the dependencies may have changed, so once you've created your working branch, you can ensure you're using the correct dependency versions you can run:
 
 ```sh
 npm i
 ```
 
-from the repo root directory will install all dependencies required, and all commands should be run from the root. Any scripts for the `tabulus` project have equivalents in the root `package.json`, while documentation scripts are prefixed with `docs:` (e.g: `docs:dev` to run a local version of the documentation site).
+to install all required dependencies for the packges.
 
-### 3. Run the project
+## Making Changes
 
-#### `tabulus`
+Once you're set up, you can make changes to the relevant files and run the packages locally to ensure they're all working correctly. For more information on any guidelines on file structure, please see the contribution documentation in the storybook (`npm run sb` will start the storybook locally on port `6006`).
 
-To keep track of changes to the existing components, you can run `storybook` in development to allow quick checking of the changes. If you are creating a new component, please also create a `[ComponentName].stories.tsx` file (and a test file). You can check the existing components for a rough template if you're new to storybook, or check out their [documentation](https://storybook.js.org/docs/react/writing-stories/introduction).
+## Submitting a PR
 
-```sh
-npm run storybook:start # Starts on port 6006 by default
-```
+Once you're changes are complete, please submit a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) against your source branch. If your changes are not quite ready to be reviewed, please create a draft request until you're happy with the changes for review.
 
-### `@tabulus/docs`
+There are PR templates in place with a checklist of things to ensure you've done before the PR can be merged, but please make sure that you have run typechecking, linting and tests on your code with `npm run validate`.
 
-You can also run the documentation site as a local remix server with hot-reloading to see your changes as you make them.
+### Additional Tasks
 
-```sh
-npm run docs:dev # Starts on port 3000 by default
-```
+You can speed up the review process by ensuring that everything is completed prior to the PR being marked as `Ready to Review`. If the PR is linked to an issue, please include `fixes {issue-ref}` in the body of the PR so that these are correctly linked. Additionally adding tags for `documentation` or `library`, depending on the packages involved, will allow us to see at a glance which packages are affected.
 
-### 4. Run Validation
+For most PR's, there may be some additional tasks to ensure that you have completed such as:
 
-Once you've made your changes, make sure that all typechecking, linting and tests are still passing by running
-
-```sh
-npm run validate
-```
-
-Providing there are no errors, you're good to go.
-
-### 5. Submit your PR
-
-Once you're ready to get the changes merged into `tabulus` or `@tabulus/docs`, create your PR! Please include any linked issues that the PR resolves, and as much information about the change as possible to help any maintainers to review your change as quickly as possible.
-
-Once the PR has been reviewed (if it's your first one), or once it's marked as 'ready for review', a few automated checks will be performed, including a coverage check (please make sure you've added tests if you've added a feature).
+- Adding/updating tests - To ensure that any new/changed functionality is tested correctly, please ensure that tests are up-to-date and passing. New functionality should have testing written for it where possible.
+- Adding/updating documentation - If you're changing the way something works, or adding some new functionality, please ensure that the documentation is updated to reflect the change.

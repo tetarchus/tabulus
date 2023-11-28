@@ -13,14 +13,14 @@ import type { FC } from 'react';
 /** All of the rows of data in the table. */
 const Rows: FC<RowsProps> = () => {
   //== Context Values =================
-  const { rows } = useContext(TableManager);
+  const { renderRows } = useContext(TableManager);
 
   //== Component Return ===============
   return (
     <TableHolder className={CLASSES.BODY.BASE} role={ROLES.BODY}>
-      {rows.map((row, index) => (
-        <Row index={index} key={index} row={row} />
-      ))}
+      {renderRows(rows =>
+        rows.map((row, index) => <Row index={index} key={row.id} row={row.data} />),
+      )}
     </TableHolder>
   );
 };

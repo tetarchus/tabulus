@@ -6,10 +6,15 @@ import type { CellContainerProps } from './types';
 /** A wrapper around all of the cell contents. */
 const CellContainer = styled.div<CellContainerProps>`
   //== Static Properties ================
-  border: 1px solid black; // TODO: Add this to theme / custom styles
   padding: 0.25rem;
   display: flex;
   width: 100%;
+
+  //== Theme Properties ===============
+  // TODO: Control with theme
+  border-width: 1px;
+  border-style: solid;
+  border-color: currentColor;
 
   //== Dynamic Properties =============
   align-items: ${({ verticalAlign }) => {

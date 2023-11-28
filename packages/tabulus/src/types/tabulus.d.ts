@@ -4,7 +4,7 @@ import type { RowDataBase } from './row';
 
 // TODO: Make the generic types work correctly?
 /** Props passed to the Tabulus component as well as contexts and hooks. */
-interface TabulusProps<RowData extends RowDataBase = RowDataBase> {
+interface TabulusProps<RowData extends RowDataBase> {
   /** Definition array for the table columns. */
   readonly columns: Array<ColumnDefinition<RowData>>;
   /** The data to display in the table. */

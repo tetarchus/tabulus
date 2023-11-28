@@ -8,7 +8,7 @@ const tailwindConfig = {
     extend: {
       colors: {
         dark: '#2A2A2B',
-        brunswick: '004039',
+        brunswick: '#004039',
         pink: '#FB00FF',
         solo: '#303435',
         teal: '#00C7AC',

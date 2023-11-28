@@ -3,9 +3,9 @@ import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import * as CellStories from './Cell.stories';
+import * as Stories from './Cell.stories';
 
-const { Default, HeaderCell } = composeStories(CellStories);
+const { Default, HeaderCell } = composeStories(Stories);
 
 describe('Cell Component Tests', () => {
   describe('Accessibility Tests', () => {

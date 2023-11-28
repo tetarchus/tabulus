@@ -1,5 +1,21 @@
 export { getHorizontalAlignProperty, getVerticalAlignProperty } from './cell';
-export { validateColumnDefinition, validateColumnDefinitions } from './columns';
-export { createTableOptions } from './options';
+export { createColumnsFromDefinitions } from './column';
+export { updateHistory } from './history';
+export { createTableOptions, validateOptions } from './options';
+export {
+  setTableManagerStateInitialValue,
+  tableManagerInitial,
+  tableManagerReducer,
+} from './reducers';
+export { createRowsFromData } from './row';
+export { ThemeProvider, styled } from './styled';
+export {
+  getColumnIndexNumber,
+  getColumnOptionValue,
+  getRowIndexNumber,
+  getTableColumnsCount,
+  getTableRowsCount,
+} from './table';
 export { WARNINGS } from './warnings';
-export { styled, ThemeProvider } from './style';
+
+export type { TableManagerActions } from './reducers';

@@ -3,9 +3,9 @@ import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import * as FooterStories from './Footer.stories';
+import * as Stories from './Footer.stories';
 
-const { Default } = composeStories(FooterStories);
+const { Default } = composeStories(Stories);
 
 describe('Footer Component Tests', () => {
   describe('Accessibility Tests', () => {

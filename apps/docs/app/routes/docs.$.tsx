@@ -3,8 +3,7 @@ import { useLoaderData } from '@remix-run/react';
 import { mergeMeta, mergeTitles } from '@tetarchus/utils/remix';
 
 import { MdxLoader } from '@docs/components';
-
-import { bundleMdx } from '../utils/server';
+import { bundleMdx } from '@docs/utils/server';
 
 import type { LoaderFunctionArgs, TypedResponse } from '@remix-run/node';
 import type { FC } from 'react';
@@ -25,8 +24,11 @@ const loader = async ({
   const docsRoute = params['*'];
   const documentationUrl = docsRoute?.replace(FILE_EXT, '');
 
+  console.log('ROUTE', docsRoute);
+
   if (docsRoute?.endsWith(FILE_EXT)) {
-    throw redirect(documentationUrl ?? '/docs');
+    console.log('REDIRECTING TO', documentationUrl);
+    throw redirect(`../docs/${documentationUrl}` ?? '/docs');
   }
 
   const file = `./app/docs/${documentationUrl || 'toc'}${FILE_EXT}`;

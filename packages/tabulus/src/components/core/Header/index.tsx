@@ -14,15 +14,16 @@ import type { FC } from 'react';
 /** The header row for the table, containing all header cells. */
 const Header: FC<HeaderProps> = () => {
   //== Context Values =================
-  const { columns } = useContext(TableManager);
+  const { renderColumns } = useContext(TableManager);
 
   //== Component Return ===============
   return (
     <TableHeader className={cn(CLASSES.HEADER.BASE)} role={ROLES.HEADER}>
       <HeadersRow className={CLASSES.HEADER.ROW} role={ROLES.ROW}>
-        {columns.map(column => (
-          <Column key={column.id} {...column} />
-        ))}
+        {renderColumns(columns =>
+          // TODO: Remove key cast (it should be of string type?!)
+          columns.map(column => <Column key={column.id as string} column={column} />),
+        )}
       </HeadersRow>
     </TableHeader>
   );

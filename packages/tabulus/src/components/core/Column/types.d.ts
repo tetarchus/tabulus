@@ -1,9 +1,9 @@
-/** Props for the column.  */
+import type { ColumnComponent } from '@tabulus/types';
+
+/** Props for the Column component. */
 interface ColumnProps {
-  /** The unique ID of the column. */
-  readonly id: string;
-  /** The title to display in the header. */
-  readonly title: string;
+  /** The component data for the column. */
+  column: ColumnComponent;
 }
 
 export type { ColumnProps };

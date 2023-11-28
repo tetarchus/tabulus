@@ -8,8 +8,8 @@ import type { ColumnProps } from './types';
 import type { FC } from 'react';
 
 /** A column header containing the column title as well as sort and filter options. */
-const Column: FC<ColumnProps> = ({ id, title }: ColumnProps) => (
-  <Cell className={CLASSES.COLUMN.BASE} column={id} rowIndex={'header'} type='header'>
+const Column: FC<ColumnProps> = ({ column: { id, title } }: ColumnProps) => (
+  <Cell className={CLASSES.COLUMN.BASE} cell={{ column: id, rowIndex: 'header', type: 'header' }}>
     <Title className={CLASSES.COLUMN.TITLE}>{title}</Title>
   </Cell>
 );

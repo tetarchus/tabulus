@@ -1,0 +1,3 @@
+const updateHistory = () => {};
+
+export { updateHistory };

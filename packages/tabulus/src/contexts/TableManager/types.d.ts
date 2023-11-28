@@ -1,46 +1,77 @@
 import type {
-  CellFilter,
-  ColumnConfig,
-  FullColumnConfig,
+  ColumnComponent,
+  ColumnsRenderFunction,
+  FooterRenderFunction,
+  GetCellByIdFunction,
+  GetCellCountFunction,
+  GetColumnOptionFunction,
+  GetTableOptionFunction,
+  RowComponent,
   RowDataBase,
+  RowsRenderFunction,
   TabulusOptions,
   TabulusProps,
+  Theme,
 } from '@tabulus/types';
 import type { ReactNode } from 'react';
 
+interface TableManagerState<RowData extends RowDataBase>
+  extends Omit<TabulusProps<RowData>, 'columns' | 'events' | 'options'> {
+  // TODO: JSDOC
+  columnDefinitions: TabulusProps<RowData>['columns'];
+  // TODO: JSDOC
+  columns: ColumnComponent<RowData>[];
+  // TODO: JSDOC
+  events: NonNullable<TabulusProps<RowData>['events']>;
+  // TODO: JSDOC
+  options: TabulusOptions;
+  // TODO: JSDOC
+  rows: RowComponent<RowData>[];
+  // TODO: JSDOC
+  theme: Theme;
+}
+
 /** Value of the `TableManager` context that is provided to consumers. */
-interface TableManagerValue<RowData extends RowDataBase = RowDataBase>
-  extends Omit<TabulusProps<RowData>, 'options'> {
+interface TableManagerValue<RowData extends RowDataBase> {
   /** Function to get the current number of columns in the table. */
-  getColumnCount: (filter?: CellFilter) => number;
-  // TODO: Type column ID better if there's a more specific type
+  getColumnsCount: GetCellCountFunction;
   /** Gets the column config option for the given column*/
-  getColumnOption: <K extends keyof ColumnConfig>(
-    columnId: string,
-    option: K,
-  ) => FullColumnConfig[K];
+  getColumnOption: GetColumnOptionFunction<RowData>;
   /** Gets the index of a column from its ID. */
-  getColumnIndex: (columnId: string) => number;
+  getColumnIndex: GetCellByIdFunction;
   /** Function to retrieve the value of an option for the table. */
-  getOption: <K extends keyof TabulusOptions>(option: K) => TabulusOptions[K];
+  getOption: GetTableOptionFunction;
   /** Function to get the current number of rows in the table. */
-  getRowCount: (filter?: CellFilter) => number;
+  getRowsCount: GetCellCountFunction;
   /** Gets the index of a given row based on the value of its id column. */
-  getRowIndex: (rowId: unknown) => number;
+  getRowIndex: GetCellByIdFunction;
+  /** The ID of the table. */
+  id: string;
   /** Whether the context has been initialised. */
   initialized: boolean;
-  // TODO: Correct this type
-  /** The rows to display on the table. */
-  rows: RowData[];
+  // TODO: JSDOCS
+  renderColumns: ColumnsRenderFunction;
+  renderFooter: FooterRenderFunction;
+  renderRows: RowsRenderFunction;
+
+  /* 
+  - registerEventListener
+  - registerChainListener
+  - registerConfirmListener
+  - dispatchChain
+  - dispatchInternal
+  - dispatchConfirm
+  
+  */
 }
 
 /** Props to be passed in to the Context provider. */
-interface TableManagerProviderProps<RowData extends RowDataBase = RowDataBase>
+interface TableManagerProviderProps<RowData extends RowDataBase>
   extends Omit<TabulusProps<RowData>, 'id'> {
   /** Children of the provider that will have access to the context value. */
   readonly children: ReactNode;
   /** The ID of the table this manager belongs to. */
-  readonly tableId: string;
+  readonly tableId: TabulusProps<RowData>['id'];
 }
 
-export type { TableManagerProviderProps, TableManagerValue };
+export type { TableManagerProviderProps, TableManagerState, TableManagerValue };
