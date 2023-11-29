@@ -71,7 +71,7 @@
     "prop-types": "15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "remark-gfm": "3.0.1",
+    "remark-gfm": "4.0.0",
     "storybook": "7.6.0",
     "vitest": "0.34.6",
     "vitest-axe": "0.1.0"
