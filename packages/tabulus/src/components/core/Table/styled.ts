@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import { setBorderCss, styled } from '@tabulus/utils';
 
 import type { TableWrapperProps } from './types';
 
@@ -6,15 +6,25 @@ import type { TableWrapperProps } from './types';
  * The container for the whole table. Equivalent to a `<table>` in standard HTML tags.
  * @private
  */
-const TableWrapper = styled.div<TableWrapperProps>(({ horizontalAlign }) => ({
-  //== Static Properties ==============
-  border: '1px solid black', // TODO: This should be an option
-  width: '50%',
+const TableWrapper = styled.div<TableWrapperProps>(({ horizontalAlign, theme }) => {
+  const { colors } = theme;
+  const borderDefinition = setBorderCss(theme, 'table');
 
-  //== Dynamic Properties =============
-  marginLeft: horizontalAlign === 'left' ? 0 : 'auto',
-  marginRight: horizontalAlign === 'right' ? 0 : 'auto',
-}));
+  //== CSS Return Value ===============
+  return {
+    //== Static Properties ==============
+    width: '50%', // TODO: This should be controlled by the options
+
+    //== Theme Properties ===============
+    backgroundColor: colors.backgroundColor,
+    color: colors.textColor,
+    ...borderDefinition,
+
+    //== Dynamic Properties =============
+    marginLeft: horizontalAlign === 'left' ? 0 : 'auto',
+    marginRight: horizontalAlign === 'right' ? 0 : 'auto',
+  };
+});
 
 /** Full width container for the table to allow positioning. */
 const TablePositioner = styled.div`

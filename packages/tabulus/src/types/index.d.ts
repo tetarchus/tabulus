@@ -22,4 +22,4 @@ export type {
 export type { TabulusCustomOptions, TabulusOptions } from './options';
 export type { RowComponent, RowDataBase } from './row';
 export type { TabulusProps } from './tabulus';
-export type { CustomTheme, Theme } from './theme';
+export type { BorderComponents, BorderOptions, CustomTheme, Theme } from './theme';

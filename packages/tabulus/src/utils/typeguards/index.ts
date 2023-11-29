@@ -1,0 +1,1 @@
+export { isBorderOptionString } from './theme';

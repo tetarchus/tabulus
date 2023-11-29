@@ -16,6 +16,9 @@ export {
   getTableColumnsCount,
   getTableRowsCount,
 } from './table';
+export { setBorderCss, setTableTheme } from './theme';
+export { isBorderOptionString } from './typeguards';
 export { WARNINGS } from './warnings';
 
 export type { TableManagerActions } from './reducers';
+export type { CSSObject } from './styled';

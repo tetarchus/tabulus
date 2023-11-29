@@ -1,8 +1,10 @@
 import type { Theme } from '@tabulus/types';
 
 const standard: Theme = {
+  borders: {},
   colors: {
-    backgroundColor: '#1D201F',
+    backgroundColor: '#CCC',
+    textColor: '#000',
   },
 };
 

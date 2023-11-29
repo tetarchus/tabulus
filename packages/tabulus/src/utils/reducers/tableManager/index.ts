@@ -1,8 +1,9 @@
-import { setTableTheme, themes } from '@tabulus/theme';
+import { themes } from '@tabulus/theme';
 import {
   createColumnsFromDefinitions,
   createRowsFromData,
   createTableOptions,
+  setTableTheme,
 } from '@tabulus/utils';
 
 import type { TableManagerActions } from './actions';
@@ -14,10 +15,12 @@ import type {
   TabulusProps,
 } from '@tabulus/types';
 
+// TODO: Move this
 interface TableManagerStateInitialValue<RowData extends RowDataBase>
   extends Omit<TableManagerState<RowData>, 'columns' | 'options' | 'rows'> {
   options: TabulusCustomOptions;
 }
+
 // TODO: MOVE THESE
 const DEFAULT_USER_EVENTS = {};
 const DEFAULT_USER_OPTIONS = {};
