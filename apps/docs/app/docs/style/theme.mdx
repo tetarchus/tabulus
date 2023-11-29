@@ -1,0 +1,57 @@
+---
+title: Theme
+---
+
+## Overview
+
+The table's `Theme` is a simple method of styling the table with many available options that can be
+set to achieve the look you are after.
+
+If a theme doesn't allow for precise enough control over the table style, you can also
+[manually style](@todo) the table, or pass in any [tailwind](https://tailwindcss.com/) classes to
+components that accept a `className` property.
+
+## Using a Theme
+
+There are several ways to use a theme within `tabulus`. The [`theme`](@todo) [table option](@todo)
+accepts any of the following types:
+
+- A [built-in theme name](@todo) - A string value of the name of one of the
+  [built-in themes](@todo).
+- A [theme extension](@todo) - A partial theme that is built on top of one of the
+  [built-in themes](@todo), changing/adding values.
+- A [custom theme](@todo) - A full theme that includes all of the [required properties](@todo).
+
+At the top level, a theme has the following properties. See the relevant headings to learn more
+about the available options within that category.
+
+- [borders](#borders)
+
+## Available Values
+
+### Borders
+
+{/* TODO: Convert to a Tabulus component */}
+{/* TODO: Need to provide more details on allowed types */}
+
+| Value       | Types | Required? | Fallback |
+| ----------- | ----- | --------- | -------- |
+| borderSides |       | false     | 'all'    |
+| borderStyle |       | false     | 'solid'  |
+| borderWidth |       | false     | '1px'    |
+| table       |       | false     |          |
+| cells       |       | false     |          |
+| header      |       | false     |          |
+| headerCells |       | false     |          |
+
+### Colors
+
+{/* TODO: Convert to a Tabulus component */}
+
+| Value           | Types | Required? | Fallback  |
+| --------------- | ----- | --------- | --------- |
+| backgroundColor |       | true      | N/A       |
+| borderColor     |       | false     | textColor |
+| textColor       |       | true      | N/A       |
+
+@todo - Write this
