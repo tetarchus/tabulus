@@ -66,7 +66,7 @@
     "eslint-plugin-unicorn": "49.0.0",
     "eslint-plugin-vitest": "0.3.10",
     "globals": "13.23.0",
-    "jsdom": "23.0.0",
+    "jsdom": "23.0.1",
     "prettier": "3.1.0",
     "prop-types": "15.8.1",
     "react": "18.2.0",
