@@ -275,6 +275,7 @@ const eslintConfig = [
             Param: true,
             params: true,
             Props: true,
+            props: true,
             ref: true,
             Ref: true,
             rel: true,
