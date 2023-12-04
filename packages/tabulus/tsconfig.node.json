@@ -9,6 +9,6 @@
     "noEmit": false,
     "outDir": "./dist"
   },
-  "include": ["tsup.config.ts", "vite.config.ts"],
+  "include": ["rollup.config.js"],
   "exclude": []
 }
