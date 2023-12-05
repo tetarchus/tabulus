@@ -1,21 +1,25 @@
+import type { TabulusCustomComponents } from '.';
 import type { ColumnDefinition } from './column';
 import type { TabulusOptions } from './options';
-import type { RowDataBase } from './row';
+import type { SimpleRowData } from './row';
 
-// TODO: Make the generic types work correctly?
-/** Props passed to the Tabulus component as well as contexts and hooks. */
-interface TabulusProps<RowData extends RowDataBase = RowDataBase> {
-  /** Definition array for the table columns. */
-  readonly columns: Array<ColumnDefinition<RowData>>;
-  /** The data to display in the table. */
-  readonly data: Array<RowData>;
-  /** Unique ID for the table. */
-  readonly id: string;
-  /** User options for the table to override defaults. */
-  readonly options?: Partial<TabulusOptions>;
-  // TODO: Write these props
-  /** Callbacks to run when events are triggered. */
-  readonly events?: Record<string, unknown>;
+/** Props to pass into the table creation components. */
+interface TabulusProps<RowData extends SimpleRowData> {
+  /** Column definitions for the table, including column-specific options. */
+  readonly columns: readonly ColumnDefinition<RowData>[];
+  /** Custom components to use for the table. */
+  readonly components?: TabulusCustomComponents<RowData> | undefined;
+  /** The data to display in the table rows. */
+  readonly data: readonly RowData[];
+  // TODO: Type and include events
+  /** Custom functions to fire when certain events trigger. */
+  readonly events?: unknown;
+  /** Custom options for this table instance. Options not set will be inherited first from any
+   * `TabulusRegistry` context, and then from the global defaults.
+   */
+  readonly options?: TabulusOptions | undefined;
+  /** The ID for the table - used to register with the `TabulusRegistry`. */
+  readonly tableId: string;
 }
 
 export type { TabulusProps };

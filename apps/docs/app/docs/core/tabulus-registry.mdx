@@ -1,0 +1,27 @@
+---
+title: Tabulus Registry
+---
+
+## Overview
+
+The `TabulusRegistry` context allows for central management of your tables. It's not required to use
+`tabulus`, however certain functionality, detailed below, will not work without it.
+
+## Features
+
+## Creating the Registry
+
+The `TabulusRegistry` context should wrap your application code. Any table created within this
+context (via any of the [creation methods](@todo)) will automatically register themselves with the
+registry if present.
+
+@todo - Example here
+
+## Usage
+
+You can access the registry by using the [`useTabulusRegistry`](@todo) hook. This allows you to use
+certain functions to manipulate the tables contained within the registry, without needing to be
+within the table's tree itself.
+
+For more information on the functions exposed by the `useTabulusRegistry` hook, please see it's
+[documentation](@todo).

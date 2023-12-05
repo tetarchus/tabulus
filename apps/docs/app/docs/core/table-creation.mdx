@@ -1,0 +1,42 @@
+---
+title: Table Creation
+---
+
+## Overview
+
+This page will outline the various options for creating tables with `tabulus`.
+
+## 1. The `<Tabulus />` Component
+
+This is the simplest method for creating a table, and ensures that all of the functionality works as
+expected.
+
+## 2. The `<Tabulus />` Component - With custom components
+
+While using `<Tabulus />` is normally enough for most users, we recognise that in some cases the
+default components will not offer the exact options that you require (even with all of the powerful
+[options](@todo) available). In this case you're able to override almost every component in the
+table with a custom component that works exactly how you need it to.
+
+The downside to this is that the default components are deeply embedded with the logic required to
+implement every aspect of `tabulus`, so if you override them, you may need to implement some of this
+yourself (a lot of the logic will still be passed down, but you'll need to use/call it when needed).
+
+For more information on requirements for custom components, please see the
+[custom components](@todo) documentation.
+
+## 3. The `useTabulus` Hook
+
+Need a completely custom set of components without any of the wrappers getting in the way and want
+to choose exactly how you use the table logic?
+
+The [`useTabulus`](@todo) hook takes the same input as the `Tabulus` component (except for custom
+components), and returns a set of functions that `Tabulus` uses internally to manage and render the
+data into a table. You can then use and manipulate as needed in order to create a completely custom
+experience.
+
+You can also pass _all_ of the output of `useTabulus` directly into a
+[`TabulusContextProvider`](@todo) to make this data available to components within the context
+without having to manually pass it down the tree.
+
+@todo - Example here

@@ -1,8 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "include": [
-    "./src"
-  ],
+  "include": ["./src", "global.d.ts", "../../test.d.ts"],
   "exclude": ["./tsup.config.ts"],
   "compilerOptions": {
     "jsxImportSource": "@emotion/react"

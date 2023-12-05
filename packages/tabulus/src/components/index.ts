@@ -1,8 +1,22 @@
-export { Cell } from './Cell';
-export { Row } from './Row';
-export { Table } from './Table';
-export { Tabulus } from './Tabulus';
+import { Cell, Column, Footer, Header, Row, Table, TableBody } from '@tabulus/components';
 
-export type { CellProps } from './Cell';
-export type { RowProps } from './Row';
-export type { TableProps } from './Table';
+import type { SimpleRowData, TabulusComponents } from '@tabulus/types';
+
+const globalDefaultComponents: TabulusComponents<SimpleRowData> = {
+  Cell,
+  Column,
+  Footer,
+  Header,
+  Row,
+  Table,
+  TableBody,
+};
+
+export { globalDefaultComponents };
+export { Cell, Column, Row, Table, Tabulus } from './core';
+export { HeaderRenderer, RowsRenderer, TableRenderer } from './renderers';
+export { Footer, Header, TableBody } from './styled';
+
+export type { CellProps, ColumnProps, RowProps, TableProps } from './core';
+export type { HeaderRendererProps, RowsRendererProps } from './renderers';
+export type { FooterProps, HeaderProps, TableBodyProps } from './styled';

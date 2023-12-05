@@ -1,77 +1,163 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
-import { createTableOptions } from '@tabulus/utils';
+import { useColumnManager, useDataManager } from '@tabulus/hooks';
+import { themes } from '@tabulus/theme';
+import { createTableComponents, createTableOptions, setTableTheme } from '@tabulus/utils';
 
-import { TabulusRegistry } from '../TabulusRegistry';
+import { TabulusRegistryContext } from '../TabulusRegistry';
 
-import type { TableManagerProviderProps, TableManagerValue } from './types';
-import type { FC } from 'react';
+import type { TableManagerProps, TableManagerReturn } from './types';
+import type {
+  FindColumnFunction,
+  FindRowFunction,
+  GetColumnOptionFunction,
+  GetComponentFunction,
+  SimpleRowData,
+} from '@tabulus/types';
 
-/**
- * Initial value for the TableManager. The `initialized` prop will be set to `false` when the
- * context has not been initialized.
- */
-const initialValue: TableManagerValue = {
-  columns: [],
-  data: [],
-  events: {},
-  id: '',
+// TODO: Move?
+//== Placeholder Functions for an empty context
+const PLACEHOLDER_COMPONENT_FN = () => null;
+const PLACEHOLDER_GET_COL_OPTION_FN = (() => {}) as GetColumnOptionFunction<SimpleRowData>;
+const PLACEHOLDER_FIND_COL_FN = (() => {}) as FindColumnFunction<SimpleRowData>;
+const PLACEHOLDER_FIND_ROW_FN = (() => {}) as FindRowFunction<SimpleRowData>;
+
+/** The initial value of the context before initialization. */
+const initialValue: TableManagerReturn<SimpleRowData> = {
+  elementRef: { current: null },
+  findColumn: PLACEHOLDER_FIND_COL_FN,
+  findRow: PLACEHOLDER_FIND_ROW_FN,
+  getColumnCount: () => 0,
+  getColumnOption: PLACEHOLDER_GET_COL_OPTION_FN,
+  getComponent: () => PLACEHOLDER_COMPONENT_FN,
+  getRowCount: () => 0,
   initialized: false,
-  options: {},
-  rows: [],
+  renderColumns: () => null,
+  renderRows: () => null,
+  tableId: '',
+  theme: themes.standard,
 };
 
 /**
- * Context for storing and providing table functions and values to the tables below.
- * This is an internal context for use with our standard components.
- *
+ * Context for providing values and methods to a table instance.
  * @private
  */
-const TableManager = createContext<TableManagerValue>(initialValue);
-TableManager.displayName = 'TableManager';
+const TableManagerContext = createContext<TableManagerReturn<SimpleRowData>>(initialValue);
+TableManagerContext.displayName = 'TableManager';
 
-const defaultEvents = {};
-const defaultTableOptions = {};
-
-const TableManagerProvider: FC<TableManagerProviderProps> = ({
-  columns: baseColumns,
-  data: baseData,
-  events: userEvents = defaultEvents,
-  options: tableOptions = defaultTableOptions,
+/**
+ * Creates a context provider wrapper for a table instance.
+ * @param param0 The {@link TableManagerProps} to pass in to the context provider.
+ * @returns A context wrapped component tree.
+ * @private
+ */
+const TableManager = <RowData extends SimpleRowData>({
   children,
+  columns,
+  components: tableComponents,
+  data,
+  // events,
+  options: tableOptions,
   tableId,
-}: TableManagerProviderProps) => {
-  const { defaultOptions } = useContext(TabulusRegistry);
+}: TableManagerProps<RowData>) => {
+  //== Element Ref ====================
+  const tableElementRef = useRef<HTMLDivElement>(null);
+
+  //== Registry Data ==================
+  const {
+    defaultComponents,
+    defaultOptions,
+    initialized: registryInitialized,
+    registerTable,
+  } = useContext(TabulusRegistryContext);
 
   //== State ==========================
-  const [id, setId] = useState(tableId);
-  const [data, setData] = useState(baseData);
-  const [rows, setRows] = useState(baseData); // TODO: This will change
-  const [events, setEvents] = useState(userEvents);
-  const [columns, setColumns] = useState(baseColumns);
-  const [options, setOptions] = useState(createTableOptions(tableOptions, defaultOptions));
+  const [options, setOptions] = useState(createTableOptions(defaultOptions, tableOptions));
+  const [components, setComponents] = useState(
+    createTableComponents(defaultComponents, tableComponents),
+  );
+  const [theme, setTheme] = useState(setTableTheme(options.theme));
 
   //== Side Effects ===================
-  useEffect(() => setId(tableId), [tableId]);
-  useEffect(() => setData(baseData), [baseData]);
-  useEffect(() => setRows(baseData), [baseData]); // TODO: This will change
-  useEffect(() => setEvents(userEvents), [userEvents]);
-  useEffect(() => setColumns(baseColumns), [baseColumns]);
   useEffect(
-    () => setOptions(createTableOptions(tableOptions, defaultOptions)),
+    () => setOptions(createTableOptions(defaultOptions, tableOptions)),
     [defaultOptions, tableOptions],
   );
+  useEffect(
+    () => setComponents(createTableComponents(defaultComponents, tableComponents)),
+    [defaultComponents, tableComponents],
+  );
+  useEffect(() => setTheme(setTableTheme(options.theme)), [options.theme]);
 
-  //== Memoized Context Value =========
-  const managerValue = useMemo(
-    () => ({ columns, data, events, id, initialized: true, options, rows }),
-    [columns, data, events, id, options, rows],
+  //== Functions ======================
+  const getComponent: GetComponentFunction<RowData> = useCallback(
+    componentName => components[componentName],
+    [components],
   );
 
-  console.log('CREATING TABLE MANAGER');
+  //== Hook Values ====================
+  const { findColumn, getColumnCount, getColumnOption, renderColumns } = useColumnManager({
+    columns,
+    options,
+  });
+  const { findRow, getRowCount, renderRows } = useDataManager({ data, options });
 
-  return <TableManager.Provider value={managerValue}>{children}</TableManager.Provider>;
+  //== Manager Value ==================
+  const managerValue = useMemo(
+    () => ({
+      elementRef: tableElementRef,
+      findColumn,
+      findRow,
+      getColumnCount,
+      getColumnOption,
+      getComponent,
+      getRowCount,
+      initialized: true,
+      renderColumns,
+      renderRows,
+      tableId,
+      theme,
+    }),
+    [
+      findColumn,
+      findRow,
+      getColumnCount,
+      getColumnOption,
+      getComponent,
+      getRowCount,
+      renderColumns,
+      renderRows,
+      tableId,
+      theme,
+    ],
+  ) satisfies TableManagerReturn<SimpleRowData>;
+
+  //== Table Registration =============
+  const registryRef = useRef(managerValue);
+
+  useEffect(() => {
+    registryRef.current = managerValue;
+  }, [managerValue]);
+
+  useEffect(() => {
+    if (registryInitialized) {
+      registerTable(tableId, registryRef);
+    }
+  }, [registerTable, registryInitialized, tableId]);
+
+  //== Provider Return ==============
+  return (
+    <TableManagerContext.Provider value={managerValue}>{children}</TableManagerContext.Provider>
+  );
 };
 
-export { TableManager, TableManagerProvider };
-export type { TableManagerProviderProps, TableManagerValue } from './types';
+export { TableManager, TableManagerContext };
+export type { TableManagerProps, TableManagerReturn } from './types';

@@ -1,30 +1,27 @@
-import { Tabulus } from '@tabulus/components';
+import { json } from '@remix-run/node';
 
-import type { MetaFunction } from '@remix-run/node';
+import logo from '@shared/images/Logo@0.25x.png';
 
-const meta: MetaFunction = () => {
-  return [{ title: 'New Remix App' }, { name: 'description', content: 'Welcome to Remix!' }];
-};
+import type { LoaderFunction } from '@remix-run/node';
 
-const cols = [
-  { id: 'id', title: 'ID' },
-  { id: 'name', title: 'Name' },
-  { id: 'age', title: 'Age' },
-  { id: 'title', title: 'Title' },
-];
-
-const data = [
-  { id: 1, name: 'Steve', age: 23, title: '' },
-  { id: 2, name: 'Gemma', age: 33, title: '' },
-  { id: 3, name: 'Tet', age: 36, title: '' },
-];
+const loader: LoaderFunction = async () => json({ title: 'Tabulus' });
 
 const IndexRoute = () => (
-  <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
-    <h1>Welcome to Tabulus</h1>
-    <Tabulus columns={cols} data={data} id='test' />
+  <div className='flex flex-col h-screen'>
+    <div className='flex flex-col w-7/12 items-center justify-center mt-20 mx-auto'>
+      <img alt='Tabulus Logo' src={logo} width={200} />
+      <h1 className='font-title text-6xl'>Tabulus</h1>
+      <div className='rounded-md shadow-md bg-gray-600 p-2 min-w-full mt-10'>
+        <code className='text-gray-300 mr-4'>{'>'}</code>
+        <code>npm i tabulus</code>
+      </div>
+    </div>
+    <div className='w-full h-full bg-teal mt-10 p-4'>
+      <h1 className='font-title'>Fabulus React Tables</h1>
+      <p>Lorem ipsum</p>
+    </div>
   </div>
 );
 
 export default IndexRoute;
-export { meta };
+export { loader };

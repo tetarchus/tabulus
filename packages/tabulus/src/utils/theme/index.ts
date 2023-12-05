@@ -1,0 +1,1 @@
+export { setTableTheme } from './setTableTheme';

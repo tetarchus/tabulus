@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
+  "access": "restricted",
+  "baseBranch": "master",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "fixed": [],
+  "ignore": [],
+  "linked": [
+    [
+      "@tabulus/*",
+      "tabulus",
+      "tabulus-repo"
+    ]
+  ],
+  "updateInternalDependencies": "patch"
+}
