@@ -1,18 +1,41 @@
-import { CLASSES } from '@tabulus/constants';
+import { useCallback } from 'react';
 
-import { Cell } from '../Cell';
+import { CLASSES } from '@tabulus/constants';
 
 import { Title } from './styled';
 
 import type { ColumnProps } from './types';
-import type { FC } from 'react';
+import type { GetBoundColumnOptionFunction, SimpleRowData } from '@tabulus/types';
 
-/** A column header containing the column title as well as sort and filter options. */
-const Column: FC<ColumnProps> = ({ column: { id, title } }: ColumnProps) => (
-  <Cell className={CLASSES.COLUMN.BASE} cell={{ column: id, rowIndex: 'header', type: 'header' }}>
-    <Title className={CLASSES.COLUMN.TITLE}>{title}</Title>
-  </Cell>
-);
+/**
+ * The default Column component for tabulus. Display a column header with title and controls.
+ * @param param0 {@link ColumnProps|Props} for the Column.
+ * @returns A column header in a table.
+ * @private
+ */
+const Column = <RowData extends SimpleRowData>({
+  getColumnOption,
+  getComponent,
+  id,
+  title,
+}: ColumnProps<RowData>) => {
+  const Cell = getComponent('Cell');
+
+  const getCurrentColumnOption: GetBoundColumnOptionFunction = useCallback(
+    option => getColumnOption(id, option),
+    [getColumnOption, id],
+  );
+
+  return (
+    <Cell
+      columnId={id}
+      getColumnOption={getCurrentColumnOption}
+      rowIndex={1}
+      type='header'
+      value={() => <Title className={CLASSES.COLUMN.TITLE}>{title}</Title>}
+    />
+  );
+};
 
 export { Column };
 export type { ColumnProps } from './types';

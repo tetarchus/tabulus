@@ -1,11 +1,5 @@
-export { TableManager, TableManagerProvider } from './TableManager';
-export { TabulusContext, TabulusContextProvider } from './TabulusContext';
+export { TableManager, TableManagerContext } from './TableManager';
 export { TabulusRegistry, TabulusRegistryContext } from './TabulusRegistry';
 
-export type {
-  TableManagerState,
-  TableManagerProviderProps,
-  TableManagerValue,
-} from './TableManager';
-export type { TabulusContextProviderProps } from './TabulusContext';
-export type { TabulusRegistryProviderProps, TabulusRegistryValue } from './TabulusRegistry';
+export type { TableManagerProps, TableManagerReturn } from './TableManager';
+export type { TabulusRegistryProps, TabulusRegistryReturn } from './TabulusRegistry';

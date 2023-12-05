@@ -1,3 +1,10 @@
+import { CLASSES } from '@tabulus/constants';
+import {
+  getColumnOptionFunction,
+  getComponentFunction,
+  renderRowFunction,
+} from '@tabulus/stories/utils';
+
 import { Row } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react';
@@ -10,11 +17,28 @@ const meta = {
 
 type Story = StoryObj<typeof meta>;
 
-/** A standard table row. */
-const Default: Story = {
+/** An example header row. */
+const HeaderRow: Story = {
   // TODO: Add some example row data
-  args: { index: 1, row: {} },
+  args: {
+    className: CLASSES.HEADER.ROW,
+    getColumnOption: getColumnOptionFunction,
+    getComponent: getComponentFunction,
+    index: 1,
+    renderRow: renderRowFunction,
+    type: 'header',
+  },
+};
+
+/** An example table row. */
+const TableRow: Story = {
+  args: {
+    ...HeaderRow.args,
+    className: CLASSES.ROW.BASE,
+    type: 'table',
+    // TODO: May need a separate renderRow function
+  },
 };
 
 export default meta;
-export { Default };
+export { HeaderRow, TableRow };

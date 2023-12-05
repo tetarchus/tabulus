@@ -1,2 +1,2 @@
-export { defaultColumnConfig } from './defaultColumnConfig';
-export { defaultOptions } from './defaultOptions';
+export { globalDefaultColumnOptions } from './defaultColumnOptions';
+export { globalDefaultTableOptions } from './defaultTableOptions';

@@ -1,15 +1,14 @@
-import type { TabulusOptions } from '@tabulus/types';
-import type { RefObject } from 'react';
+import type { TableManagerReturn } from '@tabulus/contexts';
+import type { SimpleRowData } from '@tabulus/types';
 
 /** Props for the Table component. */
-interface TableProps {
-  /** Optional ref to pass to the main table element. */
-  readonly tableRef?: RefObject<HTMLTableElement>;
-}
+interface TableProps<RowData extends SimpleRowData>
+  extends Omit<TableManagerReturn<RowData>, 'findColumn' | 'findRow' | 'initialized' | 'theme'> {}
 
-/** Props for the TableWrapper styled component  */
-interface TableWrapperProps {
-  readonly horizontalAlign: TabulusOptions['horizontalAlign'];
-}
+/** Props for the TableContainer styled component. */
+interface TableContainerProps {}
 
-export type { TableProps, TableWrapperProps };
+/** Props for the TablePositioner styled component. */
+interface TablePositionerProps {}
+
+export type { TableContainerProps, TablePositionerProps, TableProps };

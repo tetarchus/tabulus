@@ -5,8 +5,11 @@ import type { CellType } from '@tabulus/types';
  * a header, or standard cell.
  * @param type The cell type.
  * @returns The horizontalAlign property to use for the cell.
+ * @private
  */
-const getHorizontalAlignProperty = (type: CellType): 'headerHorizontalAlign' | 'horizontalAlign' =>
+const getHorizontalAlignPropertyName = (
+  type: CellType,
+): 'headerHorizontalAlign' | 'horizontalAlign' =>
   type === 'header' ? 'headerHorizontalAlign' : 'horizontalAlign';
 
 /**
@@ -14,8 +17,9 @@ const getHorizontalAlignProperty = (type: CellType): 'headerHorizontalAlign' | '
  * a header, or standard cell.
  * @param type The cell type.
  * @returns The verticalAlign property to use for the cell.
+ * @private
  */
-const getVerticalAlignProperty = (type: CellType): 'headerVerticalAlign' | 'verticalAlign' =>
+const getVerticalAlignPropertyName = (type: CellType): 'headerVerticalAlign' | 'verticalAlign' =>
   type === 'header' ? 'headerVerticalAlign' : 'verticalAlign';
 
-export { getHorizontalAlignProperty, getVerticalAlignProperty };
+export { getHorizontalAlignPropertyName, getVerticalAlignPropertyName };

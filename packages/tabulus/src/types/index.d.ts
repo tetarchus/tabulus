@@ -1,25 +1,27 @@
-export type { HorizontalAlign, VerticalAlign } from './base';
-export type { CellComponent, CellFilter, CellType } from './cell';
+export type { CellFilter, CellType } from './cell';
+export type { ColumnConfig, ColumnDefinition, ColumnLookup, FullColumnConfig } from './column';
+export type { TabulusComponents, TabulusCustomComponents } from './component';
 export type {
-  ColumnComponent,
-  ColumnConfig,
-  ColumnDefinition,
-  FullColumnConfig,
-  ColumnLookup,
-} from './column';
-export type { CustomComponents, TableComponents } from './components';
-export type {
-  ColumnsRenderFunction,
+  CellCountFunction,
+  CellValueFunction,
+  FindColumnFunction,
   FindTableFunction,
-  FooterRenderFunction,
-  GetCellByIdFunction,
-  GetCellCountFunction,
+  FindRowFunction,
+  GetBoundColumnOptionFunction,
   GetColumnOptionFunction,
-  GetTableOptionFunction,
+  GetComponentFunction,
   RegisterTableFunction,
-  RowsRenderFunction,
+  RenderColumnsFunction,
+  RenderRowFunction,
+  RenderRowsFunction,
 } from './functions';
-export type { TabulusCustomOptions, TabulusOptions } from './options';
-export type { RowComponent, RowDataBase } from './row';
+export type {
+  UseColumnManagerProps,
+  UseColumnManagerReturn,
+  UseDataManagerProps,
+  UseDataManagerReturn,
+} from './hooks';
+export type { TableColumnOptions, TabulusCompleteOptions, TabulusOptions } from './options';
+export type { RowLookup, RowType, SimpleRowData } from './row';
+export type { BorderComponents, CustomTheme, Theme } from './theme';
 export type { TabulusProps } from './tabulus';
-export type { BorderComponents, BorderOptions, CustomTheme, Theme } from './theme';

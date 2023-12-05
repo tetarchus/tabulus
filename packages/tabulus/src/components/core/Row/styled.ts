@@ -1,10 +1,15 @@
-import styled from '@emotion/styled';
+import { styled } from '@tabulus/utils';
 
-// TODO: Do we want to share a load of styles with the HeaderRow component?
-/** Wrapper around an entire row. */
-const RowWrapper = styled.div`
+import type { RowContainerProps } from './types';
+import type { CSSProperties } from 'react';
+
+const RowContainer = styled.div<RowContainerProps>`
   display: flex;
+  justify-content: stretch;
+  // TODO: Make this controllable via theme
+  font-weight: ${({ type }): CSSProperties['fontWeight'] =>
+    type === 'header' ? 'bold' : 'normal'};
   width: 100%;
 `;
 
-export { RowWrapper };
+export { RowContainer };

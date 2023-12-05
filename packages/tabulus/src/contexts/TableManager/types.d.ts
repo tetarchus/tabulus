@@ -1,77 +1,55 @@
 import type {
-  ColumnComponent,
-  ColumnsRenderFunction,
-  FooterRenderFunction,
-  GetCellByIdFunction,
-  GetCellCountFunction,
+  CellCountFunction,
+  FindColumnFunction,
+  FindRowFunction,
   GetColumnOptionFunction,
-  GetTableOptionFunction,
-  RowComponent,
-  RowDataBase,
-  RowsRenderFunction,
-  TabulusOptions,
+  GetComponentFunction,
+  RenderColumnsFunction,
+  RenderRowsFunction,
+  SimpleRowData,
   TabulusProps,
   Theme,
 } from '@tabulus/types';
-import type { ReactNode } from 'react';
+import type { ReactNode, RefObject } from 'react';
 
-interface TableManagerState<RowData extends RowDataBase>
-  extends Omit<TabulusProps<RowData>, 'columns' | 'events' | 'options'> {
-  // TODO: JSDOC
-  columnDefinitions: TabulusProps<RowData>['columns'];
-  // TODO: JSDOC
-  columns: ColumnComponent<RowData>[];
-  // TODO: JSDOC
-  events: NonNullable<TabulusProps<RowData>['events']>;
-  // TODO: JSDOC
-  options: TabulusOptions;
-  // TODO: JSDOC
-  rows: RowComponent<RowData>[];
-  // TODO: JSDOC
-  theme: Theme;
-}
-
-/** Value of the `TableManager` context that is provided to consumers. */
-interface TableManagerValue<RowData extends RowDataBase> {
-  /** Function to get the current number of columns in the table. */
-  getColumnsCount: GetCellCountFunction;
-  /** Gets the column config option for the given column*/
-  getColumnOption: GetColumnOptionFunction<RowData>;
-  /** Gets the index of a column from its ID. */
-  getColumnIndex: GetCellByIdFunction;
-  /** Function to retrieve the value of an option for the table. */
-  getOption: GetTableOptionFunction;
-  /** Function to get the current number of rows in the table. */
-  getRowsCount: GetCellCountFunction;
-  /** Gets the index of a given row based on the value of its id column. */
-  getRowIndex: GetCellByIdFunction;
-  /** The ID of the table. */
-  id: string;
-  /** Whether the context has been initialised. */
-  initialized: boolean;
-  // TODO: JSDOCS
-  renderColumns: ColumnsRenderFunction;
-  renderFooter: FooterRenderFunction;
-  renderRows: RowsRenderFunction;
-
-  /* 
-  - registerEventListener
-  - registerChainListener
-  - registerConfirmListener
-  - dispatchChain
-  - dispatchInternal
-  - dispatchConfirm
-  
-  */
-}
-
-/** Props to be passed in to the Context provider. */
-interface TableManagerProviderProps<RowData extends RowDataBase>
-  extends Omit<TabulusProps<RowData>, 'id'> {
-  /** Children of the provider that will have access to the context value. */
+/**
+ * Props to pass in to the TableManager context provider.
+ * @private.
+ */
+interface TableManagerProps<RowData extends SimpleRowData> extends TabulusProps<RowData> {
+  /** The components that will have access to the context. */
   readonly children: ReactNode;
-  /** The ID of the table this manager belongs to. */
-  readonly tableId: TabulusProps<RowData>['id'];
 }
 
-export type { TableManagerProviderProps, TableManagerState, TableManagerValue };
+/**
+ * The return value of the TableManager context for managing a table instance.
+ * @private
+ */
+interface TableManagerReturn<RowData extends SimpleRowData> {
+  /** Ref object to pass to the table element. */
+  readonly elementRef: RefObject<HTMLDivElement>;
+  /** Function for finding the column data based on a lookup value. */
+  readonly findColumn: FindColumnFunction<RowData>;
+  /** Function for finding the row data based on a lookup value. */
+  readonly findRow: FindRowFunction<RowData>;
+  /** Function to get the number of columns in the table. */
+  readonly getColumnCount: CellCountFunction;
+  /** Function for getting the value of an option for a given column. */
+  readonly getColumnOption: GetColumnOptionFunction<RowData>;
+  /** Function for obtaining the components to render. */
+  readonly getComponent: GetComponentFunction<RowData>;
+  /** Function to get the number of rows in the table. */
+  readonly getRowCount: CellCountFunction;
+  /** Whether the TableManager has been initialized and contains valid values. */
+  readonly initialized: boolean;
+  /** Function for rendering the header columns. */
+  readonly renderColumns: RenderColumnsFunction<RowData>;
+  /** Function for rendering the table rows. */
+  readonly renderRows: RenderRowsFunction<RowData>;
+  /** The ID of the table. Used to register/retrieve the table with the registry. */
+  readonly tableId: string;
+  /** The {@link Theme} object being used for the table. */
+  readonly theme: Theme;
+}
+
+export type { TableManagerProps, TableManagerReturn };

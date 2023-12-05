@@ -1,5 +1,6 @@
 import type { Theme } from '@tabulus/types';
 
+/** The default theme for `Tabulus` tables. */
 const standard: Theme = {
   borders: {},
   colors: {

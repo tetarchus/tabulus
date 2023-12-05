@@ -1,24 +1,14 @@
-export { getHorizontalAlignProperty, getVerticalAlignProperty } from './cell';
-export { createColumnsFromDefinitions } from './column';
-export { updateHistory } from './history';
-export { createTableOptions, validateOptions } from './options';
-export {
-  setTableManagerStateInitialValue,
-  tableManagerInitial,
-  tableManagerReducer,
-} from './reducers';
-export { createRowsFromData } from './row';
+export { getHorizontalAlignPropertyName, getVerticalAlignPropertyName } from './cell';
+export { createColumnOptions } from './column';
+export { createTableComponents } from './components';
+export { createTableOptions } from './options';
+export { addEvenOrOddClass } from './row';
 export { ThemeProvider, styled } from './styled';
-export {
-  getColumnIndexNumber,
-  getColumnOptionValue,
-  getRowIndexNumber,
-  getTableColumnsCount,
-  getTableRowsCount,
-} from './table';
-export { setBorderCss, setTableTheme } from './theme';
-export { isBorderOptionString } from './typeguards';
+export { setTableTheme } from './theme';
+export { isReactComponent } from './typeguards';
 export { WARNINGS } from './warnings';
 
-export type { TableManagerActions } from './reducers';
+// TODO: Remove this
+export { objectEntries } from './temporary';
+
 export type { CSSObject } from './styled';

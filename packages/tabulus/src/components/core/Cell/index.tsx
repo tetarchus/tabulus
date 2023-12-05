@@ -1,62 +1,57 @@
-import { arrayIncludes } from '@tetarchus/utils/core';
-import { useContext, useEffect, useState } from 'react';
+import { useMemo } from 'react';
 
 import { ROLES } from '@tabulus/constants';
-import { TableManager } from '@tabulus/contexts';
-import { getHorizontalAlignProperty, getVerticalAlignProperty } from '@tabulus/utils';
+import {
+  getHorizontalAlignPropertyName,
+  getVerticalAlignPropertyName,
+  isReactComponent,
+} from '@tabulus/utils';
 
 import { CellContainer } from './styled';
 
 import type { CellProps } from './types';
-import type { FC } from 'react';
+import type { SimpleRowData } from '@tabulus/types';
 
-/** A cell in a table. */
-const Cell: FC<CellProps> = ({ children, className, cell }: CellProps) => {
-  //== Cell Component =================
-  const { column, type = 'cell', rowIndex, value } = cell;
+/**
+ * The default Cell component for Tabulus.
+ * @param param0 {@link CellProps|Props} for the Cell.
+ * @returns A cell in a table.
+ * @private
+ */
+const Cell = <RowData extends SimpleRowData, CellValue extends RowData[string]>({
+  columnId,
+  getColumnOption,
+  rowIndex,
+  type,
+  value,
+}: CellProps<RowData, CellValue>) => {
+  const horizontalAlign = getColumnOption(getHorizontalAlignPropertyName(type));
+  const verticalAlign = getColumnOption(getVerticalAlignPropertyName(type));
+  const visible = getColumnOption('visible');
 
-  //== Context Values =================
-  const { getColumnIndex, getColumnOption } = useContext(TableManager);
+  const CellContents = useMemo(() => {
+    let returnValue: unknown = value;
+    if (value instanceof Function) {
+      const functionReturn = value();
+      if (isReactComponent(functionReturn)) {
+        return functionReturn;
+      }
+      returnValue = functionReturn;
+    }
+    // TODO: Format the value
+    return String(returnValue);
+  }, [value]);
 
-  //== State ==========================
-  const [visible, setVisible] = useState(getColumnOption(column, 'visible'));
-  const [horizontalAlignProperty, setHorizontalAlignProperty] = useState(
-    getHorizontalAlignProperty(type),
-  );
-  const [verticalAlignProperty, setVerticalAlignProperty] = useState(
-    getVerticalAlignProperty(type),
-  );
-  const [verticalAlign, setVerticalAlign] = useState(
-    getColumnOption(column, verticalAlignProperty),
-  );
-  const [horizontalAlign, setHorizontalAlign] = useState(
-    getColumnOption(column, horizontalAlignProperty),
-  );
-
-  //== Side Effects ===================
-  useEffect(() => {
-    setHorizontalAlignProperty(getHorizontalAlignProperty(type));
-    setVerticalAlignProperty(getVerticalAlignProperty(type));
-  }, [type]);
-
-  useEffect(() => {
-    setVisible(getColumnOption(column, 'visible'));
-    setVerticalAlign(getColumnOption(column, verticalAlignProperty));
-    setHorizontalAlign(getColumnOption(column, horizontalAlignProperty));
-  }, [column, getColumnOption, horizontalAlignProperty, verticalAlignProperty]);
-
-  //== Component Return ===============
   return (
     <CellContainer
-      aria-colindex={getColumnIndex(column)}
-      {...(arrayIncludes(['footer', 'header'], rowIndex) ? {} : { 'aria-rowindex': rowIndex })}
-      className={className}
+      aria-rowindex={rowIndex}
       horizontalAlign={horizontalAlign}
       role={type === 'header' ? ROLES.COLUMN : ROLES.CELL}
+      tabulus-columnId={columnId}
       verticalAlign={verticalAlign}
       visible={visible}
     >
-      {value ?? children ?? null}
+      {CellContents}
     </CellContainer>
   );
 };

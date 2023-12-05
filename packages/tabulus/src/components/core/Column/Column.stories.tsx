@@ -1,3 +1,5 @@
+import { getColumnOptionFunction, getComponentFunction } from '@tabulus/stories/utils';
+
 import { Column } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react';
@@ -12,7 +14,12 @@ type Story = StoryObj<typeof meta>;
 
 /** A column in the table. */
 const Default: Story = {
-  args: { id: 'column', title: 'Column Title' },
+  args: {
+    getColumnOption: getColumnOptionFunction,
+    getComponent: getComponentFunction,
+    id: 'column',
+    title: 'Column Title',
+  },
 };
 
 export default meta;

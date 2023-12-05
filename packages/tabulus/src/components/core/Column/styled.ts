@@ -1,5 +1,7 @@
-import styled from '@emotion/styled';
+import { styled } from '@tabulus/utils';
 
-const Title = styled.div``;
+import type { TitleProps } from './types';
+
+const Title = styled.div<TitleProps>``;
 
 export { Title };

@@ -1,9 +1,9 @@
-import type { ThemeBorders } from './border';
+import { themes } from '@tabulus/theme';
+
+import type { ThemeBorders } from './borders';
 import type { ThemeColors } from './colors';
-import type { themes } from '@tabulus/theme';
 import type { DeepPartial } from 'ts-essentials';
 
-/** Table theme definition that will be used to set various style elements on the table. */
 interface Theme {
   borders: ThemeBorders;
   colors: ThemeColors;
@@ -16,4 +16,4 @@ interface CustomTheme extends DeepPartial<Theme> {
 }
 
 export type { CustomTheme, Theme };
-export type { BorderComponents, BorderOptions } from './border';
+export type { BorderComponents } from './borders';

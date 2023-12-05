@@ -1,17 +1,27 @@
-import type { CellComponent, FullColumnConfig } from '@tabulus/types';
-import type { ReactNode } from 'react';
+import type {
+  CellType,
+  CellValueFunction,
+  ColumnDefinition,
+  FullColumnConfig,
+  GetBoundColumnOptionFunction,
+  SimpleRowData,
+} from '@tabulus/types';
 
-/** Props passed to the Cell component. */
-interface CellProps {
-  /** The contents of the cell. */
-  readonly children?: ReactNode;
-  /** Additional classes to pass to the cell. */
-  readonly className?: string;
-  /** The component data for the cell. */
-  readonly cell: CellComponent;
+/** Props for the Cell component. */
+interface CellProps<RowData extends SimpleRowData, CellValue extends RowData[string]> {
+  /** The ID of the column that the cell belongs to. */
+  readonly columnId: ColumnDefinition<RowData>['id'];
+  /** Function to get the value of a column option for the column the cell belongs to. */
+  readonly getColumnOption: GetBoundColumnOptionFunction<RowData>;
+  /** The index of the row that the cell belongs to. */
+  readonly rowIndex: number;
+  /** The type of cell to display. */
+  readonly type: CellType;
+  /** The value of the cell. */
+  // TODO: Sort out this type.
+  readonly value: CellValue | CellValueFunction<CellValue> | string | null | undefined;
 }
 
-/** Props for the CellContainer styled component. */
 interface CellContainerProps
   extends Pick<FullColumnConfig, 'horizontalAlign' | 'verticalAlign' | 'visible'> {}
 

@@ -1,12 +1,13 @@
 import type { GeneralColumnOptions } from './general';
 import type { ColumnLayoutOptions } from './layout';
-import type { RowDataBase } from '../row';
+import type { SimpleRowData } from '../row';
+import type { DeepKeys } from '../util';
 import type { DeepPartial } from 'ts-essentials';
 
 /** Required options for ColumnDefinitions. */
-interface ColumnOptionsRequired<RowData extends RowDataBase> {
+interface ColumnOptionsRequired<RowData extends SimpleRowData> {
   /** The unique identifier for the column. Used as the key in the data. */
-  id: keyof RowData;
+  id: DeepKeys<RowData> | string;
   /** The text title to display in the header. */
   title: string;
 }
@@ -15,24 +16,15 @@ interface ColumnOptionsRequired<RowData extends RowDataBase> {
 interface FullColumnConfig extends GeneralColumnOptions, ColumnLayoutOptions {}
 
 /** A column in the table. */
-interface ColumnDefinition<RowData extends RowDataBase>
+interface ColumnDefinition<RowData extends SimpleRowData>
   extends DeepPartial<FullColumnConfig>,
     ColumnOptionsRequired<RowData> {
-  columns?: Array<ColumnDefinition<RowData>>;
+  /** Nested columns for groups. */
+  columns?: Array<ColumnDefinition>;
 }
 
 /** Options object for default column settings. */
 type ColumnConfig = DeepPartial<FullColumnConfig>;
 
-/**
- *  Column data that is passed around with access to methods and data specific to the column.
- */
-interface ColumnComponent<RowData extends RowDataBase> {
-  /** The unique ID of the column. */
-  readonly id: keyof RowData;
-  /** The title to display in the header. */
-  readonly title: string;
-}
-
-export type { ColumnComponent, ColumnConfig, ColumnDefinition, FullColumnConfig };
+export type { ColumnConfig, ColumnDefinition, FullColumnConfig };
 export type { ColumnLookup } from './utils';

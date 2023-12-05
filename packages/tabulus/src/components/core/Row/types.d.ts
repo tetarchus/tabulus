@@ -1,11 +1,22 @@
-import type { RowDataBase } from '@tabulus/types';
+import type { TableManagerReturn } from '@tabulus/contexts';
+import type { RenderRowFunction, RowType, SimpleRowData } from '@tabulus/types';
 
-/** Props passed to the Row component. */
-interface RowProps<RowData extends RowDataBase = RowDataBase> {
-  /** The row number. */
-  readonly index: number;
-  /** The data for the row. */
-  readonly row: RowData;
+/** Props for the RowContainer styled component. */
+interface RowContainerProps {
+  /** The type of row to display. */
+  readonly type: RowType;
 }
 
-export type { RowProps };
+/** Props for the Row component. */
+interface RowProps<RowData extends SimpleRowData>
+  extends RowContainerProps,
+    Pick<TableManagerReturn<RowData>, 'getColumnOption' | 'getComponent'> {
+  /** Additional classes passed in from the parent. */
+  readonly className?: string | undefined;
+  /** The index/row number of the row. */
+  readonly index: number;
+  /** Function to render the contents of the row. */
+  readonly renderRow: RenderRowFunction<RowData>;
+}
+
+export type { RowProps, RowContainerProps };

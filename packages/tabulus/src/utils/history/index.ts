@@ -1,3 +1,0 @@
-const updateHistory = () => {};
-
-export { updateHistory };

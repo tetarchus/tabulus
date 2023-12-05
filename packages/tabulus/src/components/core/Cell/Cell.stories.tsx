@@ -10,19 +10,14 @@ const meta = {
 
 type Story = StoryObj<typeof meta>;
 
-/** A standard table cell. */
+// TODO: Need to sort out generic typings
+
+/** A standard table Cell. */
 const Default: Story = {
-  args: {
-    cell: { column: 'Cell', rowIndex: 1, type: 'cell', value: 'Cell' },
-  },
+  args: {},
 };
 
-/** A header table cell. */
-const HeaderCell: Story = {
-  args: {
-    cell: { column: 'Header Cell', rowIndex: 'header', type: 'header', value: 'Header' },
-  },
-};
+// Header Cell and Standard Cell examples
 
 export default meta;
-export { Default, HeaderCell };
+export { Default };

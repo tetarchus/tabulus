@@ -1,11 +1,11 @@
-type RowDataBase = Record<string, unknown>;
+/** The base type for RowData when no more specific type is provided. */
+type SimpleRowData = Record<string, unknown>;
 
-interface RowComponent<RowData extends RowDataBase> {
-  /** The value of the ID field for the row. */
-  id: string | number;
-  /** The row definition object. */
-  data: RowData;
-  // TODO: Define functions performed on a row.
-}
+/** The type of a row, indicating whether it is standard table data, or header data. */
+type RowType = 'header' | 'table';
 
-export type { RowComponent, RowDataBase };
+// TODO: Add more options
+/** Options to lookup a row in utility functions. */
+type RowLookup = string;
+
+export { RowLookup, RowType, SimpleRowData };

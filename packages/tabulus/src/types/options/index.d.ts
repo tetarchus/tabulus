@@ -1,18 +1,25 @@
 import type { TableColumnOptions } from './column';
-import type { TableHistoryOptions } from './history';
+import type { DebuggingOptions } from './debug';
 import type { TableLayoutOptions } from './layout';
-import type { TableStyleOptions } from './styles';
+import type { TableStyleOptions } from './theme';
 import type { DeepPartial } from 'ts-essentials';
 
-/** All options that can be set on the table to control how it looks and operates. */
-interface TabulusOptions
-  extends TableColumnOptions,
-    TableHistoryOptions,
+/** All available options that can be passed to a table. */
+interface TabulusCompleteOptions
+  extends DebuggingOptions,
+    TableColumnOptions,
     TableLayoutOptions,
     TableStyleOptions {}
 
-/** The custom options object that can be passed in as a prop. Any values not set will fall back
- * to globally set defaults. */
-type TabulusCustomOptions = DeepPartial<TabulusOptions>;
+/** Table options passed in as overrides to the defaults. */
+interface TabulusOptions extends Omit<DeepPartial<TabulusCompleteOptions>, 'theme'> {
+  /** The theme to use for the table.
+   *
+   * ---
+   * Note: {@link Theme} cannot be deep partial, so left out of standard inheritance.
+   */
+  theme?: TabulusCompleteOptions['theme'];
+}
 
-export type { TabulusCustomOptions, TabulusOptions };
+export type { TabulusCompleteOptions, TabulusOptions };
+export type { TableColumnOptions } from './column';

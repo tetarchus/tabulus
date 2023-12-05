@@ -1,9 +1,16 @@
-import type { ColumnComponent } from '@tabulus/types';
+import type { TableManagerReturn } from '@tabulus/contexts';
+import type { SimpleRowData } from '@tabulus/types';
 
 /** Props for the Column component. */
-interface ColumnProps {
-  /** The component data for the column. */
-  column: ColumnComponent;
+interface ColumnProps<RowData extends SimpleRowData>
+  extends Pick<TableManagerReturn<RowData>, 'getColumnOption' | 'getComponent'> {
+  /** The ID for the column. */
+  readonly id: keyof RowData;
+  /** The text to display in the column header. */
+  readonly title: string;
 }
 
-export type { ColumnProps };
+/** Props for the column's Title styled component. */
+interface TitleProps {}
+
+export type { ColumnProps, TitleProps };

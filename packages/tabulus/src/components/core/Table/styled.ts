@@ -1,33 +1,10 @@
-import { setBorderCss, styled } from '@tabulus/utils';
+import { styled } from '@tabulus/utils';
 
-import type { TableWrapperProps } from './types';
+import type { TableContainerProps, TablePositionerProps } from './types';
 
-/**
- * The container for the whole table. Equivalent to a `<table>` in standard HTML tags.
- * @private
- */
-const TableWrapper = styled.div<TableWrapperProps>(({ horizontalAlign, theme }) => {
-  const { colors } = theme;
-  const borderDefinition = setBorderCss(theme, 'table');
+const TableContainer = styled.div<TableContainerProps>``;
 
-  //== CSS Return Value ===============
-  return {
-    //== Static Properties ==============
-    width: '50%', // TODO: This should be controlled by the options
-
-    //== Theme Properties ===============
-    backgroundColor: colors.backgroundColor,
-    color: colors.textColor,
-    ...borderDefinition,
-
-    //== Dynamic Properties =============
-    marginLeft: horizontalAlign === 'left' ? 0 : 'auto',
-    marginRight: horizontalAlign === 'right' ? 0 : 'auto',
-  };
-});
-
-/** Full width container for the table to allow positioning. */
-const TablePositioner = styled.div`
+const TablePositioner = styled.div<TablePositionerProps>`
   position: relative;
   border: none;
   overflow: hidden;
@@ -42,4 +19,4 @@ const TablePositioner = styled.div`
   /* ? Layout === 'fitDataTable' => display: inline-block */
 `;
 
-export { TablePositioner, TableWrapper };
+export { TableContainer, TablePositioner };

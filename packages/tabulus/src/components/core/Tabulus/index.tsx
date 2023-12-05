@@ -1,28 +1,30 @@
-import { TableManagerProvider } from '@tabulus/contexts';
+import { TableManager } from '@tabulus/contexts';
 
-import { Table } from '../Table';
+import { TableRenderer } from '../../renderers';
 
-import type { RowDataBase, TabulusProps } from '@tabulus/types';
+import type { SimpleRowData, TabulusProps } from '@tabulus/types';
 
 /**
- * The main component of the `tabulus` library. This is the standard method for building a table.
+ * The main component for Tabulus. The simplest way to create a table.
+ * @param param0 {@link TabulusProps|Props} to create a table.
+ * @returns The fully assembled table.
  */
-const Tabulus = <RowData extends RowDataBase>({
+const Tabulus = <RowData extends SimpleRowData>({
   columns,
+  components,
   data,
-  events,
-  id,
   options,
+  tableId,
 }: TabulusProps<RowData>) => (
-  <TableManagerProvider
+  <TableManager
     columns={columns}
+    components={components}
     data={data}
-    events={events}
-    tableId={id}
     options={options}
+    tableId={tableId}
   >
-    <Table />
-  </TableManagerProvider>
+    <TableRenderer />
+  </TableManager>
 );
 
 export { Tabulus };
