@@ -56,6 +56,7 @@ const plugins = {
 const tsconfigs = [
   '.storybook/tsconfig.json',
   'apps/docs/tsconfig.json',
+  'packages/devtools/tsconfig.json',
   'packages/tabulus/tsconfig.json',
   'packages/tabulus/tsconfig.node.json',
   'tsconfig.json',
@@ -263,6 +264,9 @@ const eslintConfig = [
             Args: true,
             argTypesRegex: true,
             DevTool: true,
+            DevToolProps: true,
+            Dev: true,
+            dev: true,
             docs: true,
             Docs: true,
             e: true,
