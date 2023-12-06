@@ -1,3 +1,5 @@
+import { getSingleColumnOptionFunction } from '@tabulus/stories/utils';
+
 import { Cell } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react';
@@ -10,14 +12,26 @@ const meta = {
 
 type Story = StoryObj<typeof meta>;
 
-// TODO: Need to sort out generic typings
+/** A header cell. */
+const HeaderCell: Story = {
+  args: {
+    columnId: 'test',
+    getColumnOption: getSingleColumnOptionFunction,
+    rowIndex: 1,
+    type: 'header',
+    value: 'Cell Value',
+  },
+};
 
-/** A standard table Cell. */
-const Default: Story = {
-  args: {},
+/** A table cell */
+const TableCell: Story = {
+  args: {
+    ...HeaderCell.args,
+    type: 'cell',
+  },
 };
 
 // Header Cell and Standard Cell examples
 
 export default meta;
-export { Default };
+export { HeaderCell, TableCell };

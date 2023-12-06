@@ -5,13 +5,20 @@ import { axe } from 'vitest-axe';
 
 import * as Stories from './Cell.stories';
 
-const { Default } = composeStories(Stories);
+const { HeaderCell, TableCell } = composeStories(Stories);
 
 describe('Cell Component Tests', () => {
   describe('Accessibility Tests', () => {
-    it('should pass accessibility checks - Default', async () => {
+    it('should pass accessibility checks - HeaderCell', async () => {
       expect.assertions(1);
-      const { container } = render(<Default />);
+      const { container } = render(<HeaderCell />);
+      const AxeResults = await axe(container);
+      expect(AxeResults).toHaveNoViolations();
+    });
+
+    it('should pass accessibility checks - TableCell', async () => {
+      expect.assertions(1);
+      const { container } = render(<TableCell />);
       const AxeResults = await axe(container);
       expect(AxeResults).toHaveNoViolations();
     });

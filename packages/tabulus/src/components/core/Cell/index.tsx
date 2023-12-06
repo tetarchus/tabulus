@@ -18,13 +18,13 @@ import type { SimpleRowData } from '@tabulus/types';
  * @returns A cell in a table.
  * @private
  */
-const Cell = <RowData extends SimpleRowData, CellValue extends RowData[string]>({
+const Cell = <RowData extends SimpleRowData>({
   columnId,
   getColumnOption,
   rowIndex,
   type,
   value,
-}: CellProps<RowData, CellValue>) => {
+}: CellProps<RowData>) => {
   const horizontalAlign = getColumnOption(getHorizontalAlignPropertyName(type));
   const verticalAlign = getColumnOption(getVerticalAlignPropertyName(type));
   const visible = getColumnOption('visible');
