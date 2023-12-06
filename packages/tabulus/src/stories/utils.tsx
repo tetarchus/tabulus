@@ -1,4 +1,3 @@
-import { globalDefaultComponents } from '@tabulus/components';
 import { globalDefaultColumnOptions } from '@tabulus/config';
 import { themes } from '@tabulus/theme';
 import { ThemeProvider } from '@tabulus/utils';
@@ -14,6 +13,7 @@ import type {
   RenderRowFunction,
   RenderRowsFunction,
   SimpleRowData,
+  TabulusComponents,
 } from '@tabulus/types';
 import type { JSX } from 'react';
 
@@ -29,8 +29,21 @@ const data = [
   { id: 3, name: 'Steve', age: 36 },
 ];
 
+// TODO: Importing the globalDefaultComponents here causes errors in storybook -
+// as does importing the components separately directly from their files.
+// Need to look at a better method of using the default components for SB
+const components: TabulusComponents<SimpleRowData> = {
+  Cell: () => <div>CELL</div>,
+  Column: () => <div>COLUMN</div>,
+  Footer: () => <div>FOOTER</div>,
+  Header: () => <div>HEADER</div>,
+  Row: () => <div>ROW</div>,
+  Table: () => <div>TABLE</div>,
+  TableBody: () => <div>BODY</div>,
+};
+
 const getComponentFunction: GetComponentFunction<SimpleRowData> = componentName =>
-  globalDefaultComponents[componentName];
+  components[componentName];
 
 const getColumnOptionFunction: GetColumnOptionFunction<SimpleRowData> = (_columnId, option) =>
   globalDefaultColumnOptions[option];
