@@ -1,5 +1,6 @@
+import { objectEntries } from '@tetarchus/utils/core';
+
 import { ROLES } from '@tabulus/constants';
-import { objectEntries } from '@tabulus/utils';
 
 import { RowContainer } from './styled';
 

@@ -8,7 +8,4 @@ export { setTableTheme } from './theme';
 export { isReactComponent } from './typeguards';
 export { WARNINGS } from './warnings';
 
-// TODO: Remove this
-export { objectEntries } from './temporary';
-
 export type { CSSObject } from './styled';
