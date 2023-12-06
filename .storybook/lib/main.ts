@@ -6,6 +6,7 @@ const config: StorybookConfig = {
   ...storybookConfigBase,
   stories: [
     '../../packages/tabulus/**/*.stories.@(js|jsx|mdx|mjs|ts|tsx)',
+    '../../packages/devtools/**/*.stories.@(js|jsx|mdx|mjs|ts|tsx)',
     '../../stories/**/*.mdx',
     '../../packages/tabulus/stories/**/*.mdx',
   ],
