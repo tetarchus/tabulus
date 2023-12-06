@@ -16,8 +16,8 @@
   },
   "type": "module",
   "workspaces": [
-    "packages/tabulus",
-    "apps/docs"
+    "apps/docs",
+    "packages/tabulus"
   ],
   "scripts": {
     "build": "npm run build -w tabulus",
