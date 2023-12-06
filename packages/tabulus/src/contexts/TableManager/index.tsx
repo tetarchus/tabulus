@@ -9,48 +9,21 @@ import {
 } from 'react';
 
 import { useColumnManager, useDataManager } from '@tabulus/hooks';
-import { themes } from '@tabulus/theme';
 import { createTableComponents, createTableOptions, setTableTheme } from '@tabulus/utils';
 
 import { TabulusRegistryContext } from '../TabulusRegistry';
 
+import { tableManagerInitialValue } from './initialValue';
+
 import type { TableManagerProps, TableManagerReturn } from './types';
-import type {
-  FindColumnFunction,
-  FindRowFunction,
-  GetColumnOptionFunction,
-  GetComponentFunction,
-  SimpleRowData,
-} from '@tabulus/types';
-
-// TODO: Move?
-//== Placeholder Functions for an empty context
-const PLACEHOLDER_COMPONENT_FN = () => null;
-const PLACEHOLDER_GET_COL_OPTION_FN = (() => {}) as GetColumnOptionFunction<SimpleRowData>;
-const PLACEHOLDER_FIND_COL_FN = (() => {}) as FindColumnFunction<SimpleRowData>;
-const PLACEHOLDER_FIND_ROW_FN = (() => {}) as FindRowFunction<SimpleRowData>;
-
-/** The initial value of the context before initialization. */
-const initialValue: TableManagerReturn<SimpleRowData> = {
-  elementRef: { current: null },
-  findColumn: PLACEHOLDER_FIND_COL_FN,
-  findRow: PLACEHOLDER_FIND_ROW_FN,
-  getColumnCount: () => 0,
-  getColumnOption: PLACEHOLDER_GET_COL_OPTION_FN,
-  getComponent: () => PLACEHOLDER_COMPONENT_FN,
-  getRowCount: () => 0,
-  initialized: false,
-  renderColumns: () => null,
-  renderRows: () => null,
-  tableId: '',
-  theme: themes.standard,
-};
+import type { GetComponentFunction, SimpleRowData } from '@tabulus/types';
 
 /**
  * Context for providing values and methods to a table instance.
  * @private
  */
-const TableManagerContext = createContext<TableManagerReturn<SimpleRowData>>(initialValue);
+const TableManagerContext =
+  createContext<TableManagerReturn<SimpleRowData>>(tableManagerInitialValue);
 TableManagerContext.displayName = 'TableManager';
 
 /**
@@ -160,4 +133,5 @@ const TableManager = <RowData extends SimpleRowData>({
 };
 
 export { TableManager, TableManagerContext };
+export { tableManagerInitialValue } from './initialValue';
 export type { TableManagerProps, TableManagerReturn } from './types';

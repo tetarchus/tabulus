@@ -11,21 +11,26 @@ import { globalDefaultComponents } from '@tabulus/components';
 import { globalDefaultTableOptions } from '@tabulus/config';
 import { createTableComponents, createTableOptions } from '@tabulus/utils';
 
+import { tabulusRegistryInitialValue } from './initialValue';
+
 import type { TabulusRegistryProps, TabulusRegistryReturn } from './types';
 import type { TableManagerReturn } from '../TableManager';
 import type { FindTableFunction, RegisterTableFunction, SimpleRowData } from '@tabulus/types';
 
-const initialValue: TabulusRegistryReturn = {
-  defaultComponents: globalDefaultComponents,
-  defaultOptions: globalDefaultTableOptions,
-  findTable: () => null,
-  initialized: false,
-  registerTable: () => {},
-};
-
-const TabulusRegistryContext = createContext<TabulusRegistryReturn>(initialValue);
+/**
+ * The underlying context value for the TabulusRegistry. Provides global table management functions
+ * and default option values.
+ * @private
+ */
+const TabulusRegistryContext = createContext<TabulusRegistryReturn>(tabulusRegistryInitialValue);
 TabulusRegistryContext.displayName = 'TabulusRegistry';
 
+/**
+ * Creates a global table management context provider for managing tables within an application.
+ * @param param0 {@link TabulusRegistryProps|Props} to pass in when creating the registry. These
+ * are default values that are passed down to any tables below the provider in the tree.
+ * @returns A component tree wrapped in the {@link TabulusRegistryContext}.
+ */
 const TabulusRegistry = ({
   children,
   components: customComponents,
@@ -86,4 +91,5 @@ const TabulusRegistry = ({
 };
 
 export { TabulusRegistry, TabulusRegistryContext };
+export { tabulusRegistryInitialValue } from './initialValue';
 export type { TabulusRegistryProps, TabulusRegistryReturn } from './types';
