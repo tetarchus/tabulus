@@ -20,7 +20,7 @@ interface ColumnDefinition<RowData extends SimpleRowData>
   extends DeepPartial<FullColumnConfig>,
     ColumnOptionsRequired<RowData> {
   /** Nested columns for groups. */
-  columns?: Array<ColumnDefinition>;
+  columns?: Array<ColumnDefinition<RowData>>;
 }
 
 /** Options object for default column settings. */
