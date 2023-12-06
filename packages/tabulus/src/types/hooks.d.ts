@@ -1,7 +1,11 @@
 import type { TabulusCompleteOptions } from './options';
 import type { SimpleRowData } from './row';
 import type { TabulusProps } from './tabulus';
-import type { TableManagerProps, TableManagerReturn } from '@tabulus/contexts';
+import type {
+  TableManagerProps,
+  TableManagerReturn,
+  TabulusRegistryReturn,
+} from '@tabulus/contexts';
 
 /** Props to pass in to the `useColumnManager` hook. */
 interface UseColumnManagerProps<RowData extends SimpleRowData> {
@@ -36,11 +40,15 @@ interface UseTabulusProps<RowData extends SimpleRowData> extends TabulusProps<Ro
 /** Value returned from the `useTabulus` hook. */
 interface UseTabulusReturn<RowData extends SimpleRowData> extends TableManagerReturn<RowData> {}
 
+/** Value returned by the `useTabulusRegistry` hook. */
+interface UseTabulusRegistryReturn extends Omit<TabulusRegistryReturn, 'tables'> {}
+
 export type {
   UseColumnManagerProps,
   UseColumnManagerReturn,
   UseDataManagerProps,
   UseDataManagerReturn,
   UseTabulusProps,
+  UseTabulusRegistryReturn,
   UseTabulusReturn,
 };

@@ -1,12 +1,14 @@
+import type { TableManagerReturn } from '../TableManager';
 import type {
   FindTableFunction,
   RegisterTableFunction,
+  SimpleRowData,
   TabulusCompleteOptions,
   TabulusComponents,
   TabulusCustomComponents,
   TabulusOptions,
 } from '@tabulus/types';
-import type { ReactNode } from 'react';
+import type { MutableRefObject, ReactNode } from 'react';
 
 /** Props to pass into the TabulusRegistry provider. */
 interface TabulusRegistryProps {
@@ -42,6 +44,11 @@ interface TabulusRegistryReturn {
    * it be able to be fully managed.
    */
   readonly registerTable: RegisterTableFunction;
+  /**
+   * The tables object. Used internally for DevTool - omitted from output in hook.
+   * @private
+   */
+  readonly tables: Record<string, MutableRefObject<TableManagerReturn<SimpleRowData>>>;
 }
 
 export type { TabulusRegistryProps, TabulusRegistryReturn };

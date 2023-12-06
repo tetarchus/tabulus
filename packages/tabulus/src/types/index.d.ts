@@ -21,6 +21,7 @@ export type {
   UseDataManagerProps,
   UseDataManagerReturn,
   UseTabulusProps,
+  UseTabulusRegistryReturn,
   UseTabulusReturn,
 } from './hooks';
 export type { TableColumnOptions, TabulusCompleteOptions, TabulusOptions } from './options';

@@ -78,8 +78,9 @@ const TabulusRegistry = ({
       findTable,
       initialized: true,
       registerTable,
+      tables,
     }),
-    [components, defaultOptions, findTable, registerTable],
+    [components, defaultOptions, findTable, registerTable, tables],
   );
 
   //== Provider Return ================
