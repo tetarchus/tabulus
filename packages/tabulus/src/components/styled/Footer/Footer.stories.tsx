@@ -1,12 +1,9 @@
-import { styledDecorators } from '@tabulus/stories/utils';
-
 import { Footer } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
   component: Footer,
-  decorators: styledDecorators,
   tags: ['autodocs'],
   title: 'Styled Components/Footer',
 } satisfies Meta<typeof Footer>;

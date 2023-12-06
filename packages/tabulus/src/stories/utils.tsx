@@ -1,9 +1,5 @@
 import { globalDefaultColumnOptions } from '@tabulus/config';
-import { themes } from '@tabulus/theme';
-import { ThemeProvider } from '@tabulus/utils';
 
-import type { Decorator, ReactRenderer, StrictArgs } from '@storybook/react';
-import type { PartialStoryFn } from '@storybook/types';
 import type {
   CellCountFunction,
   GetBoundColumnOptionFunction,
@@ -15,7 +11,6 @@ import type {
   SimpleRowData,
   TabulusComponents,
 } from '@tabulus/types';
-import type { JSX } from 'react';
 
 const columns = [
   { id: 'id', title: 'ID' },
@@ -64,14 +59,6 @@ const getColumnCountFunction: CellCountFunction = () => 10;
 
 const getRowCountFunction: CellCountFunction = () => 10;
 
-const styledDecorators: Decorator[] = [
-  (Story: PartialStoryFn<ReactRenderer, StrictArgs>): JSX.Element => (
-    <ThemeProvider theme={themes.standard}>
-      <Story />
-    </ThemeProvider>
-  ),
-];
-
 export {
   columns,
   data,
@@ -83,5 +70,4 @@ export {
   renderColumnsFunction,
   renderRowFunction,
   renderRowsFunction,
-  styledDecorators,
 };

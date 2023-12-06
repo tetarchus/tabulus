@@ -1,12 +1,9 @@
-import { styledDecorators } from '@tabulus/stories/utils';
-
 import { TableBody } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
   component: TableBody,
-  decorators: styledDecorators,
   tags: ['autodocs'],
   title: 'Styled Components/Table Body',
 } satisfies Meta<typeof TableBody>;
