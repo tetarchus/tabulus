@@ -20,6 +20,8 @@ export type {
   UseColumnManagerReturn,
   UseDataManagerProps,
   UseDataManagerReturn,
+  UseTabulusProps,
+  UseTabulusReturn,
 } from './hooks';
 export type { TableColumnOptions, TabulusCompleteOptions, TabulusOptions } from './options';
 export type { RowLookup, RowType, SimpleRowData } from './row';
