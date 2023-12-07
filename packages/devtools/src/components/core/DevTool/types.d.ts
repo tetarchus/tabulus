@@ -1,6 +1,8 @@
 import type { DevToolUIProps } from '../DevToolUI';
 
-interface DevToolBaseProps extends DevToolUIProps {}
+interface DevToolBaseProps extends DevToolUIProps {
+  showInProduction?: boolean;
+}
 
 interface DevToolManualProps {}
 

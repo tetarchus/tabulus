@@ -1,3 +1,3 @@
-export { DevTool } from './DevTool';
+export { DevTool } from './core';
 
-export type { DevToolProps } from './DevTool';
+export type { DevToolProps } from './core';
