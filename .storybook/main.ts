@@ -69,7 +69,7 @@ const storybookConfigBase: Omit<StorybookConfig, 'stories'> = {
         .sbdocs h4, 
         .sbdocs h5, 
         .sbdocs h6 {
-          font-family: 'Share Tech', sans-serif;
+          font-family: 'Smooch Sans', sans-serif;
         }
 
         body.sb-show-main {

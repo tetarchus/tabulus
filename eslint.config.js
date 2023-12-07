@@ -67,7 +67,7 @@ const settings = {
   'import/extensions': fileExtensionsAll,
   'import/external-module-folders': ['node_modules', 'node_modules/@types'],
   'import/ignore': ['(.*/)?node_modules', '\\.(css|md|svg|json)$'],
-  'import/internal-regex': '^@(docs|shared|tabulus)\\/',
+  'import/internal-regex': '^@(devtools|docs|shared|tabulus)\\/',
   'import/parsers': {
     '@typescript-eslint/parser': fileExtensionsTypescript,
   },
@@ -299,7 +299,7 @@ const eslintConfig = [
     },
   },
   {
-    files: ['**/*.stories.tsx', jsxTestFiles],
+    files: ['**/*.stories.tsx', '**/*.styled.ts', jsxTestFiles],
     rules: {
       'unicorn/filename-case': [
         'error',
@@ -308,7 +308,7 @@ const eslintConfig = [
         // https://github.com/sindresorhus/eslint-plugin-unicorn/pull/2186
         {
           cases: { camelCase: false, kebabCase: false, pascalCase: true, snakeCase: false },
-          ignore: ['stories\\.tsx$', 'test\\.tsx$'],
+          ignore: ['stories\\.tsx$', 'test\\.tsx$', 'styled\\.ts$'],
         },
       ],
     },
