@@ -25,7 +25,7 @@
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
     "@tetarchus/utils": "0.1.7",
-    "framer-motion": "10.16.14",
+    "framer-motion": "10.16.15",
     "little-state-machine": "4.8.0",
     "react-icons": "4.12.0"
   },
