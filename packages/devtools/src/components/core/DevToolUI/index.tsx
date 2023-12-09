@@ -2,6 +2,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useStateMachine } from 'little-state-machine';
 import { useEffect } from 'react';
 
+import { useDevTool } from '@devtools/hooks';
 import { stateActions } from '@devtools/utils';
 
 import { DevToolIcon } from '../../UI';
@@ -20,7 +21,11 @@ const DevToolUI: FC<DevToolUIProps> = ({
 }: DevToolUIProps) => {
   //== State ==========================
   const { actions, state } = useStateMachine(stateActions as StateMachineActionInput);
+  // Account for SSR and just use the defaults while on the server
   const { firstRun, isClosed } = state;
+
+  //== Hook Values ====================
+  const { tables } = useDevTool();
 
   //== Setup ==========================
   useEffect(() => {
@@ -33,7 +38,7 @@ const DevToolUI: FC<DevToolUIProps> = ({
   return (
     <AnimatePresence>
       {isClosed && <DevToolIcon actions={actions} key='icon' state={state} />}
-      {!isClosed && <DevToolWindow actions={actions} key='window' state={state} />}
+      {!isClosed && <DevToolWindow actions={actions} key='window' state={state} tables={tables} />}
     </AnimatePresence>
   );
 };

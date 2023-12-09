@@ -10,7 +10,7 @@ import type { CSSProperties } from 'react';
 const DevToolButton = styled(motion.button)<DevToolButtonProps>`
   align-items: center;
   background-color: ${({ theme }): CSSProperties['backgroundColor'] => theme.colors.dark};
-  border: none;
+  border: 1px solid ${({ theme }): CSSProperties['borderColor'] => theme.colors.border};
   color: ${({ theme }): CSSProperties['color'] => theme.colors.light};
   cursor: pointer;
   display: flex;

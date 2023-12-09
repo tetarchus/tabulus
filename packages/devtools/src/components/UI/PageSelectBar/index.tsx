@@ -1,10 +1,11 @@
 import { objectEntries } from '@tetarchus/utils/core';
 import { AnimatePresence } from 'framer-motion';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { FaCaretDown } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
 
 import { PAGES } from '@devtools/constants';
+import { useOnClickOutside } from '@devtools/hooks';
 
 import { IconButton, TitleBarContainer } from '../styled';
 
@@ -15,6 +16,8 @@ import type { FC } from 'react';
 
 /** Main window section for selecting the current page. */
 const PageSelectBar: FC<PageSelectBarProps> = ({ actions, state }: PageSelectBarProps) => {
+  //== Refs ===========================
+  const ref = useRef<HTMLDivElement>(null);
   //== State ==========================
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -29,10 +32,14 @@ const PageSelectBar: FC<PageSelectBarProps> = ({ actions, state }: PageSelectBar
     [actions, state],
   );
 
+  const handleClickOutside = useCallback(() => setMenuOpen(false), []);
+
+  useOnClickOutside(ref, true, handleClickOutside);
+
   //== Component Return ===============
   return (
     <TitleBarContainer>
-      <SelectWrapper>
+      <SelectWrapper ref={ref}>
         <PageSelect onClick={() => setMenuOpen(currentState => !currentState)}>
           {PAGES[state.page]}
           <FaCaretDown size={20} />

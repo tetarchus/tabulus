@@ -6,7 +6,7 @@ import {
   determineActiveResizeEdges,
 } from '@devtools/utils';
 
-import { SettingsPage } from '../../pages';
+import { SettingsPage, TableListPage, TableMainPage } from '../../pages';
 import { PageContainer, PageSelectBar, TitleBar } from '../../UI';
 
 import {
@@ -23,7 +23,7 @@ import type { WindowSize } from '@devtools/types';
 import type { FC, MouseEvent as ReactMouseEvent } from 'react';
 
 /** The DevTool window containing the actual information. Can be in minimised/maximised state. */
-const DevToolWindow: FC<DevToolWindowProps> = ({ actions, state }: DevToolWindowProps) => {
+const DevToolWindow: FC<DevToolWindowProps> = ({ actions, state, tables }: DevToolWindowProps) => {
   //== Props ==========================
   const {
     mode,
@@ -37,7 +37,6 @@ const DevToolWindow: FC<DevToolWindowProps> = ({ actions, state }: DevToolWindow
   const startWindowSize = useRef(calculateWindowSize(mode, settings));
   const previousState = useRef(state);
   //== State ==========================
-
   const [position, setPosition] = useState(mode === 'max' ? maximisedPosition : minimisedPosition);
   const [resizeEdges, setResizeEdges] = useState(determineActiveResizeEdges(mode, position));
   const [currentWindowSize, setCurrentWindowSize] = useState(calculateWindowSize(mode, settings));
@@ -139,7 +138,11 @@ const DevToolWindow: FC<DevToolWindowProps> = ({ actions, state }: DevToolWindow
             <TitleBar actions={actions} state={state} />
             <PageSelectBar actions={actions} state={state} />
             <PageContainer>
+              {page === 'main' && <TableListPage actions={actions} state={state} tables={tables} />}
               {page === 'settings' && <SettingsPage actions={actions} state={state} />}
+              {page === 'table' && (
+                <TableMainPage actions={actions} state={state} tables={tables} />
+              )}
             </PageContainer>
           </Content>
           <ResizeHandleHorizontal

@@ -13,7 +13,7 @@ const TitleBarContainer = styled.div<{ $primary?: boolean }>`
   display: flex;
   font-family: ${({ theme }): CSSProperties['fontFamily'] => theme.fontFamily.title};
   font-size: 1.2rem;
-  gap: 2rem;
+  gap: 0.2rem;
   justify-content: space-between;
   padding: 0.25rem;
 `;

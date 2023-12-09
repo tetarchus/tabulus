@@ -13,8 +13,8 @@ const AlignmentIcon = <A extends MaximisedPosition | MinimisedPosition>({
 }: AlignmentIconProps<A>) => {
   const handleClick = useCallback(() => onClick(alignment), [alignment, onClick]);
   return (
-    <SelectionWrapper selected={selected} onClick={handleClick} type='button'>
-      <IconOuter alignment={alignment}>
+    <SelectionWrapper $selected={selected} onClick={handleClick} type='button'>
+      <IconOuter $alignment={alignment}>
         <IconInner />
       </IconOuter>
     </SelectionWrapper>

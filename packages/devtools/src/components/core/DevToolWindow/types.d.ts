@@ -1,4 +1,5 @@
 import type { BaseProps, DevToolMode, WindowPosition, WindowSize } from '@devtools/types';
+import type { TableRegister } from '@tabulus/contexts';
 
 /** Props for the ResizeHandleHorizontal styled component. */
 interface ResizeHandleHorizontalProps {
@@ -25,7 +26,9 @@ interface DevToolContainerProps {
 }
 
 /** Props for the DevToolWindow component. */
-interface DevToolWindowProps extends BaseProps {}
+interface DevToolWindowProps extends BaseProps {
+  tables: TableRegister;
+}
 
 export type {
   DevToolContainerProps,

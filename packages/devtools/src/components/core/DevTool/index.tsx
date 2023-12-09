@@ -1,6 +1,8 @@
 import { StateMachineProvider } from 'little-state-machine';
+import { useEffect, useState } from 'react';
 // import { DevTool as SMDevTool } from 'little-state-machine-devtools';
 
+import { useDevTool } from '@devtools/hooks';
 import { theme } from '@devtools/theme';
 import { createGlobalStyle, initState, ThemeProvider } from '@devtools/utils';
 
@@ -22,11 +24,16 @@ const Global = createGlobalStyle(context => ({
 const DevTool: FC<DevToolProps> = ({
   closedPosition,
   maximisedPosition,
-  minimisedPosition, // showInProduction = false,
+  minimisedPosition,
+  showInProduction = false,
 }: DevToolProps) => {
+  const [hasMounted, setHasMounted] = useState(false);
+  const { isDevToolEnabled } = useDevTool({ showInProduction });
+
+  useEffect(() => setHasMounted(true), []);
+
   //== DevTool return =================
-  // TODO: Return null if production and !showInProduction
-  return typeof window === 'undefined' ? null : (
+  return hasMounted && isDevToolEnabled ? (
     <ThemeProvider theme={theme}>
       <Global />
       <StateMachineProvider>
@@ -38,7 +45,7 @@ const DevTool: FC<DevToolProps> = ({
         />
       </StateMachineProvider>
     </ThemeProvider>
-  );
+  ) : null;
 };
 
 export { DevTool };
