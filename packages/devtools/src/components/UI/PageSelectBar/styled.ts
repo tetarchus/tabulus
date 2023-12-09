@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import { styled } from '@devtools/utils';
 
 const SelectWrapper = styled.div`
   box-sizing: border-box;

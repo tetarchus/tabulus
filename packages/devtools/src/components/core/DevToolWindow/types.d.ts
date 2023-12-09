@@ -3,15 +3,15 @@ import type { BaseProps, DevToolMode, WindowPosition, WindowSize } from '@devtoo
 /** Props for the ResizeHandleHorizontal styled component. */
 interface ResizeHandleHorizontalProps {
   /** Whether the resize handle is active and can be used to resize the window. */
-  active: boolean;
+  $active: boolean;
   /** The edge the resize handle is for. */
-  edge: 'left' | 'right';
+  $edge: 'left' | 'right';
 }
 
 /** Props for the ResizeHandleVertical styled component. */
-interface ResizeHandleVerticalProps extends Pick<ResizeHandleHorizontalProps, 'active'> {
+interface ResizeHandleVerticalProps extends Pick<ResizeHandleHorizontalProps, '$active'> {
   /** The edge the resize handle is for. */
-  edge: 'bottom' | 'top';
+  $edge: 'bottom' | 'top';
 }
 
 /** Props for the DevToolContainer styled component. */

@@ -125,14 +125,14 @@ const DevToolWindow: FC<DevToolWindowProps> = ({ actions, state }: DevToolWindow
     >
       <WindowContent>
         <ResizeHandleVertical
-          active={resizeEdges.top}
-          edge='top'
+          $active={resizeEdges.top}
+          $edge='top'
           onMouseDown={e => handleMouseDownOnHandle(e, 'top')}
         />
         <HorizontalResizePositioner>
           <ResizeHandleHorizontal
-            active={resizeEdges.left}
-            edge='left'
+            $active={resizeEdges.left}
+            $edge='left'
             onMouseDown={e => handleMouseDownOnHandle(e, 'left')}
           />
           <Content>
@@ -143,14 +143,14 @@ const DevToolWindow: FC<DevToolWindowProps> = ({ actions, state }: DevToolWindow
             </PageContainer>
           </Content>
           <ResizeHandleHorizontal
-            active={resizeEdges.right}
-            edge='right'
+            $active={resizeEdges.right}
+            $edge='right'
             onMouseDown={e => handleMouseDownOnHandle(e, 'right')}
           />
         </HorizontalResizePositioner>
         <ResizeHandleVertical
-          active={resizeEdges.bottom}
-          edge='bottom'
+          $active={resizeEdges.bottom}
+          $edge='bottom'
           onMouseDown={e => handleMouseDownOnHandle(e, 'bottom')}
         />
       </WindowContent>

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import { styled } from '@devtools/utils';
 
 /** Primary/heading text. */
 const Title = styled.div`

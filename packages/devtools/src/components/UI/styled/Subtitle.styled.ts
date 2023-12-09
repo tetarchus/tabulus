@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import { styled } from '@devtools/utils';
 
 /** Standard secondary text. */
 const Subtitle = styled.div`

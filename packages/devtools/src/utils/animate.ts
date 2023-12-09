@@ -70,8 +70,9 @@ const createWindowAnimation = (
         });
 
   const exit = { [mainAxis]: '-100%' };
+  // TODO: Fix casting?
   const initial = (previousMode === mode ? exit : previousPosition) as Target;
-  const animate = newPosition as TargetAndTransition;
+  const animate = newPosition as unknown as TargetAndTransition;
 
   return {
     animate,

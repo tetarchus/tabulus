@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import { styled } from '@devtools/utils';
 
 /** Basic button component. */
 const Button = styled.button`

@@ -1,10 +1,9 @@
-import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 
-import { setWindowPosition } from '@devtools/utils';
+import { setWindowPosition, styled } from '@devtools/utils';
 
 import type { DevToolButtonProps } from './types';
-import type { CSSObject } from '@emotion/styled';
+import type { CSSObject } from '@devtools/utils';
 import type { CSSProperties } from 'react';
 
 /** Button element around the icon. */

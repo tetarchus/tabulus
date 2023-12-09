@@ -16,4 +16,7 @@ const theme = {
   },
 } as const;
 
+type Theme = typeof theme;
+
 export { theme };
+export type { Theme };

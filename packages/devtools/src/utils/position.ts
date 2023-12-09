@@ -13,7 +13,7 @@ import type {
   WindowPosition,
   WindowSize,
 } from '@devtools/types';
-import type { CSSObject } from '@emotion/react';
+import type { CSSObject } from '@devtools/utils';
 
 /**
  * Typeguard to check whether the given position contains a valid position for maximised windows.

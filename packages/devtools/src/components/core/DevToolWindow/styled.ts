@@ -1,14 +1,13 @@
-import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 
-import { setWindowPosition } from '@devtools/utils';
+import { setWindowPosition, styled } from '@devtools/utils';
 
 import type {
   DevToolContainerProps,
   ResizeHandleHorizontalProps,
   ResizeHandleVerticalProps,
 } from './types';
-import type { CSSObject } from '@emotion/styled';
+import type { CSSObject } from '@devtools/utils';
 import type { CSSProperties } from 'react';
 
 /**
@@ -16,6 +15,7 @@ import type { CSSProperties } from 'react';
  */
 const DevToolContainer = styled(motion.div)<DevToolContainerProps>`
   background-color: ${({ theme }): CSSProperties['backgroundColor'] => theme.colors.dark};
+  border: 1px solid ${({ theme }): CSSProperties['borderColor'] => theme.colors.border};
   box-sizing: border-box;
   color: ${({ theme }): CSSProperties['color'] => theme.colors.light};
   display: flex;
@@ -67,13 +67,13 @@ const HorizontalResizePositioner = styled.div`
  */
 const ResizeHandleHorizontal = styled.div<ResizeHandleHorizontalProps>`
   /* background-color: red; */
-  cursor: ${({ active }): CSSProperties['cursor'] => (active ? 'ew-resize' : 'default')};
+  cursor: ${({ $active }): CSSProperties['cursor'] => ($active ? 'ew-resize' : 'default')};
   height: 100%;
   position: absolute;
   width: 0.2rem;
   z-index: 2;
 
-  ${({ edge }): CSSObject => ({ [edge]: 0 })};
+  ${({ $edge }): CSSObject => ({ [$edge]: 0 })};
 `;
 
 /**
@@ -81,13 +81,13 @@ const ResizeHandleHorizontal = styled.div<ResizeHandleHorizontalProps>`
  */
 const ResizeHandleVertical = styled.div<ResizeHandleVerticalProps>`
   /* background-color: green; */
-  cursor: ${({ active }): CSSProperties['cursor'] => (active ? 'ns-resize' : 'default')};
+  cursor: ${({ $active }): CSSProperties['cursor'] => ($active ? 'ns-resize' : 'default')};
   height: 0.2rem;
   position: absolute;
   width: 100%;
   z-index: 2;
 
-  ${({ edge }): CSSObject => ({ [edge]: 0 })};
+  ${({ $edge }): CSSObject => ({ [$edge]: 0 })};
 `;
 
 export {

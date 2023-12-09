@@ -1,9 +1,9 @@
-import styled from '@emotion/styled';
+import { styled } from '@devtools/utils';
 
 /** Container for page content to make it scrollable and padded. */
 const PageContainer = styled.div`
   box-sizing: border-box;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 0.5rem;
   height: 100%;
 `;

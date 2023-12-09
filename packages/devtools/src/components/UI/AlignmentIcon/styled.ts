@@ -1,19 +1,11 @@
-import styled from '@emotion/styled';
 import { arrayIncludes } from '@tetarchus/utils';
 
-import { POSITIONS } from '@devtools/constants';
+import { FLEX_ALIGN, POSITIONS } from '@devtools/constants';
+import { styled } from '@devtools/utils';
 
 import type { AlignmentIconProps } from './types';
 import type { MaximisedPosition, MinimisedPosition } from '@devtools/types';
 import type { CSSProperties } from 'react';
-
-// TODO: Re-use from main lib?
-// TODO: Move these consts
-const FLEX_ALIGN = {
-  END: 'flex-end',
-  START: 'flex-start',
-  STRETCH: 'stretch',
-} as const;
 
 /** Wrapper around the alignment icon to display the selection status. */
 const SelectionWrapper = styled.button<{

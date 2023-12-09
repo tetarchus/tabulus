@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import { styled } from '@devtools/utils';
 
 /** Grouping component to group elements in a row with a small gap between. */
 const GroupedRow = styled.div`

@@ -49,7 +49,16 @@ const PAGES: Record<DevToolPage, string> = {
   settings: 'DevTool Settings',
 };
 
+// TODO: Re-use from main lib?
+// TODO: Move these consts
+const FLEX_ALIGN = {
+  END: 'flex-end',
+  START: 'flex-start',
+  STRETCH: 'stretch',
+} as const;
+
 export {
+  FLEX_ALIGN,
   PAGES,
   POSITIONS,
   POSITIONS_HOZ_ARR,

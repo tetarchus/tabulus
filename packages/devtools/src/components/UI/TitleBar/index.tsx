@@ -22,7 +22,7 @@ const TitleBar: FC<TitleBarProps> = ({ actions, state }: TitleBarProps) => {
 
   //== Component Return ===============
   return (
-    <TitleBarContainer primary>
+    <TitleBarContainer $primary>
       <GroupedRow>
         <img alt='Tabulus Logo' width={'20px'} src={logo} style={{ marginRight: '0.3rem' }} />
         <span>Tabulus DevTool</span>

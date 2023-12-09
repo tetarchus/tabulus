@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import { styled } from '@devtools/utils';
 
 /** Standard wrapper for an icon. */
 const IconButton = styled.button`
