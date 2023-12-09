@@ -88,4 +88,9 @@ const TabulusRegistry = ({
 
 export { TabulusRegistry, TabulusRegistryContext };
 export { tabulusRegistryInitialValue } from './initialValue';
-export type { TabulusRegistryProps, TabulusRegistryReturn } from './types';
+export type {
+  TableRegister,
+  TableRegisterEntry,
+  TabulusRegistryProps,
+  TabulusRegistryReturn,
+} from './types';

@@ -10,6 +10,12 @@ import type {
 } from '@tabulus/types';
 import type { MutableRefObject, ReactNode } from 'react';
 
+/** Type alias for an entry in the table register. */
+type TableRegisterEntry = MutableRefObject<TableManagerReturn<SimpleRowData>>;
+
+/** Type alias for the TableRegister. */
+type TableRegister = Record<string, TableRegisterEntry>;
+
 /** Props to pass into the TabulusRegistry provider. */
 interface TabulusRegistryProps {
   /** The components that will have access to the context. */
@@ -48,7 +54,7 @@ interface TabulusRegistryReturn {
    * The tables object. Used internally for DevTool - omitted from output in hook.
    * @private
    */
-  readonly tables: Record<string, MutableRefObject<TableManagerReturn<SimpleRowData>>>;
+  readonly tables: TableRegister;
 }
 
-export type { TabulusRegistryProps, TabulusRegistryReturn };
+export type { TableRegister, TableRegisterEntry, TabulusRegistryProps, TabulusRegistryReturn };

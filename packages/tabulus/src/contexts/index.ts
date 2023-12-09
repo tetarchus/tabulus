@@ -4,4 +4,9 @@ export { TabulusRegistry, TabulusRegistryContext } from './TabulusRegistry';
 
 export type { TableManagerProps, TableManagerReturn } from './TableManager';
 export type { TabulusProviderProps, TabulusProviderReturn } from './TabulusContext';
-export type { TabulusRegistryProps, TabulusRegistryReturn } from './TabulusRegistry';
+export type {
+  TableRegister,
+  TableRegisterEntry,
+  TabulusRegistryProps,
+  TabulusRegistryReturn,
+} from './TabulusRegistry';
