@@ -1,30 +1,21 @@
 import { Global, ThemeProvider } from '@emotion/react';
-import { createStore, StateMachineProvider } from 'little-state-machine';
+import { StateMachineProvider } from 'little-state-machine';
 import { DevTool as SMDevTool } from 'little-state-machine-devtools';
 
-import { defaultState } from '@devtools/config';
-import { STATE_KEY } from '@devtools/constants';
 import { theme } from '@devtools/theme';
+import { initState } from '@devtools/utils';
 
 import { DevToolUI } from '../DevToolUI';
 
 import type { DevToolProps } from './types';
-import type { DevToolState } from '@devtools/types';
 import type { FC } from 'react';
 
-const testMiddleware = (state: DevToolState): DevToolState => {
-  console.log('IN MIDDLEWARE', state);
-  return state;
-};
+/** Create the initial state if it doesn't exist already. */
+initState();
 
-if (typeof window !== 'undefined') {
-  createStore(defaultState, {
-    middleWares: [testMiddleware],
-    name: STATE_KEY,
-    storageType: window.localStorage,
-  });
-}
-
+/**
+ * The main DevTool component. Sets up the state management context and theme.
+ */
 const DevTool: FC<DevToolProps> = ({
   closedPosition,
   maximisedPosition,

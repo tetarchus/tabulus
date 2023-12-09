@@ -5,6 +5,7 @@ import { IconInner, IconOuter, SelectionWrapper } from './styled';
 import type { AlignmentIconProps } from './types';
 import type { MaximisedPosition, MinimisedPosition } from '@devtools/types';
 
+/** Display Icon for showing window position options. */
 const AlignmentIcon = <A extends MaximisedPosition | MinimisedPosition>({
   alignment,
   onClick,

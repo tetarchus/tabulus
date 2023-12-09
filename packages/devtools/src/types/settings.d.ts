@@ -1,5 +1,4 @@
 import type { MaximisedPosition, MinimisedPosition } from './position';
-import type { CSSProperties } from 'react';
 
 /** Settings for the DevTools. */
 interface DevToolSettings {
@@ -8,13 +7,13 @@ interface DevToolSettings {
   /** Screen edge to display the maximised tool window. */
   maximisedPosition: MaximisedPosition;
   /** User resized window height for minimised window. */
-  minimisedPanelHeight: CSSProperties['height'];
+  minimisedPanelHeight: number;
   /** User resized window width for minimised window. */
-  minimisedPanelWidth: CSSProperties['width'];
+  minimisedPanelWidth: number;
   /** Screen position to display the minimised tool window. */
   minimisedPosition: MinimisedPosition;
   /** Window width/height for the maximised window. */
-  panelSize: CSSProperties['height'] | CSSProperties['width'];
+  panelSize: number;
   /** Whether to display internal events in the event log. */
   showInternalEvents: boolean;
 }

@@ -4,45 +4,51 @@ import { useCallback, useState } from 'react';
 import { FaCaretDown } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
 
+import { PAGES } from '@devtools/constants';
+
 import { IconButton, TitleBarContainer } from '../styled';
 
-import { PageSelect, PageSelectMenu, PageSelectMenuItem } from './styled';
+import { PageSelect, PageSelectMenu, PageSelectMenuItem, SelectWrapper } from './styled';
 
 import type { PageSelectBarProps } from './types';
-import type { DevToolPage } from '@devtools/types';
 import type { FC } from 'react';
 
-const pages: Record<DevToolPage, string> = {
-  settings: 'DevTool Settings',
-  main: 'Table List',
-  table: 'Table Home',
-};
-
+/** Main window section for selecting the current page. */
 const PageSelectBar: FC<PageSelectBarProps> = ({ actions, state }: PageSelectBarProps) => {
+  //== State ==========================
   const [menuOpen, setMenuOpen] = useState(false);
+
+  //== Functions ======================
   const handleSettingsClick = useCallback(() => actions.setPage('settings'), [actions]);
+
   const handlePageSelect = useCallback(
-    (page: typeof state.page) => actions.setPage(page),
+    (page: typeof state.page) => {
+      actions.setPage(page);
+      setMenuOpen(false);
+    },
     [actions, state],
   );
 
+  //== Component Return ===============
   return (
     <TitleBarContainer>
-      <PageSelect onClick={() => setMenuOpen(currentState => !currentState)}>
-        {pages[state.page]}
-        <FaCaretDown size={20} />
-      </PageSelect>
-      <AnimatePresence>
-        {menuOpen && (
-          <PageSelectMenu>
-            {objectEntries(pages).map(([pageId, pageName]) => (
-              <PageSelectMenuItem key={pageId} onClick={() => handlePageSelect(pageId)}>
-                {pageName}
-              </PageSelectMenuItem>
-            ))}
-          </PageSelectMenu>
-        )}
-      </AnimatePresence>
+      <SelectWrapper>
+        <PageSelect onClick={() => setMenuOpen(currentState => !currentState)}>
+          {PAGES[state.page]}
+          <FaCaretDown size={20} />
+        </PageSelect>
+        <AnimatePresence>
+          {menuOpen && (
+            <PageSelectMenu>
+              {objectEntries(PAGES).map(([pageId, pageName]) => (
+                <PageSelectMenuItem key={pageId} onClick={() => handlePageSelect(pageId)}>
+                  {pageName}
+                </PageSelectMenuItem>
+              ))}
+            </PageSelectMenu>
+          )}
+        </AnimatePresence>
+      </SelectWrapper>
       <IconButton onClick={handleSettingsClick}>
         <IoMdSettings size={20} />
       </IconButton>

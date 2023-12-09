@@ -1,8 +1,11 @@
-export { createMaximisedAnimation } from './animate';
+export { createWindowAnimation, setTransformOrigin } from './animate';
 export {
-  getMaximisedPosition,
-  getMinimisedPosition,
+  getPositionParts,
   isMaximisedPosition,
   isMinimisedPosition,
+  setMaximisedPosition,
+  setMinimisedPosition,
+  setWindowPosition,
 } from './position';
-export { stateActions } from './state';
+export { initState, resetState, stateActions } from './state';
+export { calculateWindowSize, determineActiveResizeEdges } from './window';

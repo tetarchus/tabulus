@@ -10,13 +10,19 @@ import { GroupedRow, IconButton, TitleBarContainer } from '../styled';
 import type { TitleBarProps } from './types';
 import type { FC } from 'react';
 
+/** Top bar of the main window containing the mode change buttons and window name. */
 const TitleBar: FC<TitleBarProps> = ({ actions, state }: TitleBarProps) => {
-  const handleMinimise = useCallback(() => actions.setMode('min'), [actions]);
-  const handleClose = useCallback(() => actions.setMode('closed'), [actions]);
+  //== Functions ======================
+  const handleMinimise = useCallback(
+    () => actions.setMode(state.mode === 'max' ? 'min' : 'max'),
+    [actions, state.mode],
+  );
+
+  const handleClose = useCallback(() => actions.setIsClosed(true), [actions]);
 
   //== Component Return ===============
   return (
-    <TitleBarContainer>
+    <TitleBarContainer primary>
       <GroupedRow>
         <img alt='Tabulus Logo' width={'20px'} src={logo} style={{ marginRight: '0.3rem' }} />
         <span>Tabulus DevTool</span>

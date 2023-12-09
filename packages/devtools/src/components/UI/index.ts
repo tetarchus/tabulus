@@ -1,6 +1,14 @@
 export { AlignmentIcon } from './AlignmentIcon';
 export { DevToolIcon } from './DevToolIcon';
-export { GroupedRow, IconButton, PageContainer, TitleBarContainer } from './styled';
+export {
+  Button,
+  GroupedRow,
+  IconButton,
+  PageContainer,
+  Subtitle,
+  Title,
+  TitleBarContainer,
+} from './styled';
 export { PageSelectBar } from './PageSelectBar';
 export { TitleBar } from './TitleBar';
 

@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 
-import { getMinimisedPosition } from '@devtools/utils';
+import { setWindowPosition } from '@devtools/utils';
 
 import type { DevToolButtonProps } from './types';
+import type { CSSObject } from '@emotion/styled';
 import type { CSSProperties } from 'react';
 
+/** Button element around the icon. */
 const DevToolButton = styled(motion.button)<DevToolButtonProps>`
   align-items: center;
   background-color: ${({ theme }): CSSProperties['backgroundColor'] => theme.colors.dark};
@@ -17,8 +19,9 @@ const DevToolButton = styled(motion.button)<DevToolButtonProps>`
   overflow: hidden;
   padding: 0.2rem;
   position: absolute;
+  z-index: 99999998;
 
-  ${({ position }) => getMinimisedPosition(position)}
+  ${({ position }): CSSObject => setWindowPosition(position)}
 `;
 
 export { DevToolButton };

@@ -9,13 +9,20 @@ import type { FC } from 'react';
 
 const VISIBLE_SIZE = 'fit-content';
 
+/**
+ * The button/icon that is displayed when the DevTool is closed. Clicking this will show the
+ * main window.
+ */
 const DevToolIcon: FC<DevToolIconProps> = ({ actions, state }: DevToolIconProps) => {
+  //== Props ==========================
   const {
     settings: { closedPosition },
   } = state;
 
-  const handleClick = useCallback(() => actions.setMode('max'), [actions]);
+  //== Functions ======================
+  const handleClick = useCallback(() => actions.setIsClosed(false), [actions]);
 
+  //== Component Return ===============
   return (
     <DevToolButton
       animate={{ height: VISIBLE_SIZE, width: VISIBLE_SIZE }}
