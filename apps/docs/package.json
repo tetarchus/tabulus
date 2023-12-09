@@ -23,6 +23,14 @@
     "start": "remix-serve ./build/index.js",
     "typecheck": "tsc"
   },
+  "devDependencies": {
+    "@remix-run/dev": "2.3.1",
+    "@types/lodash-es": "4.17.12",
+    "@types/react": "18.2.42",
+    "@types/react-dom": "18.2.17",
+    "tailwindcss": "3.3.6",
+    "typescript": "5.3.3"
+  },
   "dependencies": {
     "@remix-run/css-bundle": "2.3.1",
     "@remix-run/node": "2.3.1",
@@ -33,19 +41,15 @@
     "isbot": "3.7.1",
     "lodash-es": "4.17.21",
     "mdx-bundler": "10.0.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "18.3.0-canary-5bcade5fc-20231208",
+    "react-dom": "18.3.0-canary-5bcade5fc-20231208",
     "react-icons": "4.12.0"
-  },
-  "devDependencies": {
-    "@remix-run/dev": "2.3.1",
-    "@types/lodash-es": "4.17.12",
-    "@types/react": "18.2.42",
-    "@types/react-dom": "18.2.17",
-    "tailwindcss": "3.3.6",
-    "typescript": "5.3.3"
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom"
   }
 }
