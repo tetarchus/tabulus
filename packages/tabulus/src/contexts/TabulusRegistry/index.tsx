@@ -59,14 +59,9 @@ const TabulusRegistry = ({
   );
 
   //== Functions ======================
-  const registerTable: RegisterTableFunction = useCallback(
-    (id, table) => {
-      const updatedTableRegister = { ...tables };
-      tables[id] = table;
-      setTables(updatedTableRegister);
-    },
-    [tables],
-  );
+  const registerTable: RegisterTableFunction = useCallback((id, table) => {
+    setTables(previous => ({ ...previous, [id]: table }));
+  }, []);
 
   const findTable: FindTableFunction<SimpleRowData> = useCallback(id => tables[id], [tables]);
 

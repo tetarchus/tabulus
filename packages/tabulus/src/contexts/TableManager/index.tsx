@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 
 import { useTabulus } from '@tabulus/hooks';
+import { StyleSheetManager } from '@tabulus/utils';
 
 import { tableManagerInitialValue } from './initialValue';
 
@@ -29,7 +30,9 @@ const TableManager = <RowData extends SimpleRowData>({
 
   //== Provider Return ==============
   return (
-    <TableManagerContext.Provider value={managerValue}>{children}</TableManagerContext.Provider>
+    <TableManagerContext.Provider value={managerValue}>
+      <StyleSheetManager>{children}</StyleSheetManager>
+    </TableManagerContext.Provider>
   );
 };
 

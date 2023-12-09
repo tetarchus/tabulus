@@ -47,7 +47,7 @@ const Cell = <RowData extends SimpleRowData>({
       aria-rowindex={rowIndex}
       horizontalAlign={horizontalAlign}
       role={type === 'header' ? ROLES.COLUMN : ROLES.CELL}
-      tabulus-columnId={columnId}
+      tabulus-columnid={columnId}
       verticalAlign={verticalAlign}
       visible={visible}
     >

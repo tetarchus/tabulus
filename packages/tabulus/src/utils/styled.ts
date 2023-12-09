@@ -1,5 +1,3 @@
-/** Re-exports to allow switching out with styled-components if we need to. */
-export { default as styled } from '@emotion/styled';
-export { ThemeProvider } from '@emotion/react';
+export { styled, StyleSheetManager, ThemeProvider } from 'styled-components';
 
-export type { CSSObject } from '@emotion/styled';
+export type { CSSObject } from 'styled-components';

@@ -15,7 +15,7 @@ interface TabulusRegistryProps {
   /** The components that will have access to the context. */
   readonly children: ReactNode;
   /** Default options to apply to any table within the context tree. */
-  readonly options: TabulusOptions;
+  readonly options?: TabulusOptions;
   /** Default components to use for any table within the context tree. */
   readonly components?: TabulusCustomComponents;
 }
