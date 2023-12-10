@@ -283,6 +283,7 @@ const eslintConfig = [
             Ref: true,
             rel: true,
             requireNoSession: true,
+            varName: true,
           },
           checkShorthandProperties: true,
           checkFilenames: true,
