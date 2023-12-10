@@ -29,7 +29,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
-      "@devtools/*": ["./packages/devtools/src/*"],
       "@docs/*": ["./apps/docs/app/*"],
       "@tabulus/*": ["./packages/tabulus/src/*"],
       "@shared/*": ["./packages/shared/*"]

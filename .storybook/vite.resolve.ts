@@ -3,10 +3,6 @@ import { fileURLToPath, URL } from 'node:url';
 const viteResolveConfig = {
   resolve: {
     alias: [
-      {
-        find: '@devtools',
-        replacement: fileURLToPath(new URL('../packages/devtools/src/', import.meta.url)),
-      },
       { find: '@docs', replacement: fileURLToPath(new URL('../apps/docs/app/', import.meta.url)) },
       {
         find: '@shared',

@@ -56,7 +56,6 @@ const plugins = {
 const tsconfigs = [
   '.storybook/tsconfig.json',
   'apps/docs/tsconfig.json',
-  'packages/devtools/tsconfig.json',
   'packages/tabulus/tsconfig.json',
   'packages/tabulus/tsconfig.node.json',
   'tsconfig.json',
@@ -67,7 +66,7 @@ const settings = {
   'import/extensions': fileExtensionsAll,
   'import/external-module-folders': ['node_modules', 'node_modules/@types'],
   'import/ignore': ['(.*/)?node_modules', '\\.(css|md|svg|json)$'],
-  'import/internal-regex': '^@(devtools|docs|shared|tabulus)\\/',
+  'import/internal-regex': '^@(docs|shared|tabulus)\\/',
   'import/parsers': {
     '@typescript-eslint/parser': fileExtensionsTypescript,
   },
