@@ -3,7 +3,7 @@ export { createColumnOptions } from './column';
 export { createTableComponents } from './components';
 export { createTableOptions } from './options';
 export { addEvenOrOddClass } from './row';
-export { styled, StyleSheetManager, ThemeProvider } from './styled';
+export { createGlobalStyle, styled, StyleSheetManager, ThemeProvider } from './styled';
 export { setTableTheme } from './theme';
 export { isReactComponent } from './typeguards';
 export { WARNINGS } from './warnings';

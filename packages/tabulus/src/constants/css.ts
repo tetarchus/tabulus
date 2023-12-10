@@ -6,9 +6,10 @@
 const CSS_VALUES = {
   FLEX: {
     ALIGN: {
-      START: 'flex-start',
-      END: 'flex-end',
       CENTER: 'center',
+      END: 'flex-end',
+      START: 'flex-start',
+      STRETCH: 'stretch',
     },
   },
 };

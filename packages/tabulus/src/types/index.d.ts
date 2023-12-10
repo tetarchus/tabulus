@@ -1,6 +1,24 @@
 export type { CellFilter, CellType } from './cell';
 export type { ColumnConfig, ColumnDefinition, ColumnLookup, FullColumnConfig } from './column';
 export type { TabulusComponents, TabulusCustomComponents } from './component';
+// export type {
+//   ActionFunction,
+//   ActionPayload,
+//   BaseProps,
+//   BaseStyledProps,
+//   DevToolMode,
+//   DevToolPage,
+//   DevToolSettings,
+//   DevToolState,
+//   MaximisedPosition,
+//   MinimisedPosition,
+//   ResizeEdgeConfig,
+//   StateActions,
+//   StateMachineActionInput,
+//   StateMachineActions,
+//   WindowPosition,
+//   WindowSize,
+// } from './devtool';
 export type {
   CellCountFunction,
   CellValueFunction,
