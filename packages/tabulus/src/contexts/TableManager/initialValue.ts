@@ -1,3 +1,4 @@
+import { globalDefaultTableOptions } from '@tabulus/config';
 import { themes } from '@tabulus/theme';
 
 import type { TableManagerReturn } from './types';
@@ -20,6 +21,7 @@ const PLACEHOLDER_FIND_ROW_FN = (() => {}) as FindRowFunction<SimpleRowData>;
  * @private
  */
 const tableManagerInitialValue: TableManagerReturn<SimpleRowData> = {
+  __raw: { columns: [], data: [], options: globalDefaultTableOptions },
   elementRef: { current: null },
   findColumn: PLACEHOLDER_FIND_COL_FN,
   findRow: PLACEHOLDER_FIND_ROW_FN,

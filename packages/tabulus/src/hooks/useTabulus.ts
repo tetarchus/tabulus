@@ -66,6 +66,7 @@ const useTabulus = <RowData extends SimpleRowData>({
   //== Return Value ==================
   const tabulusValue = useMemo(
     () => ({
+      __raw: { columns, data, options },
       elementRef: tableElementRef,
       findColumn,
       findRow,
@@ -80,12 +81,15 @@ const useTabulus = <RowData extends SimpleRowData>({
       theme,
     }),
     [
+      columns,
+      data,
       findColumn,
       findRow,
       getColumnCount,
       getColumnOption,
       getComponent,
       getRowCount,
+      options,
       renderColumns,
       renderRows,
       tableId,

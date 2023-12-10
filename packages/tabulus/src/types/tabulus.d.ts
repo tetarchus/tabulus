@@ -1,5 +1,5 @@
-import type { TabulusCustomComponents } from '.';
 import type { ColumnDefinition } from './column';
+import type { TabulusCustomComponents } from './component';
 import type { TabulusOptions } from './options';
 import type { SimpleRowData } from './row';
 

@@ -7,6 +7,7 @@ import type {
   RenderColumnsFunction,
   RenderRowsFunction,
   SimpleRowData,
+  TabulusCompleteOptions,
   TabulusProps,
   Theme,
 } from '@tabulus/types';
@@ -21,11 +22,20 @@ interface TableManagerProps<RowData extends SimpleRowData> extends TabulusProps<
   readonly children: ReactNode;
 }
 
+/** Raw data about the table that is not meant to be accessed directly. */
+interface RawTableData<RowData extends SimpleRowData>
+  extends Pick<TabulusProps<RowData>, 'columns' | 'data'> {
+  /** Complete options for the table. */
+  readonly options: TabulusCompleteOptions;
+}
+
 /**
  * The return value of the TableManager context for managing a table instance.
  * @private
  */
 interface TableManagerReturn<RowData extends SimpleRowData> {
+  /** Stored information about the table that is not meant to be accessed directly. */
+  readonly __raw: RawTableData<RowData>;
   /** Ref object to pass to the table element. */
   readonly elementRef: RefObject<HTMLDivElement>;
   /** Function for finding the column data based on a lookup value. */
