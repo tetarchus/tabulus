@@ -6,6 +6,13 @@ export type {
   StateMachineActions,
 } from './actions';
 export type {
+  DevToolRegister,
+  DevToolTableSource,
+  DevToolTableSourceType,
+  UseDevToolProps,
+  UseDevToolReturn,
+} from './hooks';
+export type {
   MaximisedPosition,
   MinimisedPosition,
   ResizeEdgeConfig,

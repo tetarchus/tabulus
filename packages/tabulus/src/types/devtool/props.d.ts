@@ -10,6 +10,7 @@ interface BaseProps {
   state: DevToolState;
 }
 
+/** Props for styled components including the custom DevTool theme. */
 interface BaseStyledProps {
   theme: DevToolTheme;
 }

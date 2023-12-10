@@ -65,7 +65,7 @@ const IconOuter = styled.div<IconOuterProps>`
 const IconInner = styled.div<BaseStyledProps>`
   background-color: ${({ theme }): CSSProperties['backgroundColor'] => theme.colors.teal};
   box-sizing: border-box;
-  padding: ${({ theme }): CSSProperties['padding'] => theme.padding.xs};
+  padding: ${({ theme }): CSSProperties['padding'] => theme.padding.sm};
 `;
 
 export { IconInner, IconOuter, SelectionWrapper };

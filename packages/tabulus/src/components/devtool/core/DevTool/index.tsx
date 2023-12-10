@@ -28,9 +28,10 @@ const DevTool: FC<DevToolProps> = ({
   maximisedPosition,
   minimisedPosition,
   showInProduction = false,
+  table,
 }: DevToolProps) => {
   const [hasMounted, setHasMounted] = useState(false);
-  const { isDevToolEnabled } = useDevTool({ showInProduction });
+  const { isDevToolEnabled } = useDevTool({ showInProduction, table });
 
   useEffect(() => setHasMounted(true), []);
 
@@ -39,11 +40,11 @@ const DevTool: FC<DevToolProps> = ({
     <ThemeProvider theme={theme as unknown as Theme}>
       <Global theme={theme as unknown as Theme & DevToolTheme} />
       <StateMachineProvider>
-        {/* <SMDevTool /> */}
         <DevToolUI
           closedPosition={closedPosition}
           maximisedPosition={maximisedPosition}
           minimisedPosition={minimisedPosition}
+          table={table}
         />
       </StateMachineProvider>
     </ThemeProvider>

@@ -3,15 +3,22 @@ import { useCallback } from 'react';
 import { Info, TableListItemContainer, TableType } from './styled';
 
 import type { TableListItemProps } from './types';
+import type { DevToolTableSourceType } from '@tabulus/types/devtool';
 import type { FC } from 'react';
 
+const TABLE_SOURCE: Record<DevToolTableSourceType, string> = {
+  manual: 'Manual',
+  registry: 'Managed',
+};
+
+/** An entry in the table list. */
 const TableListItem: FC<TableListItemProps> = ({
   actions,
   id,
   state,
   table,
 }: TableListItemProps) => {
-  const { getRowCount } = table;
+  const { getRowCount, source = 'registry' } = table;
   const { selectedTable } = state;
 
   const handleTableSelect = useCallback(() => {
@@ -21,9 +28,8 @@ const TableListItem: FC<TableListItemProps> = ({
 
   return (
     <TableListItemContainer $selected={selectedTable === id} onClick={handleTableSelect}>
-      {/* TODO: Make this dynamic */}
       <Info>
-        <TableType>Managed</TableType>
+        <TableType $type={source}>{TABLE_SOURCE[source]}</TableType>
         <Info>{id}</Info>
       </Info>
       <Info>{`Rows: ${getRowCount()}`}</Info>

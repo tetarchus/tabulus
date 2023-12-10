@@ -3,16 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { IS } from '@tabulus/constants';
 import { TabulusRegistryContext } from '@tabulus/contexts';
 
-import type { TableRegister } from '@tabulus/contexts';
-
-interface UseDevToolProps {
-  showInProduction?: boolean;
-}
-
-interface UseDevToolReturn {
-  isDevToolEnabled: boolean;
-  tables: TableRegister;
-}
+import type { UseDevToolProps, UseDevToolReturn } from '@tabulus/types/devtool';
 
 /**
  * Hook to deal with the values and methods for the devtool.
@@ -20,19 +11,36 @@ interface UseDevToolReturn {
  * @returns Settings and values for the DevTool.
  */
 const useDevTool = (props?: UseDevToolProps): UseDevToolReturn => {
-  const { showInProduction = false } = props ?? {};
+  const { showInProduction = false, table } = props ?? {};
   const [isDevToolEnabled, setIsDevToolEnabled] = useState(false);
-  const { tables } = useContext(TabulusRegistryContext);
+  const { initialized, tables } = useContext(TabulusRegistryContext);
+  const [manualTableRegister, setManualTableRegister] = useState(
+    table ? { [table.tableId]: { current: { ...table, source: 'manual' } } } : {},
+  );
+  const [registry, setRegistry] = useState(initialized ? tables : manualTableRegister);
+
+  useEffect(
+    () =>
+      setManualTableRegister(
+        table ? { [table.tableId]: { current: { ...table, source: 'manual' } } } : {},
+      ),
+    [table],
+  );
+
+  useEffect(
+    () => setRegistry(initialized ? tables : manualTableRegister),
+    [initialized, manualTableRegister, tables],
+  );
 
   useEffect(() => {
-    if ((!IS.PROD || showInProduction) && Object.keys(tables).length > 0) {
+    if ((!IS.PROD || showInProduction) && Object.keys(registry).length > 0) {
       setIsDevToolEnabled(true);
     } else {
       setIsDevToolEnabled(false);
     }
-  }, [showInProduction, tables]);
+  }, [showInProduction, registry]);
 
-  return { isDevToolEnabled, tables };
+  return { isDevToolEnabled, tables: registry };
 };
 
 export { useDevTool };

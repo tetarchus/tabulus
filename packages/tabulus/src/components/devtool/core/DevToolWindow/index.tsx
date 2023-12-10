@@ -1,5 +1,7 @@
+import { arrayIncludes } from '@tetarchus/utils';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { POSITIONS_HOZ_ARR, POSITIONS_VERT_ARR } from '@tabulus/constants/devtool';
 import {
   calculateWindowSize,
   createWindowAnimation,
@@ -36,6 +38,7 @@ const DevToolWindow: FC<DevToolWindowProps> = ({ actions, state, tables }: DevTo
   const mouseDownPosition = useRef({ x: 0, y: 0 });
   const startWindowSize = useRef(calculateWindowSize(mode, settings));
   const previousState = useRef(state);
+
   //== State ==========================
   const [position, setPosition] = useState(mode === 'max' ? maximisedPosition : minimisedPosition);
   const [resizeEdges, setResizeEdges] = useState(determineActiveResizeEdges(mode, position));
@@ -66,7 +69,7 @@ const DevToolWindow: FC<DevToolWindowProps> = ({ actions, state, tables }: DevTo
         actions.setPanelHeight(newSize.y);
         actions.setPanelWidth(newSize.x);
       } else {
-        if (mouseDown && ['bottom', 'top'].includes(mouseDown)) {
+        if (mouseDown && arrayIncludes(POSITIONS_VERT_ARR, mouseDown)) {
           actions.setPanelSize(newSize.y);
         } else if (mouseDown) {
           actions.setPanelSize(newSize.x);
@@ -80,23 +83,27 @@ const DevToolWindow: FC<DevToolWindowProps> = ({ actions, state, tables }: DevTo
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
-      const newSizeX = startWindowSize.current.x + (e.clientX - mouseDownPosition.current.x);
-      const newSizeY = startWindowSize.current.y + (e.clientY - mouseDownPosition.current.y);
+      if (!mouseDown) return;
+      const newSizeX = arrayIncludes(POSITIONS_HOZ_ARR, mouseDown)
+        ? startWindowSize.current.x + (e.clientX - mouseDownPosition.current.x)
+        : startWindowSize.current.x;
+      const newSizeY = arrayIncludes(POSITIONS_VERT_ARR, mouseDown)
+        ? startWindowSize.current.y + (e.clientY - mouseDownPosition.current.y)
+        : startWindowSize.current.y;
       const newWindowSize = { x: newSizeX, y: newSizeY };
+
       setWindowSize(newWindowSize);
       setCurrentWindowSize(newWindowSize);
     },
-    [setWindowSize],
+    [mouseDown, setWindowSize],
   );
 
   const handleMouseUp = useCallback(() => {
+    if (!mouseDown) return;
     rootRef && rootRef.current && (rootRef.current.style.userSelect = 'auto');
     setMouseDown(false);
     startWindowSize.current = calculateWindowSize(mode, settings);
-
-    document.removeEventListener('mouseup', handleMouseUp);
-    document.removeEventListener('mousemove', handleMouseMove);
-  }, [handleMouseMove, mode, settings]);
+  }, [mode, mouseDown, settings]);
 
   const handleMouseDownOnHandle = useCallback(
     (e: ReactMouseEvent<HTMLDivElement>, edge: 'bottom' | 'left' | 'right' | 'top') => {
@@ -106,12 +113,19 @@ const DevToolWindow: FC<DevToolWindowProps> = ({ actions, state, tables }: DevTo
       setMouseDown(edge);
       const mousePosition = { x: e.clientX, y: e.clientY };
       mouseDownPosition.current = mousePosition;
-
-      document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('mousemove', handleMouseMove);
     },
-    [handleMouseMove, handleMouseUp, resizeEdges],
+    [resizeEdges],
   );
+
+  useEffect(() => {
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [handleMouseMove, handleMouseUp]);
 
   //== Component Return ===============
   return (

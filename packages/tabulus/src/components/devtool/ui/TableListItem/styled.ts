@@ -1,6 +1,6 @@
 import { styled } from '@tabulus/utils';
 
-import type { TableListItemContainerProps } from './types';
+import type { TableListItemContainerProps, TableTypeProps } from './types';
 import type { BaseStyledProps } from '@tabulus/types/devtool';
 import type { CSSProperties } from 'react';
 
@@ -22,10 +22,12 @@ const TableListItemContainer = styled.div<TableListItemContainerProps>`
 `;
 
 /** The source type of the table. */
-const TableType = styled.div<BaseStyledProps>`
+const TableType = styled.div<TableTypeProps>`
   /* TODO: Change the color depending on the table type */
-  background-color: ${({ theme }): CSSProperties['backgroundColor'] => theme.colors.title};
-  color: ${({ theme }): CSSProperties['color'] => theme.colors.highlight};
+  background-color: ${({ $type, theme }): CSSProperties['backgroundColor'] =>
+    $type === 'registry' ? theme.colors.title : theme.colors.highlight};
+  color: ${({ $type, theme }): CSSProperties['color'] =>
+    $type === 'registry' ? theme.colors.highlight : theme.colors.dark};
   border: 1px solid ${({ theme }): CSSProperties['borderColor'] => theme.colors.border};
   display: inline-flex;
   padding: ${({ theme }): CSSProperties['padding'] => theme.padding.sm};

@@ -18,6 +18,7 @@ const DevToolUI: FC<DevToolUIProps> = ({
   closedPosition,
   maximisedPosition,
   minimisedPosition,
+  table,
 }: DevToolUIProps) => {
   //== State ==========================
   const { actions, state } = useStateMachine(stateActions as StateMachineActionInput);
@@ -25,7 +26,7 @@ const DevToolUI: FC<DevToolUIProps> = ({
   const { firstRun, isClosed } = state;
 
   //== Hook Values ====================
-  const { tables } = useDevTool();
+  const { tables } = useDevTool({ table });
 
   //== Setup ==========================
   useEffect(() => {
