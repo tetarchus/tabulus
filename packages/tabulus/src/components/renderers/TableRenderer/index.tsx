@@ -1,6 +1,9 @@
 import { useTableManager } from '@tabulus/hooks';
 import { ThemeProvider } from '@tabulus/utils';
 
+import { HeaderRenderer } from '../HeaderRenderer';
+import { RowsRenderer } from '../RowsRenderer';
+
 import type { SimpleRowData } from '@tabulus/types';
 
 /**
@@ -30,8 +33,10 @@ const TableRenderer = <RowData extends SimpleRowData>() => {
         getColumnOption={getColumnOption}
         getComponent={getComponent}
         getRowCount={getRowCount}
+        HeaderRenderer={HeaderRenderer}
         renderColumns={renderColumns}
         renderRows={renderRows}
+        RowsRenderer={RowsRenderer}
         tableId={tableId}
       />
     </ThemeProvider>

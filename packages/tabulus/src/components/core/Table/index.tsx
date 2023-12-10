@@ -1,7 +1,5 @@
 import { CLASSES, ROLES } from '@tabulus/constants';
 
-import { HeaderRenderer, RowsRenderer } from '../../renderers';
-
 import { TableContainer, TablePositioner } from './styled';
 
 import type { TableProps } from './types';
@@ -19,8 +17,10 @@ const Table = <RowData extends SimpleRowData>({
   getColumnOption,
   getComponent,
   getRowCount,
+  HeaderRenderer,
   renderColumns,
   renderRows,
+  RowsRenderer,
   tableId,
 }: TableProps<RowData>) => (
   <TablePositioner className={CLASSES.BASE}>

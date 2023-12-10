@@ -7,7 +7,7 @@ import {
   type MutableRefObject,
 } from 'react';
 
-import { globalDefaultComponents } from '@tabulus/components';
+import { globalDefaultComponents } from '@tabulus/components/defaults';
 import { globalDefaultTableOptions } from '@tabulus/config';
 import { createTableComponents, createTableOptions } from '@tabulus/utils';
 
