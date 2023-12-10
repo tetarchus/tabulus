@@ -1,5 +1,5 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["remix.env.d.ts", "remix.config.js", "**/*.ts", "**/*.tsx"],
   "exclude": []
 }
