@@ -2,13 +2,18 @@ import { styled } from '@tabulus/utils';
 
 import type { TableContainerProps, TablePositionerProps } from './types';
 
-const TableContainer = styled.div<TableContainerProps>``;
+/** Wrapper around the table itself. */
+const TableContainer = styled.div<TableContainerProps>`
+  box-sizing: border-box;
+`;
 
+/** Layout wrapper that can allows for positioning the table. */
 const TablePositioner = styled.div<TablePositionerProps>`
-  position: relative;
   border: none;
+  box-sizing: border-box;
   overflow: hidden;
-
+  padding: 0 1rem;
+  position: relative;
   width: 100%;
 
   //== Theme Properties ===============

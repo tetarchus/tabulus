@@ -6,6 +6,7 @@ import type { CellContainerProps } from './types';
 /** A wrapper around all of the cell contents. */
 const CellContainer = styled.div<CellContainerProps>`
   //== Static Properties ================
+  box-sizing: border-box;
   padding: 0.25rem;
   display: flex;
   width: 100%;
@@ -17,8 +18,8 @@ const CellContainer = styled.div<CellContainerProps>`
   border-color: currentColor;
 
   //== Dynamic Properties =============
-  align-items: ${({ verticalAlign }) => {
-    switch (verticalAlign) {
+  align-items: ${({ $verticalAlign }) => {
+    switch ($verticalAlign) {
       case 'bottom':
         return CSS_VALUES.FLEX.ALIGN.END;
       case 'middle':
@@ -27,8 +28,8 @@ const CellContainer = styled.div<CellContainerProps>`
         return CSS_VALUES.FLEX.ALIGN.START;
     }
   }};
-  justify-content: ${({ horizontalAlign }) => {
-    switch (horizontalAlign) {
+  justify-content: ${({ $horizontalAlign }) => {
+    switch ($horizontalAlign) {
       case 'center':
         return CSS_VALUES.FLEX.ALIGN.CENTER;
       case 'left':

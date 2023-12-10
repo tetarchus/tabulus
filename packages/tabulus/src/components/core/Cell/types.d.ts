@@ -22,7 +22,14 @@ interface CellProps<RowData extends SimpleRowData> {
   readonly value: unknown; //CellValue | CellValueFunction<CellValue> | string | null | undefined;
 }
 
-interface CellContainerProps
-  extends Pick<FullColumnConfig, 'horizontalAlign' | 'verticalAlign' | 'visible'> {}
+/** Props for the CellContainer styled component. */
+interface CellContainerProps {
+  /** How to align the content horizontally in the cell. */
+  readonly $horizontalAlign: FullColumnConfig['horizontalAlign'];
+  /** How to align the content vertically in the cell. */
+  readonly $verticalAlign: FullColumnConfig['verticalAlign'];
+  /** Whether the cell should be visible. */
+  readonly $visible: FullColumnConfig['visible'];
+}
 
 export type { CellContainerProps, CellProps };

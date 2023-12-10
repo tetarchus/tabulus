@@ -44,12 +44,12 @@ const Cell = <RowData extends SimpleRowData>({
 
   return (
     <CellContainer
+      $horizontalAlign={horizontalAlign}
+      $verticalAlign={verticalAlign}
+      $visible={visible}
       aria-rowindex={rowIndex}
-      horizontalAlign={horizontalAlign}
       role={type === 'header' ? ROLES.COLUMN : ROLES.CELL}
       tabulus-columnid={columnId}
-      verticalAlign={verticalAlign}
-      visible={visible}
     >
       {CellContents}
     </CellContainer>
