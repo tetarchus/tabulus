@@ -1,0 +1,14 @@
+# Notes
+
+Some notes that will need to be added to documentation:
+
+## Remix
+
+When using with remix, due to use of React-Icons in the library, and the exports of that not working
+correctly with Remix, you will need to add react-icons to your `serverDependenciesToBundle`:
+
+```ts
+{
+  serverDependenciesToBundle: [/^react-icons/u];
+}
+```
