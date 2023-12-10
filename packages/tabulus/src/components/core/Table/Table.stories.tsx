@@ -1,3 +1,4 @@
+import { HeaderRenderer, RowsRenderer } from '@tabulus/components/renderers';
 import {
   getColumnCountFunction,
   getColumnOptionFunction,
@@ -27,8 +28,10 @@ const Default: Story = {
     getColumnOption: getColumnOptionFunction,
     getComponent: getComponentFunction,
     getRowCount: getRowCountFunction,
+    HeaderRenderer,
     renderColumns: renderColumnsFunction,
     renderRows: renderRowsFunction,
+    RowsRenderer,
     tableId: 'test',
   },
 };
