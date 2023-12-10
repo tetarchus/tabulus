@@ -14,6 +14,7 @@ const tabulusRegistryInitialValue: TabulusRegistryReturn = {
   findTable: () => null,
   initialized: false,
   registerTable: () => {},
+  tables: {},
 };
 
 export { tabulusRegistryInitialValue };

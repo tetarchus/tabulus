@@ -1,4 +1,4 @@
-import type { DevToolSettings, DevToolState } from '@tabulus/types';
+import type { DevToolSettings, DevToolState } from '@tabulus/types/devtool';
 
 /**
  * Default settings to use if no user-overrides exist.

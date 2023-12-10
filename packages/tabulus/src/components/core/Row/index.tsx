@@ -5,7 +5,7 @@ import { ROLES } from '@tabulus/constants';
 import { RowContainer } from './styled';
 
 import type { RowProps } from './types';
-import type { SimpleRowData } from '@tabulus/types';
+import type { GetBoundColumnOptionFunction, SimpleRowData } from '@tabulus/types';
 
 /**
  * The default Row component for Tabulus.
@@ -28,16 +28,22 @@ const Row = <RowData extends SimpleRowData>({
       {/* Render Row Contents */}
       {renderRow(row => {
         const cells = objectEntries(row);
-        return cells.map(([column, value]) => (
-          <Cell
-            columnId={column}
-            getColumnOption={getColumnOption}
-            key={column}
-            rowIndex={index}
-            type='cell'
-            value={value}
-          />
-        ));
+
+        return cells.map(([column, value]) => {
+          const getBoundColumnOption: GetBoundColumnOptionFunction = option =>
+            getColumnOption(column, option);
+
+          return (
+            <Cell
+              columnId={column}
+              getColumnOption={getBoundColumnOption}
+              key={column}
+              rowIndex={index}
+              type='cell'
+              value={value}
+            />
+          );
+        });
       })}
     </RowContainer>
   );

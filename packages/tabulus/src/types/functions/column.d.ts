@@ -14,7 +14,7 @@ type FindColumnFunction<RowData extends SimpleRowData> = (
  * Function for getting the value of a column option for a given column.
  */
 type GetColumnOptionFunction<RowData extends SimpleRowData> = <K extends keyof FullColumnConfig>(
-  // TODO: Change to a lookup?
+  // TODO: Change to a lookup - type needs sorting as resolving to 'any'
   columnId: ColumnDefinition<RowData>['id'],
   option: K,
 ) => FullColumnConfig[K];
