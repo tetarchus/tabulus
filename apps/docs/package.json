@@ -37,7 +37,7 @@
     "@remix-run/node": "2.3.1",
     "@remix-run/react": "2.3.1",
     "@remix-run/serve": "2.3.1",
-    "@tetarchus/utils": "0.1.7",
+    "@tetarchus/utils": "0.1.8",
     "esbuild": "0.19.9",
     "isbot": "3.7.1",
     "lodash-es": "4.17.21",
