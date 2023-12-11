@@ -22,7 +22,7 @@ const setTableTheme = (theme: TabulusCompleteOptions['theme']): Theme => {
   } else if (typeof theme === 'object' && 'baseTheme' in theme) {
     const { baseTheme = 'standard' } = theme;
     const baseThemeObject = themes[baseTheme];
-    return mergeWith(baseThemeObject, theme, themeMergeFunction);
+    return mergeWith({}, baseThemeObject, theme, themeMergeFunction);
   } else if (typeof theme === 'object') {
     return theme;
   } else {
