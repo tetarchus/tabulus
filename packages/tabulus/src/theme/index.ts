@@ -6,3 +6,4 @@ import { standard } from './standard';
 const themes = { standard };
 
 export { themes };
+export { BORDER_MAP } from './borders';
