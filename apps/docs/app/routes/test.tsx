@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import { Tabulus } from '@tabulus/components';
+import { DevTool, Tabulus } from '@tabulus/components';
+import { TabulusRegistry } from '@tabulus/contexts';
 
 const TestRoute = () => {
   const data = useMemo(
@@ -10,12 +11,47 @@ const TestRoute = () => {
     ],
     [],
   );
-  const columns = useMemo(() => [] as const, []);
+  const columns = useMemo(
+    () =>
+      [
+        { id: 'id', title: 'ID' },
+        { id: 'name', title: 'Name' },
+        { id: 'age', title: 'Age' },
+      ] as const,
+    [],
+  );
+  const options = useMemo(() => ({ columnDefaults: { horizontalAlign: 'center' } }) as const, []);
 
   return (
-    <div>
+    <div className='w-full'>
       <h1>Tabulus Testing</h1>
-      <Tabulus columns={columns} data={data} tableId='test' />
+      <TabulusRegistry options={options}>
+        <DevTool />
+        <Tabulus
+          columns={columns}
+          data={data}
+          options={{
+            columnDefaults: { horizontalAlign: 'left' },
+            theme: {
+              baseTheme: 'standard',
+              borders: { all: { borderSides: 'external' }, table: { borderColor: 'red' } },
+            },
+          }}
+          tableId='test'
+        />
+        <Tabulus
+          columns={columns}
+          data={data}
+          options={{
+            theme: {
+              baseTheme: 'standard',
+              borders: { all: { borderSides: 'between' }, table: { borderColor: 'green' } },
+            },
+          }}
+          tableId='test2'
+        />
+        <Tabulus columns={columns} data={data} tableId='test3' />
+      </TabulusRegistry>
     </div>
   );
 };
