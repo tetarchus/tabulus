@@ -1,5 +1,5 @@
-import { cloneDeep } from 'lodash-es';
-import { useCallback, useEffect, useState } from 'react';
+import { cloneDeep, isEqual } from 'lodash-es';
+import { useCallback, useEffect, useRef } from 'react';
 
 import type {
   CellCountFunction,
@@ -20,31 +20,42 @@ const useDataManager = <RowData extends SimpleRowData>({
   data: baseData, // options,
 }: UseDataManagerProps<RowData>): UseDataManagerReturn<RowData> => {
   //== State ==========================
-  const [data, setData] = useState(cloneDeep(baseData));
-  const [rows, setRows] = useState(data);
+  const data = useRef(cloneDeep(baseData));
+  const rows = useRef(data.current);
 
   //== Side Effects ===================
-  useEffect(() => setData(cloneDeep(baseData)), [baseData]);
-  useEffect(() => setRows(data), [data]);
+  useEffect(() => {
+    const newData = cloneDeep(baseData);
+    if (!isEqual(newData, data.current)) {
+      data.current = newData;
+    }
+  }, [baseData]);
+
+  useEffect(() => {
+    const newRows = data.current;
+    if (!isEqual(newRows, rows.current)) {
+      rows.current = newRows;
+    }
+  }, [data]);
 
   //== Functions ======================
   const findRow: FindRowFunction<RowData> = useCallback(
     // TODO: Use 'options.indexField' for ID based lookup
-    lookup => rows.find(row => row['id'] === lookup),
+    lookup => rows.current.find(row => row['id'] === lookup),
     [rows],
   );
 
   const getRowCount: CellCountFunction = useCallback(
     (_filter = 'all') => {
       // TODO: Add different returns based on the filter.
-      return rows.length;
+      return rows.current.length;
     },
     [rows],
   );
 
   const renderRows: RenderRowsFunction<RowData> = useCallback(
     renderFunction => {
-      return renderFunction(rows);
+      return renderFunction(rows.current);
     },
     [rows],
   );

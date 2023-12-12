@@ -1,4 +1,5 @@
-import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { isEqual } from 'lodash-es';
+import { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
 
 import { TabulusRegistryContext } from '@tabulus/contexts';
 import { createTableComponents, createTableOptions, setTableTheme } from '@tabulus/utils';
@@ -33,40 +34,55 @@ const useTabulus = <RowData extends SimpleRowData>({
   } = useContext(TabulusRegistryContext);
 
   //== State ==========================
-  const [options, setOptions] = useState(createTableOptions(defaultOptions, tableOptions));
-  const [components, setComponents] = useState(
-    createTableComponents(defaultComponents, tableComponents),
-  );
-  const [theme, setTheme] = useState(setTableTheme(options.theme));
+  const options = useRef(createTableOptions(defaultOptions, tableOptions));
+  const components = useRef(createTableComponents(defaultComponents, tableComponents));
+  const theme = useRef(setTableTheme(options.current.theme));
+  // const [options, setOptions] = useState(createTableOptions(defaultOptions, tableOptions));
+  // const [components, setComponents] = useState(
+  //   createTableComponents(defaultComponents, tableComponents),
+  // );
+  // const [theme, setTheme] = useState(setTableTheme(options.current.theme));
 
   //== Side Effects ===================
-  useEffect(
-    () => setOptions(createTableOptions(defaultOptions, tableOptions)),
-    [defaultOptions, tableOptions],
-  );
-  useEffect(
-    () => setComponents(createTableComponents(defaultComponents, tableComponents)),
-    [defaultComponents, tableComponents],
-  );
-  useEffect(() => setTheme(setTableTheme(options.theme)), [options.theme]);
+  useEffect(() => {
+    const newOptions = createTableOptions(defaultOptions, tableOptions);
+    if (!isEqual(newOptions, options.current)) {
+      options.current = newOptions;
+    }
+    // setOptions(createTableOptions(defaultOptions, tableOptions));
+  }, [defaultOptions, tableOptions]);
+  useEffect(() => {
+    const newComponents = createTableComponents(defaultComponents, tableComponents);
+    if (!isEqual(newComponents, components.current)) {
+      components.current = newComponents;
+    }
+    // setComponents(createTableComponents(defaultComponents, tableComponents));
+  }, [defaultComponents, tableComponents]);
+  useEffect(() => {
+    const newTheme = setTableTheme(options.current.theme);
+    if (!isEqual(newTheme, theme.current)) {
+      theme.current = newTheme;
+    }
+  }, []);
+  // useEffect(() => setTheme(setTableTheme(options.current.theme)), [options.current.theme]);
 
   //== Functions ======================
   const getComponent: GetComponentFunction<RowData> = useCallback(
-    componentName => components[componentName],
+    componentName => components.current[componentName],
     [components],
   );
 
   //== Hook Values ====================
   const { findColumn, getColumnCount, getColumnOption, renderColumns } = useColumnManager({
     columns,
-    options,
+    options: options.current,
   });
-  const { findRow, getRowCount, renderRows } = useDataManager({ data, options });
+  const { findRow, getRowCount, renderRows } = useDataManager({ data, options: options.current });
 
   //== Return Value ==================
   const tabulusValue = useMemo(
     () => ({
-      __raw: { columns, data, options },
+      __raw: { columns, data, options: options.current },
       elementRef: tableElementRef,
       findColumn,
       findRow,
@@ -78,7 +94,7 @@ const useTabulus = <RowData extends SimpleRowData>({
       renderColumns,
       renderRows,
       tableId,
-      theme,
+      theme: theme.current,
     }),
     [
       columns,
@@ -89,7 +105,7 @@ const useTabulus = <RowData extends SimpleRowData>({
       getColumnOption,
       getComponent,
       getRowCount,
-      options,
+      // options.current,
       renderColumns,
       renderRows,
       tableId,
@@ -109,6 +125,8 @@ const useTabulus = <RowData extends SimpleRowData>({
       registerTable(tableId, registryRef);
     }
   }, [registerTable, registryInitialized, tableId]);
+
+  console.log('useTabulus Renderer', tableId);
 
   return tabulusValue;
 };

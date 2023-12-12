@@ -1,11 +1,5 @@
-import {
-  createContext,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  type MutableRefObject,
-} from 'react';
+import { isEqual } from 'lodash-es';
+import { createContext, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { globalDefaultComponents } from '@tabulus/components/defaults';
 import { globalDefaultTableOptions } from '@tabulus/config';
@@ -13,8 +7,7 @@ import { createTableComponents, createTableOptions } from '@tabulus/utils';
 
 import { tabulusRegistryInitialValue } from './initialValue';
 
-import type { TabulusRegistryProps, TabulusRegistryReturn } from './types';
-import type { TableManagerReturn } from '../TableManager';
+import type { TableRegister, TabulusRegistryProps, TabulusRegistryReturn } from './types';
 import type { FindTableFunction, RegisterTableFunction, SimpleRowData } from '@tabulus/types';
 
 /**
@@ -37,43 +30,45 @@ const TabulusRegistry = ({
   options,
 }: TabulusRegistryProps) => {
   //== State ==========================
-  const [tables, setTables] = useState<
-    Record<string, MutableRefObject<TableManagerReturn<SimpleRowData>>>
-  >({});
-
-  const [defaultOptions, setDefaultOptions] = useState(
-    createTableOptions(globalDefaultTableOptions, options),
-  );
-  const [components, setComponents] = useState(
-    createTableComponents(globalDefaultComponents, customComponents),
-  );
+  const tables = useRef<TableRegister>({});
+  const defaultOptions = useRef(createTableOptions(globalDefaultTableOptions, options));
+  const components = useRef(createTableComponents(globalDefaultComponents, customComponents));
 
   //== Side Effects ===================
-  useEffect(
-    () => setDefaultOptions(createTableOptions(globalDefaultTableOptions, options)),
-    [options],
-  );
-  useEffect(
-    () => setComponents(createTableComponents(globalDefaultComponents, customComponents)),
-    [customComponents],
-  );
+  useEffect(() => {
+    const newOptions = createTableOptions(globalDefaultTableOptions, options);
+    if (!isEqual(newOptions, defaultOptions.current)) {
+      defaultOptions.current = newOptions;
+    }
+  }, [options]);
+
+  useEffect(() => {
+    const newComponents = createTableComponents(globalDefaultComponents, customComponents);
+    if (!isEqual(newComponents, components.current)) {
+      components.current = newComponents;
+    }
+  }, [customComponents]);
 
   //== Functions ======================
   const registerTable: RegisterTableFunction = useCallback((id, table) => {
-    setTables(previous => ({ ...previous, [id]: table }));
+    const newTables = { ...tables.current, [id]: table };
+    tables.current = newTables;
   }, []);
 
-  const findTable: FindTableFunction<SimpleRowData> = useCallback(id => tables[id], [tables]);
+  const findTable: FindTableFunction<SimpleRowData> = useCallback(
+    id => tables.current[id],
+    [tables],
+  );
 
   //== Memoized Context Value =========
   const registryValue = useMemo(
     () => ({
-      defaultComponents: components,
-      defaultOptions,
+      defaultComponents: components.current,
+      defaultOptions: defaultOptions.current,
       findTable,
       initialized: true,
       registerTable,
-      tables,
+      tables: tables.current,
     }),
     [components, defaultOptions, findTable, registerTable, tables],
   );
