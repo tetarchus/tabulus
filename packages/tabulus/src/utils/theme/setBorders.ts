@@ -226,7 +226,6 @@ const setBorders = (theme: Theme, component: BorderComponentsPlus): CSSObject =>
       break;
   }
 
-  console.log('BORDERS', { component, fallbacks, borderStyles, borderSides });
   return borderStyles;
 };
 
