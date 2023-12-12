@@ -1,0 +1,48 @@
+---
+title: Theme | Borders
+---
+
+Border can be controlled using the [`borders`](@todo) property of the [`theme`](@todo).
+
+This allows for control over every aspect of the borders in your table, and largely functions like a
+standard [HTML Table](@todo).
+
+## Basic Properties
+
+The [`borders`](@todo) theme property has several top-level keys:
+
+- `all` [required] - Controls all of the borders for table components that do not have their own
+  options defined.
+- `cell` - Controls all cell borders, including header cells if they do not have their own values
+  defined.
+- `column` - Controls borders for columns.
+- `header` - Controls borders around the header element that contains the header cells.
+- `headerCell` - Controls borders for cells in the header.
+- `row` - Controls borders around an entire row.
+- `table` - Controls the border around the entire table.
+
+## Definitions
+
+Each of the above properties is an object containing a range of properties specific to each
+component. If they are not defined, there are fallback values that will be used in their place.
+
+- `borderCollapse`
+- `borderColor`
+- `borderSides`
+- `borderSpacing`
+- `borderStyle`
+- `borderWidth`
+
+## Common Border Style Recipes
+
+For the most part, the simple `borderSides` values can be used to control most borders. Here are
+some theme options for common table border styles. You can then simply define border
+color/style/width where needed if they need to differ.
+
+{/* @todo: Test that these all work as expected */}
+
+- Header and Column (no external or row borders)
+- External only (border around the table edge only)
+- Internal only (border between each row and column, but nothing around the edge)
+- All - Borders around everything
+- Header only (a single line below the header row, with no other borders)

@@ -1,0 +1,21 @@
+---
+title: Theme | Colors
+---
+
+The standard table colors can be defined under the [`colors`](@todo) property of the
+[`theme`](@todo).
+
+## Available Color Options
+
+- `backgroundColor`: The main background of the table.
+- `borderColor`: The color to use for all table borders. This falls back to the textColor, and is
+  overridden by providing colors under the [`borders`](@todo) property of the theme.
+- `textColor`: The color to use for text in the table.
+
+@todo: Add these
+
+- `headerTextColor`: The color to use for text in the table header.
+- `rowColor`: An array of colors to use for 'striping' rows. The colors will be cycled through in
+  order each time, so if 3 colors are provided, every 3 rows will be the same colors.
+- `columnColor`: @todo need to think how this can/should work. Allow for 2 axis striping: possibly
+  have array of arrays and/or multiple acceptable types for the property.
