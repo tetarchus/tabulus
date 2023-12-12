@@ -12,6 +12,8 @@ import { CellContainer } from './styled';
 import type { CellProps } from './types';
 import type { SimpleRowData } from '@tabulus/types';
 
+let renderCount = 0;
+
 /**
  * The default Cell component for Tabulus.
  * @param param0 {@link CellProps|Props} for the Cell.
@@ -52,6 +54,7 @@ const Cell = <RowData extends SimpleRowData>({
       tabulus-columnid={columnId}
     >
       {CellContents}
+      {renderCount++}
     </CellContainer>
   );
 };

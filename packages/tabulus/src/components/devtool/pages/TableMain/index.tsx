@@ -28,7 +28,7 @@ const TableMainPage: FC<TableMainPageProps> = ({ /* actions, */ state, tables })
             <Value>{selectedTable.getRowCount()}</Value>
           </TableDetails>
           {/* TODO: Make collapsible */}
-          <RawValue></RawValue>
+          <RawValue>{JSON.stringify(selectedTable.__raw, null, 2)}</RawValue>
         </>
       ) : (
         <div>{state.selectedTable.trim() === '' ? 'No Table Selected' : 'No Table Data Found'}</div>

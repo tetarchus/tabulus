@@ -9,8 +9,12 @@ import type { CSSProperties } from 'react';
 
 /** Button element around the icon. */
 const DevToolButton = styled(motion.button)<DevToolButtonProps>`
+  /* Hack to prevent tailwind preflight overwriting the color with transparent. */
+  && {
+    background-color: ${({ theme }): CSSProperties['backgroundColor'] => theme.colors.dark};
+  }
+
   align-items: center;
-  background-color: ${({ theme }): CSSProperties['backgroundColor'] => theme.colors.dark};
   border: 1px solid ${({ theme }): CSSProperties['borderColor'] => theme.colors.border};
   color: ${({ theme }): CSSProperties['color'] => theme.colors.light};
   cursor: pointer;

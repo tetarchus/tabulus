@@ -24,7 +24,7 @@ const Row = <RowData extends SimpleRowData>({
   const Cell = getComponent('Cell');
 
   return (
-    <RowContainer aria-rowindex={index} className={className} role={ROLES.ROW} type={type}>
+    <RowContainer $type={type} aria-rowindex={index} className={className} role={ROLES.ROW}>
       {/* Render Row Contents */}
       {renderRow(row => {
         const cells = objectEntries(row);

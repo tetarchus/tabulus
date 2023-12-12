@@ -1,5 +1,5 @@
 import { CSS_VALUES } from '@tabulus/constants';
-import { styled } from '@tabulus/utils';
+import { setBorders, styled } from '@tabulus/utils';
 
 import type { CellContainerProps } from './types';
 
@@ -12,10 +12,11 @@ const CellContainer = styled.div<CellContainerProps>`
   width: 100%;
 
   //== Theme Properties ===============
+  ${({ $type, theme }) => setBorders(theme, $type === 'cell' ? 'cell' : 'headerCell')}
   // TODO: Control with theme
-  border-width: 1px;
+  /* border-width: 1px;
   border-style: solid;
-  border-color: currentColor;
+  border-color: currentColor; */
 
   //== Dynamic Properties =============
   align-items: ${({ $verticalAlign }) => {

@@ -19,6 +19,8 @@ const Label = styled.span`
 const Value = styled.span``;
 
 /** Wrapper for the raw data displayed as code. */
-const RawValue = styled.code``;
+const RawValue = styled.code`
+  white-space: pre;
+`;
 
 export { Label, RawValue, TableDetails, Value };

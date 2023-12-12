@@ -1,11 +1,22 @@
 import type {
   CellType,
-  // CellValueFunction,
   ColumnDefinition,
   FullColumnConfig,
   GetBoundColumnOptionFunction,
   SimpleRowData,
 } from '@tabulus/types';
+
+/** Props for the CellContainer styled component. */
+interface CellContainerProps {
+  /** How to align the content horizontally in the cell. */
+  readonly $horizontalAlign: FullColumnConfig['horizontalAlign'];
+  /** The type of cell to display. */
+  readonly $type: CellType;
+  /** How to align the content vertically in the cell. */
+  readonly $verticalAlign: FullColumnConfig['verticalAlign'];
+  /** Whether the cell should be visible. */
+  readonly $visible: FullColumnConfig['visible'];
+}
 
 /** Props for the Cell component. */
 interface CellProps<RowData extends SimpleRowData> {
@@ -16,20 +27,10 @@ interface CellProps<RowData extends SimpleRowData> {
   /** The index of the row that the cell belongs to. */
   readonly rowIndex: number;
   /** The type of cell to display. */
-  readonly type: CellType;
+  readonly type: CellContainerProps['$type'];
   /** The value of the cell. */
   // TODO: Sort out this type.
   readonly value: unknown; //CellValue | CellValueFunction<CellValue> | string | null | undefined;
-}
-
-/** Props for the CellContainer styled component. */
-interface CellContainerProps {
-  /** How to align the content horizontally in the cell. */
-  readonly $horizontalAlign: FullColumnConfig['horizontalAlign'];
-  /** How to align the content vertically in the cell. */
-  readonly $verticalAlign: FullColumnConfig['verticalAlign'];
-  /** Whether the cell should be visible. */
-  readonly $visible: FullColumnConfig['visible'];
 }
 
 export type { CellContainerProps, CellProps };
