@@ -40,7 +40,7 @@ const BORDER_MAP: Record<BorderComponentsPlus, BorderMap> = {
     applyBorderSpacing: 'none',
     collapseEdges: ['right'],
     collapseSkip: 'last',
-    externalEdges: [...BORDER_EDGES],
+    externalEdges: [],
     fallbacks: ['cell', 'column'],
     internalEdges: [...BORDER_EDGES],
     main: 'headerCell',
