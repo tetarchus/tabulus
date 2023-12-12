@@ -47,6 +47,7 @@ const Cell = <RowData extends SimpleRowData>({
   return (
     <CellContainer
       $horizontalAlign={horizontalAlign}
+      $type={type}
       $verticalAlign={verticalAlign}
       $visible={visible}
       aria-rowindex={rowIndex}
