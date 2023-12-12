@@ -44,5 +44,19 @@ export type {
 } from './hooks';
 export type { TableColumnOptions, TabulusCompleteOptions, TabulusOptions } from './options';
 export type { RowLookup, RowType, SimpleRowData } from './row';
-export type { BorderComponents, CustomTheme, Theme } from './theme';
+export type {
+  BorderComponents,
+  BorderComponentsPlus,
+  BorderDefinition,
+  BorderEdges,
+  BorderMap,
+  BorderOptions,
+  BorderProperties,
+  BorderSides,
+  BorderSpacing,
+  BorderStyleFallbacks,
+  BorderStyles,
+  CustomTheme,
+  Theme,
+} from './theme';
 export type { TabulusProps } from './tabulus';
