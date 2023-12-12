@@ -8,8 +8,12 @@ const FALLBACKS = {
   THEME: {
     /** Border fallbacks for theme. */
     BORDER: {
+      /** Fallback collapse setting for borders. */
+      borderCollapse: 'collapse',
       /** Fallback color for borders. */
       borderColor: 'currentColor',
+      /** Fallback border spacing setting for borders. */
+      borderSpacing: 0,
       /** Fallback style for borders. */
       borderStyle: 'solid',
       /** Fallback width for borders. */
