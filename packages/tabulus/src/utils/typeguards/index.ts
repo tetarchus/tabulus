@@ -16,3 +16,4 @@ const isReactComponent = (value: unknown): value is ReactElement | Iterable<Reac
 };
 
 export { isReactComponent };
+export { isBorderOptionString } from './theme';

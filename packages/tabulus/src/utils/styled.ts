@@ -1,3 +1,9 @@
-export { createGlobalStyle, styled, StyleSheetManager, ThemeProvider } from 'styled-components';
+export {
+  createGlobalStyle,
+  styled,
+  StyleSheetManager,
+  ThemeProvider,
+  useTheme,
+} from 'styled-components';
 
 export type { CSSObject } from 'styled-components';
