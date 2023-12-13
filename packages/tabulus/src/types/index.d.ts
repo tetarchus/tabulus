@@ -4,6 +4,8 @@ export type {
   ColumnConfig,
   ColumnDefinition,
   ColumnLookup,
+  ColumnsReducerAction,
+  ColumnsReducerState,
   FullColumnConfig,
 } from './column';
 export type { TabulusComponents, TabulusCustomComponents } from './component';
@@ -33,6 +35,7 @@ export type {
   UseTabulusReturn,
 } from './hooks';
 export type { TableColumnOptions, TabulusCompleteOptions, TabulusOptions } from './options';
+
 export type { RowLookup, RowType, SimpleRowData } from './row';
 export type {
   BorderComponents,
@@ -50,3 +53,4 @@ export type {
   Theme,
 } from './theme';
 export type { TabulusProps } from './tabulus';
+export type { ReducerAction } from './util';

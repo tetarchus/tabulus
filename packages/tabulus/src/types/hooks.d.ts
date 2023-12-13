@@ -1,3 +1,13 @@
+import type {
+  CellCountFunction,
+  FindColumnFunction,
+  FindRowFunction,
+  GetColumnOptionFunction,
+  RegisterColumnCellFunction,
+  RenderColumnsFunction,
+  RenderRowsFunction,
+  ReorderColumnsFunction,
+} from './functions';
 import type { TabulusCompleteOptions } from './options';
 import type { SimpleRowData } from './row';
 import type { TabulusProps } from './tabulus';
@@ -16,11 +26,23 @@ interface UseColumnManagerProps<RowData extends SimpleRowData> {
 }
 
 /** Value returned from the `useColumnManager` hook. */
-interface UseColumnManagerReturn<RowData extends SimpleRowData>
-  extends Pick<
-    TableManagerReturn<RowData>,
-    'findColumn' | 'getColumnCount' | 'getColumnOption' | 'renderColumns'
-  > {}
+interface UseColumnManagerReturn<RowData extends SimpleRowData> {
+  /** Function for finding the column data based on a lookup value. */
+  readonly findColumn: FindColumnFunction<RowData>;
+  /** Function to get the number of columns in the table. */
+  readonly getColumnCount: CellCountFunction;
+  /** Function for getting the value of an option for a given column. */
+  readonly getColumnOption: GetColumnOptionFunction<RowData>;
+  /**
+   * Function for registering a cell to a column to allow for easy calculation and management
+   * of all cells in a column.
+   */
+  readonly registerColumnCell: RegisterColumnCellFunction<RowData>;
+  /** Function for rendering the header columns. */
+  readonly renderColumns: RenderColumnsFunction<RowData>;
+  /** Function for reordering the table columns. */
+  readonly reorderColumns: ReorderColumnsFunction<RowData>;
+}
 
 /** Props to pass in to the `useDataManager` hook. */
 interface UseDataManagerProps<RowData extends SimpleRowData> {
@@ -31,8 +53,14 @@ interface UseDataManagerProps<RowData extends SimpleRowData> {
 }
 
 /** Value returned from the `useDataManager` hook. */
-interface UseDataManagerReturn<RowData extends SimpleRowData>
-  extends Pick<TableManagerReturn<RowData>, 'findRow' | 'getRowCount' | 'renderRows'> {}
+interface UseDataManagerReturn<RowData extends SimpleRowData> {
+  /** Function for finding the row data based on a lookup value. */
+  readonly findRow: FindRowFunction<RowData>;
+  /** Function to get the number of rows in the table. */
+  readonly getRowCount: CellCountFunction;
+  /** Function for rendering the table rows. */
+  readonly renderRows: RenderRowsFunction<RowData>;
+}
 
 /** Props to pass to the `useTabulus` hook. */
 interface UseTabulusProps<RowData extends SimpleRowData> extends TabulusProps<RowData> {}

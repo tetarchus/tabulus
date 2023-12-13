@@ -1,5 +1,10 @@
 export { getHorizontalAlignPropertyName, getVerticalAlignPropertyName } from './cell';
-export { createColumnOptions } from './column';
+export {
+  createColumnOptions,
+  columnsReducer,
+  columnsReducerInitialiser,
+  orderColumnComponents,
+} from './column';
 export { createTableComponents } from './components';
 export { createTableOptions } from './options';
 export { addEvenOrOddClass } from './row';
