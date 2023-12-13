@@ -1,6 +1,7 @@
 import type { TableColumnOptions } from './column';
 import type { DebuggingOptions } from './debug';
 import type { TableLayoutOptions } from './layout';
+import type { TableRowOptions } from './row';
 import type { TableStyleOptions } from './theme';
 import type { DeepPartial } from 'ts-essentials';
 
@@ -9,6 +10,7 @@ interface TabulusCompleteOptions
   extends DebuggingOptions,
     TableColumnOptions,
     TableLayoutOptions,
+    TableRowOptions,
     TableStyleOptions {}
 
 /** Table options passed in as overrides to the defaults. */

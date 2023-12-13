@@ -9,8 +9,11 @@ const globalDefaultTableOptions: TabulusCompleteOptions = {
   debugInvalidOptions: IS.PROD ? false : true,
   //== Columns ========================
   columnDefaults: globalDefaultColumnOptions,
+  movableColumns: false,
   //== Layout =========================
   horizontalAlign: 'center',
+  //== Rows ===========================
+  movableRows: false,
   //== Theme ==========================
   theme: 'standard',
 };

@@ -7,6 +7,11 @@ interface TableColumnOptions {
    * @default @see {@link FullColumnConfig}
    */
   columnDefaults: FullColumnConfig;
+  /**
+   * Whether to allow the user to change the column order by clicking and dragging.
+   * @default false
+   */
+  movableColumns: boolean;
 }
 
 export type { TableColumnOptions };
