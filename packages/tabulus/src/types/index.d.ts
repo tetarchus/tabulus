@@ -1,24 +1,12 @@
-export type { CellFilter, CellType } from './cell';
-export type { ColumnConfig, ColumnDefinition, ColumnLookup, FullColumnConfig } from './column';
+export type { CellComponent, CellFilter, CellType } from './cell';
+export type {
+  ColumnComponent,
+  ColumnConfig,
+  ColumnDefinition,
+  ColumnLookup,
+  FullColumnConfig,
+} from './column';
 export type { TabulusComponents, TabulusCustomComponents } from './component';
-// export type {
-//   ActionFunction,
-//   ActionPayload,
-//   BaseProps,
-//   BaseStyledProps,
-//   DevToolMode,
-//   DevToolPage,
-//   DevToolSettings,
-//   DevToolState,
-//   MaximisedPosition,
-//   MinimisedPosition,
-//   ResizeEdgeConfig,
-//   StateActions,
-//   StateMachineActionInput,
-//   StateMachineActions,
-//   WindowPosition,
-//   WindowSize,
-// } from './devtool';
 export type {
   CellCountFunction,
   CellValueFunction,
@@ -28,10 +16,12 @@ export type {
   GetBoundColumnOptionFunction,
   GetColumnOptionFunction,
   GetComponentFunction,
+  RegisterColumnCellFunction,
   RegisterTableFunction,
   RenderColumnsFunction,
   RenderRowFunction,
   RenderRowsFunction,
+  ReorderColumnsFunction,
 } from './functions';
 export type {
   UseColumnManagerProps,

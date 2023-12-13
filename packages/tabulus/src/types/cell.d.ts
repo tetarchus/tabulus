@@ -1,3 +1,7 @@
+import type { ColumnDefinition } from './column';
+import type { SimpleRowData } from './row';
+import type { RefObject } from 'react';
+
 /** Type of cell represented by a Cell component. */
 type CellType = 'cell' | 'header';
 
@@ -10,4 +14,17 @@ type CellType = 'cell' | 'header';
  */
 type CellFilter = 'all' | 'selected' | 'viewport' | 'visible';
 
-export { CellFilter, CellType };
+interface CellComponent<RowData extends SimpleRowData> {
+  /** The ID of the column that the cell belongs to. */
+  columnId: ColumnDefinition<RowData>['id'];
+  /** A unique ID for the cell consisting of the column ID and Row ID. */
+  // TODO: Type better?
+  id: string;
+  /** The ID for the row that the cell belongs to. */
+  // TODO: Type better?
+  rowId: string;
+  /** A ref to the cell's DOM element. */
+  elementRef: RefObject<HTMLDivElement>;
+}
+
+export { CellComponent, CellFilter, CellType };

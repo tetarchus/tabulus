@@ -1,4 +1,5 @@
-import type { ColumnDefinition, ColumnLookup, FullColumnConfig } from '../column';
+import type { CellComponent } from '../cell';
+import type { ColumnComponent, ColumnDefinition, ColumnLookup, FullColumnConfig } from '../column';
 import type { SimpleRowData } from '../row';
 import type { ReactNode } from 'react';
 
@@ -7,8 +8,7 @@ import type { ReactNode } from 'react';
  */
 type FindColumnFunction<RowData extends SimpleRowData> = (
   lookup: ColumnLookup,
-  // TODO: Is ColumnDefinition the right return type here?
-) => ColumnDefinition<RowData> | undefined;
+) => ColumnComponent<RowData> | undefined;
 
 /**
  * Function for getting the value of a column option for a given column.
@@ -28,13 +28,26 @@ type GetBoundColumnOptionFunction = <K extends keyof FullColumnConfig>(
 
 /** Function for rendering the contents of a column header. */
 type RenderColumnsFunction<RowData extends SimpleRowData> = (
-  // TODO: Is this the correct type?
-  renderFunction: (columns: readonly ColumnDefinition<RowData>[]) => ReactNode,
+  renderFunction: (columns: readonly ColumnComponent<RowData>[]) => ReactNode,
 ) => ReactNode;
+
+/** Function for re-ordering the columns. */
+type ReorderColumnsFunction<RowData extends SimpleRowData> = (
+  columnId: ColumnComponent<RowData>['id'],
+  target: ColumnComponent<RowData>['id'],
+  before?: boolean,
+) => void;
+
+type RegisterColumnCellFunction<RowData extends SimpleRowData> = (
+  columnId: ColumnComponent<RowData>['id'],
+  cell: CellComponent<RowData>,
+) => void;
 
 export {
   FindColumnFunction,
   GetBoundColumnOptionFunction,
   GetColumnOptionFunction,
+  RegisterColumnCellFunction,
   RenderColumnsFunction,
+  ReorderColumnsFunction,
 };
