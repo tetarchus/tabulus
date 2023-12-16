@@ -1,0 +1,1 @@
+export { addEvenOrOddClass } from './class';
