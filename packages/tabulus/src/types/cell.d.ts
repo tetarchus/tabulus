@@ -14,6 +14,7 @@ type CellType = 'cell' | 'header';
  */
 type CellFilter = 'all' | 'selected' | 'viewport' | 'visible';
 
+/** Definition for a Cell component including additional data for cell management. */
 interface CellComponent<RowData extends SimpleRowData> {
   /** The ID of the column that the cell belongs to. */
   columnId: ColumnDefinition<RowData>['id'];

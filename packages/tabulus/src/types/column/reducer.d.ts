@@ -1,6 +1,6 @@
 import type { ColumnComponent } from './component';
 import type { ColumnDefinition } from './definition';
-import type { CellComponent } from '../cell';
+import type { CellComponent, CellType } from '../cell';
 import type { SimpleRowData } from '../row';
 import type { ReducerAction } from '../util';
 
@@ -39,6 +39,8 @@ interface ColumnsReducerRegisterCellActionPayload<RowData extends SimpleRowData>
   // TODO: Change to a lookup?
   /** The ID of the column to register to. */
   columnId: ColumnComponent<RowData>['id'];
+  /** The type of cell being registered. */
+  type: CellType;
 }
 
 /** Combined ColumnsReducer action types. */

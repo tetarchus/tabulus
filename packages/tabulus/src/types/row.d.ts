@@ -8,4 +8,12 @@ type RowType = 'header' | 'table';
 /** Options to lookup a row in utility functions. */
 type RowLookup = string;
 
+/** Definition for a row containing additional data for row management. */
+interface RowComponent<RowData extends SimpleRowData> {
+  /** The value of the ID column. */
+  id: string | number;
+  /** The Row Data for the row. */
+  data: RowData;
+}
+
 export { RowLookup, RowType, SimpleRowData };

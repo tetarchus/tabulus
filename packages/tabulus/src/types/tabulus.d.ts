@@ -1,5 +1,6 @@
 import type { ColumnDefinition } from './column';
 import type { TabulusCustomComponents } from './component';
+import type { ExternalEvents } from './events';
 import type { TabulusOptions } from './options';
 import type { SimpleRowData } from './row';
 
@@ -11,9 +12,8 @@ interface TabulusProps<RowData extends SimpleRowData> {
   readonly components?: TabulusCustomComponents<RowData> | undefined;
   /** The data to display in the table rows. */
   readonly data: readonly RowData[];
-  // TODO: Type and include events
   /** Custom functions to fire when certain events trigger. */
-  readonly events?: unknown;
+  readonly events?: Partial<ExternalEvents<RowData>>;
   /** Custom options for this table instance. Options not set will be inherited first from any
    * `TabulusRegistry` context, and then from the global defaults.
    */

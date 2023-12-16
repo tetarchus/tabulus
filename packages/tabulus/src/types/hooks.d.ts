@@ -1,5 +1,10 @@
+import type { ExternalDispatchEvents, InternalDispatchEvents } from './events';
 import type {
   CellCountFunction,
+  DispatchChainEventFunction,
+  DispatchConfirmEventFunction,
+  DispatchEventFunction,
+  EventSubscriptionFunction,
   FindColumnFunction,
   FindRowFunction,
   GetColumnOptionFunction,
@@ -62,6 +67,28 @@ interface UseDataManagerReturn<RowData extends SimpleRowData> {
   readonly renderRows: RenderRowsFunction<RowData>;
 }
 
+/** Props passed to the `useEventBus` hook. */
+interface UseEventBusProps<RowData extends SimpleRowData> {
+  /** The events option passed to the table. */
+  readonly events?: TableManagerProps<RowData>['events'] | undefined;
+}
+
+/** Value returned from the `useEventManager` hook. */
+interface UseEventBusReturn<RowData extends SimpleRowData> {
+  /** Function to call an internal `chain` function. */
+  chainInternal: DispatchChainEventFunction<RowData>;
+  /** Function to call an internal `confirm` function. */
+  confirmInternal: DispatchConfirmEventFunction<RowData>;
+  /** Function to call a `dispatch` function. */
+  dispatch: DispatchEventFunction<RowData, ExternalDispatchEvents<RowData>>;
+  /** Function to call an internal `dispatch` function. */
+  dispatchInternal: DispatchEventFunction<RowData, InternalDispatchEvents>;
+  /** Function to register a callback to an event. */
+  off: EventSubscriptionFunction<RowData>;
+  /** Function to remove a callback from an event. */
+  on: EventSubscriptionFunction<RowData>;
+}
+
 /** Props to pass to the `useTabulus` hook. */
 interface UseTabulusProps<RowData extends SimpleRowData> extends TabulusProps<RowData> {}
 
@@ -76,6 +103,8 @@ export type {
   UseColumnManagerReturn,
   UseDataManagerProps,
   UseDataManagerReturn,
+  UseEventBusProps,
+  UseEventBusReturn,
   UseTabulusProps,
   UseTabulusRegistryReturn,
   UseTabulusReturn,

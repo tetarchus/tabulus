@@ -1,4 +1,4 @@
-import type { CellComponent } from '../cell';
+import type { CellComponent, CellType } from '../cell';
 import type { ColumnComponent, ColumnDefinition, ColumnLookup, FullColumnConfig } from '../column';
 import type { SimpleRowData } from '../row';
 import type { ReactNode } from 'react';
@@ -38,9 +38,11 @@ type ReorderColumnsFunction<RowData extends SimpleRowData> = (
   before?: boolean,
 ) => void;
 
+/** Function for registering a new cell to a Column component. */
 type RegisterColumnCellFunction<RowData extends SimpleRowData> = (
   columnId: ColumnComponent<RowData>['id'],
   cell: CellComponent<RowData>,
+  type: CellType,
 ) => void;
 
 export {
