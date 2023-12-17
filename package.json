@@ -74,7 +74,7 @@
     "prop-types": "15.8.1",
     "react": "18.3.0-canary-5bcade5fc-20231208",
     "react-dom": "18.3.0-canary-5bcade5fc-20231208",
-    "remark-gfm": "3.0.1",
+    "remark-gfm": "4.0.0",
     "storybook": "7.6.4",
     "vitest": "1.0.4",
     "vitest-axe": "0.1.0"
