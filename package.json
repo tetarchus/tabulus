@@ -67,7 +67,7 @@
     "eslint-plugin-sonarjs": "0.23.0",
     "eslint-plugin-testing-library": "6.2.0",
     "eslint-plugin-unicorn": "49.0.0",
-    "eslint-plugin-vitest": "0.3.12",
+    "eslint-plugin-vitest": "0.5.4",
     "globals": "13.23.0",
     "jsdom": "23.0.1",
     "prettier": "3.1.1",
