@@ -24,7 +24,7 @@
     "typecheck": "tsc"
   },
   "devDependencies": {
-    "@remix-run/dev": "2.3.1",
+    "@remix-run/dev": "2.13.1",
     "@types/lodash-es": "4.17.12",
     "@types/react": "18.2.43",
     "@types/react-dom": "18.2.17",
@@ -33,10 +33,10 @@
   },
   "dependencies": {
     "@mdx-js/react": "3.0.0",
-    "@remix-run/css-bundle": "2.3.1",
-    "@remix-run/node": "2.3.1",
-    "@remix-run/react": "2.3.1",
-    "@remix-run/serve": "2.3.1",
+    "@remix-run/css-bundle": "2.13.1",
+    "@remix-run/node": "2.13.1",
+    "@remix-run/react": "2.13.1",
+    "@remix-run/serve": "2.13.1",
     "@tetarchus/utils": "0.1.9",
     "esbuild": "0.19.9",
     "isbot": "3.7.1",
