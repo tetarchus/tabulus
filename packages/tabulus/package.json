@@ -33,7 +33,7 @@
     "react-dom": "18.3.0-canary-5bcade5fc-20231208"
   },
   "dependencies": {
-    "@tetarchus/utils": "0.1.9",
+    "@tetarchus/utils": "0.1.11",
     "classnames": "2.3.2",
     "framer-motion": "10.16.16",
     "little-state-machine": "4.8.0",
